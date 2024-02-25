@@ -18,6 +18,8 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int titleOption = scanner.nextInt();
 
+      scanner.close();
+
       switch (titleOption) {
         case 1:
         GameLobby();
@@ -40,6 +42,8 @@ public class Menus {
 
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
+
+      scanner.close();
 
       switch (option) {
         case 1:
@@ -69,6 +73,8 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
+      scanner.close();
+
       switch (option) {
         case 1:
         System.out.println("Input name");
@@ -94,6 +100,8 @@ public class Menus {
 
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
+
+      scanner.close();
 
       switch (option) {
         case 1:
@@ -123,6 +131,8 @@ public class Menus {
 
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
+
+      scanner.close();
 
       switch (option) {
         case 1:
