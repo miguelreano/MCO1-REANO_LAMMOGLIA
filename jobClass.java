@@ -1,3 +1,4 @@
+
 /*
 public class CharacterCreation {
 
@@ -54,4 +55,3 @@ public class CharacterCreation {
     int INT = 7;
     int FTH = 16;
   }
-}*/
