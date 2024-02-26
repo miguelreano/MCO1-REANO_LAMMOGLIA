@@ -1,8 +1,40 @@
 
-/*
+
 public class CharacterCreation {
 
-  class Vagabond(){
+  public static void selectClass(){
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Select Class");
+
+    System.out.println("CLASS");
+    int classOption = scanner.nextInt();
+
+    switch (classOption) {
+      case 1:
+        Vagabond vagabond = new Vagabond();
+        break;
+      case 2:
+        Samurai samurai = new Samurai();
+        break;
+      case 3:
+        Warrior warrior = new Warrior();
+        break;
+      case 4:
+        Hero hero = new Hero();
+        break;
+      case 5:
+        Astrologer astrologer = new Astrologer();
+        break;
+      case 6:
+        Prophet prophet = new Prophet();
+        break;
+
+    }
+
+  }
+
+  public class Vagabond{
     int HP = 15;
     int END = 11;
     int DEX = 13;
@@ -11,7 +43,7 @@ public class CharacterCreation {
     int FTH = 9;
   }
 
-  class Samurai(){
+  public class Samurai{
     int HP = 12;
     int END = 13;
     int DEX = 15;
@@ -20,7 +52,7 @@ public class CharacterCreation {
     int FTH = 8;
   }
 
-  class Warrior(){
+  public class Warrior{
     int HP = 11;
     int END = 11;
     int DEX = 16;
@@ -29,7 +61,7 @@ public class CharacterCreation {
     int FTH = 8;
   }
 
-  class Hero(){
+  public class Hero{
     int HP = 14;
     int END = 12;
     int DEX = 9;
@@ -38,7 +70,7 @@ public class CharacterCreation {
     int FTH = 8;
   }
 
-  class Astrologer(){
+  public class Astrologer{
     int HP = 9;
     int END = 9;
     int DEX = 12;
@@ -47,7 +79,7 @@ public class CharacterCreation {
     int FTH = 7;
   }
 
-  class Prophet(){
+  public class Prophet{
     int HP = 10;
     int END = 8;
     int DEX = 10;
@@ -55,4 +87,5 @@ public class CharacterCreation {
     int INT = 7;
     int FTH = 16;
   }
-*/
+
+}

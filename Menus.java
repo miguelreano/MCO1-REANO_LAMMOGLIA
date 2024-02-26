@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 public class Menus {
 
+  
     public Menus(){
         TitleScreen();
     }
@@ -93,10 +94,10 @@ public class Menus {
           System.out.println("Input name:");
           String playerName = scanner.next();
           System.out.println("Name set to: " + playerName);
-          
+          CharacterCreation();
           break;
         case 2:
-          System.out.println("Select Job Class");
+          jobClass.selectClass();
           break;
         case 3:
           GameLobby();
