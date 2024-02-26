@@ -78,8 +78,7 @@ public class Menus {
     }
 
     public static void CharacterCreation(){
-        Scanner scanner = new Scanner(System.in);
-
+      Scanner scanner = new Scanner(System.in);
       
       System.out.println("[1] Input Name");
       System.out.println("[2] Select Job Class");
@@ -89,11 +88,12 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
-      
-
       switch (option) {
         case 1:
-          System.out.println("Input name");
+          System.out.println("Input name:");
+          String playerName = scanner.next();
+          System.out.println("Name set to: " + playerName);
+          
           break;
         case 2:
           System.out.println("Select Job Class");
@@ -129,13 +129,13 @@ public class Menus {
 
       switch (option) {
         case 1:
-          System.out.println("Go A1");
+          System.out.println("Go to Stormveil Castle");
           break;
         case 2:
-          System.out.println("Go A2");
+          System.out.println("Go to Raya Lucaria Academy");
           break;
         case 3:
-          System.out.println("Go A3");
+          System.out.println("Go to The Elden Throne");
           break;
         case 4:
           GameLobby();
