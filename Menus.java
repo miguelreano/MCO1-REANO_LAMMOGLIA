@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class Menus {
 
@@ -10,7 +11,7 @@ public class Menus {
     public static void TitleScreen() {
         Scanner scanner = new Scanner(System.in);
 
-      // Title Screen
+      
       System.out.println("\n=== Title Screen ===");
       System.out.println("[1] Start");
       System.out.println("[2] Exit");
@@ -18,22 +19,28 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int titleOption = scanner.nextInt();
 
-      scanner.close();
+      
 
       switch (titleOption) {
         case 1:
-        GameLobby();
+          CharacterCreation();
+          break;
         case 2:
-        System.exit(0);
+          System.exit(0);
+          break;
         default:
-        System.out.println("Invalid choice. Please try again.");
+          System.out.println("Invalid choice. Please try again.");
+          TitleScreen();
+          break;
       }
+
+      scanner.close();
     }
 
     public static void GameLobby(){
         Scanner scanner = new Scanner(System.in);
 
-      // Character Creation
+      
       System.out.println("[1] Fast Travel");
       System.out.println("[2] Level Up");
       System.out.println("[3] Inventory");
@@ -43,28 +50,37 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
-      scanner.close();
-
+      
       switch (option) {
         case 1:
-        FastTravel();
+          FastTravel();
+          break;
         case 2:
-        LevelUp();
+          LevelUp();
+          break;
         case 3:
-        System.out.println("Inventory");
+          System.out.println("Inventory");
+          break;
         case 4:
-        System.out.println("Shop");
+          System.out.println("Shop");
+          break;
         case 5:
-        TitleScreen();
+          TitleScreen();
+          break;
         default:
-        System.out.println("Invalid choice. Please try again.");
+          System.out.println("Invalid choice. Please try again.");
+          GameLobby();
+          break;
       }
+
+      scanner.close();
+
     }
 
     public static void CharacterCreation(){
         Scanner scanner = new Scanner(System.in);
 
-      // Character Creation
+      
       System.out.println("[1] Input Name");
       System.out.println("[2] Select Job Class");
       System.out.println("[3] Confirm");
@@ -73,26 +89,34 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
-      scanner.close();
+      
 
       switch (option) {
         case 1:
-        System.out.println("Input name");
+          System.out.println("Input name");
+          break;
         case 2:
-        System.out.println("Select Job Class");
+          System.out.println("Select Job Class");
+          break;
         case 3:
-        System.out.println("Confirm");
+          GameLobby();
+          break;
         case 4:
-        TitleScreen();
+          TitleScreen();
+          break;
         default:
-        System.out.println("Invalid choice. Please try again.");
+          System.out.println("Invalid choice. Please try again.");
+          CharacterCreation();
+          break;
       }
+
+      scanner.close();
     }
 
     public static void FastTravel(){
         Scanner scanner = new Scanner(System.in);
 
-      // Character Creation
+      
       System.out.println("[1] Stormveil Castle");
       System.out.println("[2] Raya Lucaria Academey");
       System.out.println("[3] The Elden Throne");
@@ -101,27 +125,35 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
-      scanner.close();
+      
 
       switch (option) {
         case 1:
-        System.out.println("Go A1");
+          System.out.println("Go A1");
+          break;
         case 2:
-        System.out.println("Go A2");
+          System.out.println("Go A2");
+          break;
         case 3:
-        System.out.println("Go A3");
+          System.out.println("Go A3");
+          break;
         case 4:
-        GameLobby();
+          GameLobby();
+          break;
         default:
-        System.out.println("Invalid choice. Please try again.");
+          System.out.println("Invalid choice. Please try again.");
+          FastTravel();
+          break;
       }
+
+      scanner.close();
     }
 
     public static void LevelUp(){
         Scanner scanner = new Scanner(System.in);
 
-      // Character Creation
-      System.out.println("[1] Level Health");
+      
+      System.out.println("\n[1] Level Health");
       System.out.println("[2] Level Endurance");
       System.out.println("[3] Level Dexterity");
       System.out.println("[4] Level Strength");
@@ -132,26 +164,43 @@ public class Menus {
       System.out.print("\nEnter your choice: ");
       int option = scanner.nextInt();
 
-      scanner.close();
+      
 
       switch (option) {
         case 1:
-        System.out.println("Leveled HP");
+          System.out.println("Leveled HP");
+          LevelUp();
+          break;
         case 2:
-        System.out.println("Leveled END");
+          System.out.println("Leveled END");
+          LevelUp();
+          break;
         case 3:
-        System.out.println("Leveled DEX");
+          System.out.println("Leveled DEX");
+          LevelUp();
+          break;
         case 4:
-        System.out.println("Leveled STR");
+          System.out.println("Leveled STR");
+          LevelUp();
+          break;
         case 5:
-        System.out.println("Leveled INT");
+          System.out.println("Leveled INT");
+          LevelUp();
+          break;
         case 6:
-        System.out.println("Leveled FTH");
+          System.out.println("Leveled FTH");
+          LevelUp();
+          break;
         case 7:
-        GameLobby();
+          GameLobby();
+          break;
         default:
-        System.out.println("Invalid choice. Please try again.");
+          System.out.println("Invalid choice. Please try again.");
+          LevelUp();
+          break;
       }
+
+      scanner.close();
     }
     
   }
