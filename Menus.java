@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Menus {
 
+  private static CharacterCreation user;
+
   public Menus() {
     TitleScreen();
   }
@@ -21,7 +23,8 @@ public class Menus {
 
     switch (titleOption) {
       case 1:
-        CharacterCreation();
+        user = new CharacterCreation();
+        user.startCharacterCreation();
         break;
       case 2:
         System.exit(0);
@@ -86,13 +89,10 @@ public class Menus {
 
     switch (option) {
       case 1:
-        System.out.println("Input name:");
-        String playerName = scanner.next();
-        System.out.println("Name set to: " + playerName);
-        CharacterCreation();
+        
         break;
       case 2:
-        classStats.selectClass();
+        
         break;
       case 3:
         GameLobby();
@@ -158,32 +158,26 @@ public class Menus {
 
     switch (option) {
       case 1:
-        Character.currentCharacter.levelUpHP();
         System.out.println("Leveled HP");
         LevelUp();
         break;
       case 2:
-        Character.currentCharacter.levelUpEND();
         System.out.println("Leveled END");
         LevelUp();
         break;
       case 3:
-        Character.currentCharacter.levelUpDEX();
         System.out.println("Leveled DEX");
         LevelUp();
         break;
       case 4:
-        Character.currentCharacter.levelUpSTR();
         System.out.println("Leveled STR");
         LevelUp();
         break;
       case 5:
-        Character.currentCharacter.levelUpINT();
         System.out.println("Leveled INT");
         LevelUp();
         break;
       case 6:
-        Character.currentCharacter.levelUpFTH();
         System.out.println("Leveled FTH");
         LevelUp();
         break;
