@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class CharacterCreation {
+public class selectClass {
   public static Character selectClass() {
     Scanner scanner = new Scanner(System.in);
     Character character = null;
