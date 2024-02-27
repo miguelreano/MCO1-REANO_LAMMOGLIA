@@ -1,6 +1,6 @@
-/*  import java.util.Scanner;
+import java.util.Scanner;
 
-public class CharacterCreation {
+public class classStats {
   public static Character selectClass() {
     Scanner scanner = new Scanner(System.in);
     Character character = null;
@@ -38,7 +38,7 @@ public class CharacterCreation {
   }
 }
 
-
+/* 
 public class classStats {
 
   public static void selectClass(){

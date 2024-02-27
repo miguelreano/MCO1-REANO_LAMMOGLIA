@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-import java.util.logging.Level;
 
 public class Menus {
 
@@ -93,7 +92,7 @@ public class Menus {
         CharacterCreation();
         break;
       case 2:
-        jobClass.selectClass();
+        classStats.selectClass();
         break;
       case 3:
         GameLobby();
@@ -159,26 +158,32 @@ public class Menus {
 
     switch (option) {
       case 1:
+        Character.currentCharacter.levelUpHP();
         System.out.println("Leveled HP");
         LevelUp();
         break;
       case 2:
+        Character.currentCharacter.levelUpEND();
         System.out.println("Leveled END");
         LevelUp();
         break;
       case 3:
+        Character.currentCharacter.levelUpDEX();
         System.out.println("Leveled DEX");
         LevelUp();
         break;
       case 4:
+        Character.currentCharacter.levelUpSTR();
         System.out.println("Leveled STR");
         LevelUp();
         break;
       case 5:
+        Character.currentCharacter.levelUpINT();
         System.out.println("Leveled INT");
         LevelUp();
         break;
       case 6:
+        Character.currentCharacter.levelUpFTH();
         System.out.println("Leveled FTH");
         LevelUp();
         break;
