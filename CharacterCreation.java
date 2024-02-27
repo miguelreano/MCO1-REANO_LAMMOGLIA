@@ -4,7 +4,7 @@ public class CharacterCreation {
     private Scanner scanner = new Scanner(System.in);
     private String characterName = "";
     private CharacterStats characterStats = null;
-    private int HP, END, DEX, STR, INT, FTH;
+    private int Runes = 0;
 
     public void startCharacterCreation() {
         boolean isConfirmed = false;
@@ -82,27 +82,3 @@ public class CharacterCreation {
     }
 
 }
-
-/*
- * Old CODE
- * 
- * public class Character {
- * public String playerName;
- * 
- * public int HP;
- * public int END;
- * public int DEX;
- * public int STR;
- * public int INT;
- * public int FTH;
- * 
- * public Character() {
- * this.HP = ClassStats.HP;
- * this.END = ClassStats.END;
- * this.DEX = ClassStats.DEX;
- * this.STR = ClassStats.STR;
- * this.INT = ClassStats.INT;
- * this.FTH = ClassStats.FTH;
- * }
- * }
- */
