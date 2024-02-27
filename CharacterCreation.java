@@ -41,7 +41,13 @@ public class CharacterCreation {
     }
 
     private void chooseJobClass() {
-        System.out.println("Choose your job class:\n[1] Vagabond\n[2] Samurai\n[3] Warrior\n[4] Hero\n[5] Astrologer\n[6] Prophet");
+        System.out.println("CLASS: \t\t HP  END  DEX  STR  INT  FTH \tLVL");
+        System.out.println("[1] Vagabond \t 15   11   13   14    9    9     9");
+        System.out.println("[2] Samurai \t 12   13   15   12    9    8     9");
+        System.out.println("[3] Warrior \t 11   11   16   10   10    8     8");
+        System.out.println("[4] Hero \t 14   12    9   16    7    8     7");
+        System.out.println("[5] Astrologer \t  9    9   12    8   16    7     6");
+        System.out.println("[6] Prophet \t 10    8   10   11    7   16     7");
         int classOption = scanner.nextInt();
         switch (classOption) {
             case 1:
