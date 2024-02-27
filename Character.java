@@ -1,6 +1,7 @@
 public class Character {
     public String playerName;
     public int HP, END, DEX, STR, INT, FTH;
+    public int playerLevel;
 
     // Modified constructor to accept parameters
     public Character(int HP, int END, int DEX, int STR, int INT, int FTH) {
