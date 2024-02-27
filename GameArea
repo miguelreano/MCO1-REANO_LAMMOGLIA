@@ -1,0 +1,115 @@
+import java.util.Scanner;
+
+public class GameArea {
+    private static final int ROWS1 = 7; // first floor rows
+    private static final int COLS1 = 3; // first floor columns
+    private static final int ROWS2 = 7; // second floor rows
+    private static final int COLS2 = 7; // second floor columns
+    
+    private static int currentPositionX1 = 6; // Start position row for the first floor
+    private static int currentPositionY1 = 1; // Start position column for the first floor
+    private static int currentPositionX2 = 6; // Start position row for the second floor
+    private static int currentPositionY2 = 3; // Start position column for the second floor
+    
+    private static final int[][] SPAWNS = {
+        {5, 2}, {5, 4}, {3, 0}, {3, 2}, {3, 3}, {3, 4}, {3, 6}, {1, 3}
+    };
+    private static final int[] DOOR1 = {0, 1}; // Door position for the first floor
+    private static final int[] DOOR2 = {0, 3}; // Door position for the second floor
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        FirstFloor(scanner);
+        SecondFloor(scanner);
+        scanner.close();
+    }
+
+    public static void FirstFloor(Scanner scanner) {
+        int choice;
+        boolean reachedDoor = false;
+
+        while (!reachedDoor) {
+            printGameBoard(ROWS1, COLS1, currentPositionX1, currentPositionY1);
+            System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1: // Move Up
+                    if (currentPositionX1 > 0) currentPositionX1--;
+                    else System.out.println("Cannot move up. You are at the edge.");
+                    break;
+                case 2: // Move Down
+                    if (currentPositionX1 < ROWS1 - 1) currentPositionX1++;
+                    else System.out.println("Cannot move down. You are at the edge.");
+                    break;
+                case 3: // Move Right
+                    if (currentPositionY1 < COLS1 - 1) currentPositionY1++;
+                    else System.out.println("Cannot move right. You are at the edge.");
+                    break;
+                case 4: // Move Left
+                    if (currentPositionY1 > 0) currentPositionY1--;
+                    else System.out.println("Cannot move left. You are at the edge.");
+                    break;
+                default:
+                    System.out.println("Invalid input. Please choose a valid move.");
+                    break;
+            }
+
+            // Check if reached the door
+            if (currentPositionX1 == DOOR1[0] && currentPositionY1 == DOOR1[1]) {
+                System.out.println("You've reached the door, moving to the second floor...");
+                reachedDoor = true;
+            }
+        }
+    }
+
+    public static void SecondFloor(Scanner scanner) {
+        int choice;
+        boolean reachedDoor = false;
+
+        while (!reachedDoor) {
+            printGameBoard(ROWS2, COLS2, currentPositionX2, currentPositionY2);
+            System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1: // Move Up
+                    if (currentPositionX2 > 0) currentPositionX2--;
+                    else System.out.println("You cannot go out of bounds. Please choose another move.");
+                    break;
+                case 2: // Move Down
+                    if (currentPositionX2 < ROWS2 - 1) currentPositionX2++;
+                    else System.out.println("You cannot go out of bounds. Please choose another move.");
+                    break;
+                case 3: // Move Right
+                    if (currentPositionY2 < COLS2 - 1) currentPositionY2++;
+                    else System.out.println("You cannot go out of bounds. Please choose another move.");
+                    break;
+                case 4: // Move Left
+                    if (currentPositionY2 > 0) currentPositionY2--;
+                    else System.out.println("You cannot go out of bounds. Please choose another move.");
+                    break;
+                default:
+                    System.out.println("Invalid move. Please enter a number between 1 and 4.");
+            }
+
+            if (currentPositionX2 == DOOR2[0] && currentPositionY2 == DOOR2[1]) {
+                System.out.println("You've reached the door. Congratulations!");
+                reachedDoor = true;
+            }
+        }
+    }
+
+    private static void printGameBoard(int rows, int cols, int currentPositionX, int currentPositionY) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i == currentPositionX && j == currentPositionY) {
+                    System.out.print("| ? |");
+                } else {
+                    System.out.print("|   |");
+                }
+            }
+            System.out.println(); // Move to the next line after printing each row
+        }
+    }
+}
