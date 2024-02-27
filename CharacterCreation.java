@@ -9,7 +9,10 @@ public class CharacterCreation {
     public void startCharacterCreation() {
         boolean isConfirmed = false;
         while (!isConfirmed) {
-            System.out.println("[1] Input Name\n[2] Job Class\n[3] Confirm");
+            System.out.println("[1] Input Name");
+            System.out.println("[2] Select Class");
+            System.out.println("[3] Confirm");
+            System.out.println("[4] Back");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
             switch (choice) {
@@ -34,8 +37,12 @@ public class CharacterCreation {
                         }
                     }
                     break;
+                case 4:
+                    Menus.TitleScreen();
+                    break;
                 default:
-                    System.out.println("Invalid selection. Please select a number between 1 and 3.");
+                    System.out.println("Invalid Input!");
+                    startCharacterCreation();
             }
         }
     }
