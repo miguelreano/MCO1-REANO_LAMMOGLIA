@@ -25,7 +25,7 @@ public class GameLobby{
         System.out.println("Go to The Elden Throne");
         break;
       case 4:
-        Menus.menusGameLobby();
+   //     Menus.menusGameLobby(characterStats);
         break;
       default:
         System.out.println("Invalid choice. Please try again.");
@@ -36,7 +36,7 @@ public class GameLobby{
     scanner.close();
   }
 
-    public static void LevelUp() {
+    public static void LevelUp(Character.CharacterStats characterStats) {
         Scanner scanner = new Scanner(System.in);
     
         System.out.println("\n[1] Level Health");
@@ -52,35 +52,53 @@ public class GameLobby{
     
         switch (option) {
           case 1:
+            characterStats.setHP(characterStats.getHP() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled HP");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 2:
+            characterStats.setEND(characterStats.getEND() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled END");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 3:
+            characterStats.setDEX(characterStats.getDEX() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled DEX");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 4:
+            characterStats.setSTR(characterStats.getSTR() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled STR");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 5:
+            characterStats.setINT(characterStats.getINT() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled INT");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 6:
+            characterStats.setFTH(characterStats.getFTH() + 1);
+            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+            characterStats.displayStats();
             System.out.println("Leveled FTH");
-            LevelUp();
+            LevelUp(characterStats);
             break;
           case 7:
-            Menus.menusGameLobby();
+            Menus.menusGameLobby(characterStats);
             break;
           default:
             System.out.println("Invalid choice. Please try again.");
-            LevelUp();
+            LevelUp(characterStats);
             break;
         }
     

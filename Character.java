@@ -27,12 +27,13 @@ public class Character {
                     if (characterName.isEmpty() || characterStats == null) {
                         System.out.println("Please ensure you have chosen a name and job class.");
                     } else {
-                        System.out.println("Confirm Character? (yes/no)");
+                        System.out.println("Confirm Character?");
+                        System.out.println("[YES] [NO]");
                         String confirm = scanner.nextLine();
                         if (confirm.equalsIgnoreCase("yes")) {
                             isConfirmed = true;
-                            Menus.menusGameLobby();
-                        } else {
+                            Menus.menusGameLobby(characterStats);
+                        } else if (confirm.equalsIgnoreCase("no")){
                             System.out.println("Character creation not confirmed, returning to options.");
                         }
                     }
@@ -129,6 +130,45 @@ public class Character {
 
         public int getPlayerLevel() {
             return playerLevel;
+        }
+
+        public void setHP(int HP) {
+            this.HP = HP;
+        }
+    
+        public void setEND(int END) {
+            this.END = END;
+        }
+    
+        public void setDEX(int DEX) {
+            this.DEX = DEX;
+        }
+    
+        public void setSTR(int STR) {
+            this.STR = STR;
+        }
+    
+        public void setINT(int INT) {
+            this.INT = INT;
+        }
+    
+        public void setFTH(int FTH) {
+            this.FTH = FTH;
+        }
+    
+        public void setPlayerLevel(int playerLevel) {
+            this.playerLevel = playerLevel;
+        }
+
+        public void displayStats() {
+            System.out.println("Current Stats:");
+            System.out.println("HP: " + HP);
+            System.out.println("END: " + END);
+            System.out.println("DEX: " + DEX);
+            System.out.println("STR: " + STR);
+            System.out.println("INT: " + INT);
+            System.out.println("FTH: " + FTH);
+            System.out.println("Player Level: " + playerLevel);
         }
     }
 

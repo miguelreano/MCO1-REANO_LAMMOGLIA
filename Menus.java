@@ -25,7 +25,7 @@ public class Menus {
       case 1:
         user = new Character();
         user.startCharacterCreation();
-        break;
+        break;  
       case 2:
         System.exit(0);
         break;
@@ -38,7 +38,7 @@ public class Menus {
     scanner.close();
   }
 
-  public static void menusGameLobby() {
+  public static void menusGameLobby(Character.CharacterStats characterStats) {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("[1] Fast Travel");
@@ -55,7 +55,7 @@ public class Menus {
         GameLobby.FastTravel();
         break;
       case 2:
-        GameLobby.LevelUp();
+        GameLobby.LevelUp(characterStats);
         break;
       case 3:
         System.out.println("Inventory");
@@ -68,7 +68,7 @@ public class Menus {
         break;
       default:
         System.out.println("Invalid choice. Please try again.");
-        menusGameLobby();
+        menusGameLobby(characterStats);
         break;
     }
 
