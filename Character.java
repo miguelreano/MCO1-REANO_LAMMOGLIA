@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class CharacterCreation {
+public class Character {
     private Scanner scanner = new Scanner(System.in);
     private String characterName = "";
     private CharacterStats characterStats = null;
