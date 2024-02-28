@@ -132,6 +132,11 @@ public class Character {
             return playerLevel;
         }
 
+        public String setClassName(String className) {
+            this.className = className;
+            return this.className;
+        }
+
         public void setHP(int HP) {
             this.HP = HP;
         }
@@ -161,6 +166,7 @@ public class Character {
         }
 
         public void displayStats() {
+            System.out.println("Class:" + className);
             System.out.println("Current Stats:");
             System.out.println("HP: " + HP);
             System.out.println("END: " + END);
