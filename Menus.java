@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Menus {
 
-  private static CharacterCreation user;
+  private static Character user;
 
   public Menus() {
     TitleScreen();
@@ -23,7 +23,7 @@ public class Menus {
 
     switch (titleOption) {
       case 1:
-        user = new CharacterCreation();
+        user = new Character();
         user.startCharacterCreation();
         break;
       case 2:

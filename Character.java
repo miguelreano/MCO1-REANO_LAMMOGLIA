@@ -58,32 +58,38 @@ public class Character {
         int classOption = scanner.nextInt();
         switch (classOption) {
             case 1:
-                characterStats = new CharacterStats(15, 11, 13, 14, 9, 9, 9);
+                characterStats = new CharacterStats("Vagabond", 15, 11, 13, 14, 9, 9, 9);
                 break;
             case 2:
-                characterStats = new CharacterStats(12, 13, 15, 12, 9, 8, 9);
+                characterStats = new CharacterStats("Samurai", 12, 13, 15, 12, 9, 8, 9);
                 break;
             case 3:
-                characterStats = new CharacterStats(11, 11, 16, 10, 10, 8, 8);
+                characterStats = new CharacterStats("Warrior", 11, 11, 16, 10, 10, 8, 8);
                 break;
             case 4:
-                characterStats = new CharacterStats(14, 12, 9, 16, 7, 8, 7);
+                characterStats = new CharacterStats("Hero", 14, 12, 9, 16, 7, 8, 7);
                 break;
             case 5:
-                characterStats = new CharacterStats(9, 9, 12, 8, 16, 7, 6);
+                characterStats = new CharacterStats("Astrologer", 9, 9, 12, 8, 16, 7, 6);
                 break;
             case 6:
-                characterStats = new CharacterStats(10, 8, 10, 11, 7, 16, 7);
+                characterStats = new CharacterStats("Prophet", 10, 8, 10, 11, 7, 16, 7);
                 break;
             default:
                 System.out.println("Invalid selection. Please select a number between 1 and 6.");
         }
     }
 
+    public CharacterStats getCharacterStats() {
+        return characterStats;
+    }
+
     class CharacterStats {
+        String className;
         int HP, END, DEX, STR, INT, FTH, playerLevel;
 
-        public CharacterStats(int HP, int END, int DEX, int STR, int INT, int FTH, int playerLevel) {
+        public CharacterStats(String className, int HP, int END, int DEX, int STR, int INT, int FTH, int playerLevel) {
+            this.className = className;
             this.HP = HP;
             this.END = END;
             this.DEX = DEX;
@@ -91,6 +97,38 @@ public class Character {
             this.INT = INT;
             this.FTH = FTH;
             this.playerLevel = playerLevel;
+        }
+
+        public String getClassName() {
+            return className;
+        }
+
+        public int getHP() {
+            return HP;
+        }
+
+        public int getEND() {
+            return END;
+        }
+        
+        public int getDEX() {
+            return DEX;
+        }
+
+        public int getSTR() {
+            return STR;
+        }
+
+        public int getINT() {
+            return INT;
+        }
+
+        public int getFTH() {
+            return HP;
+        }
+
+        public int getPlayerLevel() {
+            return playerLevel;
         }
     }
 
