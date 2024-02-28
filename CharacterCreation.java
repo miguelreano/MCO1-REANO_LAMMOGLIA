@@ -31,7 +31,7 @@ public class CharacterCreation {
                         String confirm = scanner.nextLine();
                         if (confirm.equalsIgnoreCase("yes")) {
                             isConfirmed = true;
-                            Menus.GameLobby();
+                            Menus.menusGameLobby();
                         } else {
                             System.out.println("Character creation not confirmed, returning to options.");
                         }
