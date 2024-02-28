@@ -21,7 +21,7 @@ public class Character {
                     characterName = scanner.nextLine();
                     break;
                 case 2:
-                    chooseJobClass();
+                    selectClass();
                     break;
                 case 3:
                     if (characterName.isEmpty() || characterStats == null) {
@@ -47,7 +47,7 @@ public class Character {
         }
     }
 
-    private void chooseJobClass() {
+    private void selectClass() {
         System.out.println("CLASS: \t\t HP  END  DEX  STR  INT  FTH \tLVL");
         System.out.println("[1] Vagabond \t 15   11   13   14    9    9     9");
         System.out.println("[2] Samurai \t 12   13   15   12    9    8     9");
@@ -55,8 +55,8 @@ public class Character {
         System.out.println("[4] Hero \t 14   12    9   16    7    8     7");
         System.out.println("[5] Astrologer \t  9    9   12    8   16    7     6");
         System.out.println("[6] Prophet \t 10    8   10   11    7   16     7");
-        int classOption = scanner.nextInt();
-        switch (classOption) {
+        int selectedClass = scanner.nextInt();
+        switch (selectedClass) {
             case 1:
                 characterStats = new CharacterStats("Vagabond", 15, 11, 13, 14, 9, 9, 9);
                 break;
