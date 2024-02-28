@@ -76,7 +76,7 @@ public class GameLobby{
             LevelUp();
             break;
           case 7:
-            System.out.println("Back");
+            Menus.menusGameLobby();
             break;
           default:
             System.out.println("Invalid choice. Please try again.");

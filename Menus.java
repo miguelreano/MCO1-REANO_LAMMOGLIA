@@ -55,7 +55,7 @@ public class Menus {
         GameLobby.FastTravel();
         break;
       case 2:
-        
+        GameLobby.LevelUp();
         break;
       case 3:
         System.out.println("Inventory");
