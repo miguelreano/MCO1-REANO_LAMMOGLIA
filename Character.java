@@ -4,7 +4,7 @@ public class Character {
     private Scanner scanner = new Scanner(System.in);
     private String characterName = "";
     private CharacterStats characterStats = null;
-    private int Runes = 0;
+    private int Runes = 1000;
 
     public void startCharacterCreation() {
         boolean isConfirmed = false;
@@ -88,6 +88,7 @@ public class Character {
     class CharacterStats {
         String className;
         int HP, END, DEX, STR, INT, FTH, playerLevel;
+        int Runes;
 
         public CharacterStats(String className, int HP, int END, int DEX, int STR, int INT, int FTH, int playerLevel) {
             this.className = className;
@@ -98,6 +99,7 @@ public class Character {
             this.INT = INT;
             this.FTH = FTH;
             this.playerLevel = playerLevel;
+
         }
 
         public String getClassName() {
@@ -130,6 +132,10 @@ public class Character {
 
         public int getPlayerLevel() {
             return playerLevel;
+        }
+
+        public int getRunes() {
+            return this.Runes;
         }
 
         public String setClassName(String className) {
@@ -175,6 +181,18 @@ public class Character {
             System.out.println("INT: " + INT);
             System.out.println("FTH: " + FTH);
             System.out.println("Player Level: " + playerLevel);
+        }
+
+        public void addRunes(int amount) {
+            this.Runes += amount;
+        }
+
+        public void subtractRunes(int amount) {
+            if (this.Runes >= amount) {
+                this.Runes -= amount;
+            } else {
+                System.out.println("Not Enough Runes!");
+            }
         }
     }
 

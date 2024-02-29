@@ -38,6 +38,8 @@ public class GameLobby{
 
     public static void LevelUp(Character.CharacterStats characterStats) {
         Scanner scanner = new Scanner(System.in);
+
+        int runeCost = (characterStats.getPlayerLevel() * 100) / 2;
     
         System.out.println("\n[1] Level Health");
         System.out.println("[2] Level Endurance");
@@ -52,45 +54,81 @@ public class GameLobby{
     
         switch (option) {
           case 1:
-            characterStats.setHP(characterStats.getHP() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled HP");
+            if(characterStats.getRunes() >= runeCost) {
+              characterStats.subtractRunes(runeCost);
+              characterStats.setHP(characterStats.getHP() + 1);
+              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+              characterStats.displayStats();
+              System.out.println("Leveled HP");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 2:
-            characterStats.setEND(characterStats.getEND() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled END");
+            if(characterStats.getRunes() >= runeCost) {
+              characterStats.subtractRunes(runeCost);
+              characterStats.setEND(characterStats.getEND() + 1);
+              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+              characterStats.displayStats();
+              System.out.println("Leveled END");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 3:
-            characterStats.setDEX(characterStats.getDEX() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled DEX");
+            if(characterStats.getRunes() >= runeCost) {
+              characterStats.subtractRunes(runeCost);
+             characterStats.setDEX(characterStats.getDEX() + 1);
+              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+             characterStats.displayStats();
+             System.out.println("Leveled DEX");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 4:
-            characterStats.setSTR(characterStats.getSTR() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled STR");
+            if(characterStats.getRunes() >= runeCost) {
+              characterStats.subtractRunes(runeCost);
+              characterStats.setSTR(characterStats.getSTR() + 1);
+              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+              characterStats.displayStats();
+              System.out.println("Leveled STR");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 5:
-            characterStats.setINT(characterStats.getINT() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled INT");
+            if(characterStats.getRunes() >= runeCost) {
+             characterStats.subtractRunes(runeCost);
+             characterStats.setINT(characterStats.getINT() + 1);
+             characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+             characterStats.displayStats();
+             System.out.println("Leveled INT");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 6:
-            characterStats.setFTH(characterStats.getFTH() + 1);
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
-            System.out.println("Leveled FTH");
+            if(characterStats.getRunes() >= runeCost) {
+              characterStats.subtractRunes(runeCost);
+              characterStats.setFTH(characterStats.getFTH() + 1);
+              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
+              characterStats.displayStats();
+              System.out.println("Leveled FTH");
+            } else {
+              System.out.println("Not Enough Runes!");
+              System.out.println("Current Runes: " + characterStats.getRunes());
+            }
             LevelUp(characterStats);
             break;
           case 7:
