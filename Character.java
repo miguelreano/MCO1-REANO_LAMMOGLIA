@@ -4,10 +4,16 @@ public class Character {
     private Scanner scanner = new Scanner(System.in);
     private String characterName = "";
     private CharacterStats characterStats = null;
-    private int Runes = 1000;
+    private int Runes = 10000;
+
+    //Character character = new Character();
 
     public int getRunes() {
         return this.Runes;
+    }
+
+    public void setRunes(int Runes){
+        this.Runes = Runes;
     }
 
     public void addRunes(int amount) {
@@ -15,7 +21,7 @@ public class Character {
     }
 
     public void subtractRunes(int amount) {
-            this.Runes -= amount;
+        this.Runes -= amount;
     }
 
     public void startCharacterCreation() {
@@ -138,7 +144,7 @@ public class Character {
         }
 
         public int getFTH() {
-            return HP;
+            return FTH;
         }
 
         public int getPlayerLevel() {

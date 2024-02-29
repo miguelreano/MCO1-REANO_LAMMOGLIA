@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 
 public class GameLobby{
+    private Character user;
+
 
     public static void FastTravel() {
     Scanner scanner = new Scanner(System.in);
@@ -36,7 +38,7 @@ public class GameLobby{
     scanner.close();
   }
 
-    public static void LevelUp(Character.CharacterStats characterStats, Character character) {
+    public static void LevelUp(Character.CharacterStats characterStats, Character user) {
         Scanner scanner = new Scanner(System.in);
 
         int runeCost = (characterStats.getPlayerLevel() * 100) / 2;
@@ -54,89 +56,89 @@ public class GameLobby{
     
         switch (option) {
           case 1:
-            if(character.getRunes() >= runeCost) {
-              character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
               characterStats.setHP(characterStats.getHP() + 1);
               characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
               characterStats.displayStats();
               System.out.println("Leveled HP");
-            } else if (character.getRunes() < runeCost) {
+            } else if (user.getRunes() < runeCost) {
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 2:
-            if(character.getRunes() >= runeCost) {
-              character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
               characterStats.setEND(characterStats.getEND() + 1);
               characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
               characterStats.displayStats();
               System.out.println("Leveled END");
-            } else {
+            } else if (user.getRunes() < runeCost) { 
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 3:
-            if(character.getRunes() >= runeCost) {
-              character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
              characterStats.setDEX(characterStats.getDEX() + 1);
               characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
              characterStats.displayStats();
              System.out.println("Leveled DEX");
-            } else {
+            } else if (user.getRunes() < runeCost) {
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 4:
-            if(character.getRunes() >= runeCost) {
-              character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
               characterStats.setSTR(characterStats.getSTR() + 1);
               characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
               characterStats.displayStats();
               System.out.println("Leveled STR");
-            } else {
+            } else if (user.getRunes() < runeCost) {
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 5:
-            if(character.getRunes() >= runeCost) {
-             character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
              characterStats.setINT(characterStats.getINT() + 1);
              characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
              characterStats.displayStats();
              System.out.println("Leveled INT");
-            } else {
+            } else if (user.getRunes() < runeCost) {
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 6:
-            if(character.getRunes() >= runeCost) {
-              character.subtractRunes(runeCost);
+            if(user.getRunes() >= runeCost) {
+              user.subtractRunes(runeCost);
               characterStats.setFTH(characterStats.getFTH() + 1);
               characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
               characterStats.displayStats();
               System.out.println("Leveled FTH");
-            } else {
+            } else if (user.getRunes() < runeCost) {
               System.out.println("Not Enough Runes!");
-              System.out.println("Current Runes: " + character.getRunes());
+              System.out.println("Current Runes: " + user.getRunes());
             }
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
           case 7:
             Menus.menusGameLobby(characterStats);
             break;
           default:
             System.out.println("Invalid choice. Please try again.");
-            LevelUp(characterStats, character);
+            LevelUp(characterStats, user);
             break;
         }
     
