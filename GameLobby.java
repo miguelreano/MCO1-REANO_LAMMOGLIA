@@ -62,38 +62,53 @@ public class GameLobby{
                 case 1:
                     System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setHP(characterStats.getHP() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled HP");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
                 case 2:
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setEND(characterStats.getEND() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled END");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
                 case 3:
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setDEX(characterStats.getDEX() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled DEX");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
                 case 4:
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setSTR(characterStats.getSTR() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled STR");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
                 case 5:
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setINT(characterStats.getINT() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled INT");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
                 case 6:
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setFTH(characterStats.getFTH() + 1);
+                    characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
                     System.out.println("Leveled FTH");
-                    Menus.menusGameLobby(characterStats);
+                    characterStats.displayStats();
+                    LevelUp(characterStats, user);
                     break;
             }
-
-            characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-            characterStats.displayStats();
+            
         } else {
             System.out.println("Not Enough Runes!");
             System.out.println("Current Runes: " + user.getRunes());
@@ -102,6 +117,7 @@ public class GameLobby{
         Menus.menusGameLobby(characterStats);
     } else {
         System.out.println("Invalid choice. Please try again.");
+        LevelUp(characterStats, user);
     }
 
     scanner.close();
