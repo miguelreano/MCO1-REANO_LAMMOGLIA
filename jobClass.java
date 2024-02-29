@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class classStats {
 
-  public static void selectClass(){
+  public static void selectClass() {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("Select Class");
@@ -53,7 +53,7 @@ public class classStats {
 
   }
 
-  public static class Vagabond extends classStats{
+  public static class Vagabond extends classStats {
     int HP = 15;
     int END = 11;
     int DEX = 13;
@@ -62,7 +62,7 @@ public class classStats {
     int FTH = 9;
   }
 
-  public static class Samurai extends classStats{
+  public static class Samurai extends classStats {
     int HP = 12;
     int END = 13;
     int DEX = 15;
@@ -71,7 +71,7 @@ public class classStats {
     int FTH = 8;
   }
 
-  public static class Warrior extends classStats{
+  public static class Warrior extends classStats {
     int HP = 11;
     int END = 11;
     int DEX = 16;
@@ -80,7 +80,7 @@ public class classStats {
     int FTH = 8;
   }
 
-  public static class Hero extends classStats{
+  public static class Hero extends classStats {
     int HP = 14;
     int END = 12;
     int DEX = 9;
@@ -89,7 +89,7 @@ public class classStats {
     int FTH = 8;
   }
 
-  public static class Astrologer extends classStats{
+  public static class Astrologer extends classStats {
     int HP = 9;
     int END = 9;
     int DEX = 12;
@@ -98,7 +98,7 @@ public class classStats {
     int FTH = 7;
   }
 
-  public static class Prophet extends classStats{
+  public static class Prophet extends classStats {
     int HP = 10;
     int END = 8;
     int DEX = 10;

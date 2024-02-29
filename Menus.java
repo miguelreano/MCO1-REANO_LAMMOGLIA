@@ -25,7 +25,7 @@ public class Menus {
       case 1:
         user = new Character();
         user.startCharacterCreation();
-        break;  
+        break;
       case 2:
         System.exit(0);
         break;

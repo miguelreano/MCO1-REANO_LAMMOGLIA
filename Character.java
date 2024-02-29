@@ -6,13 +6,13 @@ public class Character {
     private CharacterStats characterStats = null;
     private int Runes = 10000;
 
-    //Character character = new Character();
+    // Character character = new Character();
 
     public int getRunes() {
         return this.Runes;
     }
 
-    public void setRunes(int Runes){
+    public void setRunes(int Runes) {
         this.Runes = Runes;
     }
 
@@ -51,7 +51,7 @@ public class Character {
                         if (confirm.equalsIgnoreCase("yes")) {
                             isConfirmed = true;
                             Menus.menusGameLobby(characterStats);
-                        } else if (confirm.equalsIgnoreCase("no")){
+                        } else if (confirm.equalsIgnoreCase("no")) {
                             System.out.println("Character creation not confirmed, returning to options.");
                         }
                     }
@@ -130,7 +130,7 @@ public class Character {
         public int getEND() {
             return END;
         }
-        
+
         public int getDEX() {
             return DEX;
         }
@@ -159,27 +159,27 @@ public class Character {
         public void setHP(int HP) {
             this.HP = HP;
         }
-    
+
         public void setEND(int END) {
             this.END = END;
         }
-    
+
         public void setDEX(int DEX) {
             this.DEX = DEX;
         }
-    
+
         public void setSTR(int STR) {
             this.STR = STR;
         }
-    
+
         public void setINT(int INT) {
             this.INT = INT;
         }
-    
+
         public void setFTH(int FTH) {
             this.FTH = FTH;
         }
-    
+
         public void setPlayerLevel(int playerLevel) {
             this.playerLevel = playerLevel;
         }
@@ -199,4 +199,3 @@ public class Character {
     }
 
 }
-
