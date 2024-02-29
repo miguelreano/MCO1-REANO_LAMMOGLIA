@@ -60,29 +60,35 @@ public class GameLobby{
 
             switch (option) {
                 case 1:
-                System.out.println("Current Runes: " + user.getRunes());
+                    System.out.println("Current Runes: " + user.getRunes());
                     characterStats.setHP(characterStats.getHP() + 1);
                     System.out.println("Leveled HP");
+                    Menus.menusGameLobby(characterStats);
                     break;
                 case 2:
                     characterStats.setEND(characterStats.getEND() + 1);
                     System.out.println("Leveled END");
+                    Menus.menusGameLobby(characterStats);
                     break;
                 case 3:
                     characterStats.setDEX(characterStats.getDEX() + 1);
                     System.out.println("Leveled DEX");
+                    Menus.menusGameLobby(characterStats);
                     break;
                 case 4:
                     characterStats.setSTR(characterStats.getSTR() + 1);
                     System.out.println("Leveled STR");
+                    Menus.menusGameLobby(characterStats);
                     break;
                 case 5:
                     characterStats.setINT(characterStats.getINT() + 1);
                     System.out.println("Leveled INT");
+                    Menus.menusGameLobby(characterStats);
                     break;
                 case 6:
                     characterStats.setFTH(characterStats.getFTH() + 1);
                     System.out.println("Leveled FTH");
+                    Menus.menusGameLobby(characterStats);
                     break;
             }
 
