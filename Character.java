@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Character {
     private Scanner scanner = new Scanner(System.in);
-    private String characterName = "";
+    public static String characterName = "";
     private CharacterStats characterStats = null;
     private int Runes = 10000;
 
@@ -27,12 +27,17 @@ public class Character {
     public void startCharacterCreation() {
         boolean isConfirmed = false;
         while (!isConfirmed) {
+
             System.out.print("\033\143");
-            System.out.println("[1] Input Name");
+            Menus.Title();
+            System.out.println("\n[1] Input Name");
             System.out.println("[2] Select Class");
             System.out.println("[3] Confirm");
             System.out.println("[4] Back");
+
+            System.out.print("\nEnter choice: ");
             int choice = scanner.nextInt();
+
             scanner.nextLine(); // Consume newline
             switch (choice) {
                 case 1:
@@ -59,6 +64,7 @@ public class Character {
                     } else {
                         System.out.println("Confirm Character?");
                         System.out.println("[YES] [NO]");
+                        System.out.print("\nEnter Choice: ");
                         String confirm = scanner.nextLine();
                         if (confirm.equalsIgnoreCase("yes")) {
                             System.out.print("\033\143");
@@ -95,6 +101,8 @@ public class Character {
         System.out.println("[4] Hero \t 14   12    9   16    7    8     7");
         System.out.println("[5] Astrologer \t  9    9   12    8   16    7     6");
         System.out.println("[6] Prophet \t 10    8   10   11    7   16     7");
+
+        System.out.print("\nEnter choice: ");
         int selectedClass = scanner.nextInt();
         switch (selectedClass) {
             case 1:

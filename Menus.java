@@ -22,17 +22,9 @@ public class Menus {
   public static void TitleScreen() {
     Scanner scanner = new Scanner(System.in);
 
-    String yellowColorCode = "\u001B[33m";
+    System.out.print("\033\143");
 
-    System.out.println(yellowColorCode + " _____ _    ______ _____ _   _  ______ _____ _____ _   _ _____ ");
-    System.out.println(yellowColorCode + "|  ___| |   |  _  \\  ___| \\ | | | ___ \\  _  |  __ \\ | | |  ___|");
-    System.out.println(yellowColorCode + "| |__ | |   | | | | |__ |  \\| | | |_/ / | | | |  \\/ | | | |__  ");
-    System.out.println(yellowColorCode + "|  __|| |   | | | |  __|| . ` | |    /| | | | | __| | | |  __| ");
-    System.out.println(yellowColorCode + "| |___| |___| |/ /| |___| |\\  | | |\\ \\  \\_/ / |_\\ \\ |_| | |___ ");
-    System.out.println(yellowColorCode + "\\____/\\_____/___/ \\____/\\_| \\_/ \\_| \\_/\\___/ \\____/\\___/\\____/ ");
-
-    String resetColorCode = "\u001B[0m";
-    System.out.print(resetColorCode);
+    Title();
 
     System.out.println("\n[1] Start");
     System.out.println("[2] Exit");
@@ -71,7 +63,12 @@ public class Menus {
   public static void menusGameLobby(Character.CharacterStats characterStats) {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("[1] Fast Travel");
+
+    System.out.println("Name: " + Character.characterName);
+    characterStats.displayStats();
+    System.out.println("Current Runes: " + user.getRunes());
+
+    System.out.println("\n[1] Fast Travel");
     System.out.println("[2] Level Up");
     System.out.println("[3] Inventory");
     System.out.println("[4] Shop");
@@ -130,6 +127,20 @@ public class Menus {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void Title(){
+    String yellowColorCode = "\u001B[33m";
+
+    System.out.println(yellowColorCode + " _____ _    ______ _____ _   _  ______ _____ _____ _   _ _____ ");
+    System.out.println(yellowColorCode + "|  ___| |   |  _  \\  ___| \\ | | | ___ \\  _  |  __ \\ | | |  ___|");
+    System.out.println(yellowColorCode + "| |__ | |   | | | | |__ |  \\| | | |_/ / | | | |  \\/ | | | |__  ");
+    System.out.println(yellowColorCode + "|  __|| |   | | | |  __|| . ` | |    /| | | | | __| | | |  __| ");
+    System.out.println(yellowColorCode + "| |___| |___| |/ /| |___| |\\  | | |\\ \\  \\_/ / |_\\ \\ |_| | |___ ");
+    System.out.println(yellowColorCode + "\\____/\\_____/___/ \\____/\\_| \\_/ \\_| \\_/\\___/ \\____/\\___/\\____/ ");
+
+    String resetColorCode = "\u001B[0m";
+    System.out.print(resetColorCode);
   }
 
 }
