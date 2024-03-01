@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class GameArea {
+
     private static final int ROWS1 = 7; // First floor rows
     private static final int COLS1 = 3; // First floor columns
     private static final int ROWS2 = 7; // Second floor rows
@@ -22,8 +23,7 @@ public class GameArea {
     private static final int[] BOSS_TILE = { 3, 2 }; // Boss position for the third floor
     private static final int[] FAST_TRAVEL_TILE = { 0, 2 }; // Fast travel position for the third floor
 
-    private static Character user; // Placeholder for user character
-    private static int treasure = treasureRunes();
+    private static Character.CharacterStats characterStats;
 
     public static boolean FirstFloor(Scanner scanner) {
         currentPositionX = 6;
@@ -51,7 +51,7 @@ public class GameArea {
         currentPositionX = 6; // Starting position for the third floor
         currentPositionY = 2;
         boolean gameRunning = true;
-
+        
         while (gameRunning) {
             printGameBoard(ROWS3, COLS3, currentPositionX, currentPositionY);
             System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
@@ -64,8 +64,8 @@ public class GameArea {
             }
 
             if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
-                System.out.println("You've reached fast travel.");
                 gameRunning = false;
+                Menus.menusGameLobby(characterStats);
             }
         }
     }
@@ -73,7 +73,7 @@ public class GameArea {
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[] door, int[][] spawns,
             String doorMessage) {
         boolean reachedDoor = false;
-
+        Character user = new Character();
         while (!reachedDoor) {
             printGameBoard(rows, cols, currentPositionX, currentPositionY);
             System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
@@ -86,8 +86,9 @@ public class GameArea {
                     System.out.println("You've reached a spawn point.");
                     if (generateRandomNumber() == 3) {
                         System.out.println("\nIt's your lucky day! You reached a treasure tile");
+                        int runesObtained = treasureRunes();
                         System.out.println("\nYou won this much runes:" + treasureRunes());
-                        user.addRunes(treasure);
+                        user.addRunes(runesObtained);
                     } else {
                         System.out.println("\nYou got a battle tile!");
                     }

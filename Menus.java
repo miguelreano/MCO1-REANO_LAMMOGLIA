@@ -12,10 +12,19 @@ public class Menus {
   public static void TitleScreen() {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("test");
+    String yellowColorCode = "\u001B[33m";
 
-    System.out.println("\n=== Title Screen ===");
-    System.out.println("[1] Start");
+    System.out.println(yellowColorCode + " _____ _    ______ _____ _   _  ______ _____ _____ _   _ _____ ");
+    System.out.println(yellowColorCode + "|  ___| |   |  _  \\  ___| \\ | | | ___ \\  _  |  __ \\ | | |  ___|");
+    System.out.println(yellowColorCode + "| |__ | |   | | | | |__ |  \\| | | |_/ / | | | |  \\/ | | | |__  ");
+    System.out.println(yellowColorCode + "|  __|| |   | | | |  __|| . ` | |    /| | | | | __| | | |  __| ");
+    System.out.println(yellowColorCode + "| |___| |___| |/ /| |___| |\\  | | |\\ \\  \\_/ / |_\\ \\ |_| | |___ ");
+    System.out.println(yellowColorCode + "\\____/\\_____/___/ \\____/\\_| \\_/ \\_| \\_/\\___/ \\____/\\___/\\____/ ");
+
+    String resetColorCode = "\u001B[0m";
+    System.out.print(resetColorCode);
+
+    System.out.println("\n[1] Start");
     System.out.println("[2] Exit");
 
     System.out.print("\nEnter your choice: ");
@@ -23,14 +32,19 @@ public class Menus {
 
     switch (titleOption) {
       case 1:
+        System.out.print("\033\143");
         user = new Character();
         user.startCharacterCreation();
         break;
       case 2:
+        System.out.print("\033\143");
         System.exit(0);
         break;
       default:
+        System.out.print("\033\143");
         System.out.println("Invalid choice. Please try again.");
+        Pause();
+        System.out.print("\033\143");
         TitleScreen();
         break;
     }
@@ -52,28 +66,50 @@ public class Menus {
 
     switch (option) {
       case 1:
+        System.out.print("\033\143");
         GameLobby.FastTravel();
         break;
       case 2:
+        System.out.print("\033\143");
         GameLobby.LevelUp(characterStats, user);
         break;
       case 3:
+        System.out.print("\033\143");
         System.out.println("Inventory");
+        Pause();
+        System.out.print("\033\143");
+        menusGameLobby(characterStats);
         break;
       case 4:
+        System.out.print("\033\143");
         System.out.println("Shop");
+        Pause();
+        System.out.print("\033\143");
+        menusGameLobby(characterStats);
         break;
       case 5:
+        System.out.print("\033\143");
         TitleScreen();
         break;
       default:
+        System.out.print("\033\143");
         System.out.println("Invalid choice. Please try again.");
+        Pause();
+        System.out.print("\033\143");
         menusGameLobby(characterStats);
         break;
     }
 
     scanner.close();
 
+  }
+
+  public static void Pause(){
+    try {
+      Thread.sleep(1500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
 }
