@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class GameLobby {
     private static Character.CharacterStats characterStats;
+    
     private Character user;
     GameArea gameArea = new GameArea();
 
@@ -51,12 +52,13 @@ public class GameLobby {
                 break;
         }
 
-        scanner.close();
+        scanner.close(); 
     }
 
     public static void LevelUp(Character.CharacterStats characterStats, Character user) {
         Scanner scanner = new Scanner(System.in);
-
+        //Character.CharacterStats characterStats = user.getCharacterStats();
+    
         int runeCost = (characterStats.getPlayerLevel() * 100) / 2;
 
         System.out.println("\nCurrent Runes: " + user.getRunes());

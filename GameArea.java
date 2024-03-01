@@ -53,6 +53,7 @@ public class GameArea {
         boolean gameRunning = true;
         
         while (gameRunning) {
+            System.out.print("\033\143");
             printGameBoard(ROWS3, COLS3, currentPositionX, currentPositionY);
             System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
             int choice = scanner.nextInt();
@@ -60,11 +61,16 @@ public class GameArea {
             updatePosition(choice, ROWS3, COLS3);
 
             if (isTile(currentPositionX, currentPositionY, BOSS_TILE)) {
+                System.out.print("\033\143");
                 System.out.println("You've encountered a Boss but can still move to tiles.");
+                Menus.Pause();
             }
 
             if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
                 gameRunning = false;
+                System.out.print("\033\143");
+                System.out.println("You have reached the end of this map! Redirecting you to the Game Lobby...");
+                Menus.Pause();
                 Menus.menusGameLobby(characterStats);
             }
         }
@@ -75,6 +81,7 @@ public class GameArea {
         boolean reachedDoor = false;
         Character user = new Character();
         while (!reachedDoor) {
+            System.out.print("\033\143");
             printGameBoard(rows, cols, currentPositionX, currentPositionY);
             System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
             int choice = scanner.nextInt();
@@ -83,21 +90,29 @@ public class GameArea {
 
             for (int[] spawn : spawns) {
                 if (isTile(currentPositionX, currentPositionY, spawn)) {
+                    System.out.print("\033\143");
                     System.out.println("You've reached a spawn point.");
+                    Menus.Pause();
                     if (generateRandomNumber() == 3) {
+                        System.out.print("\033\143");
                         System.out.println("\nIt's your lucky day! You reached a treasure tile");
                         int runesObtained = treasureRunes();
-                        System.out.println("\nYou won this much runes:" + treasureRunes());
-                        user.addRunes(runesObtained);
+                        System.out.println("\nYou won this much runes:" + runesObtained);
+                        user.setRunes(user.getRunes() + runesObtained);
+                        Menus.Pause();
                     } else {
+                        System.out.print("\033\143");
                         System.out.println("\nYou got a battle tile!");
+                        Menus.Pause();
                     }
                     break;
                 }
             }
 
             if (isTile(currentPositionX, currentPositionY, door)) {
+                System.out.print("\033\143");
                 System.out.println(doorMessage);
+                Menus.Pause();
                 reachedDoor = true;
             }
         }
@@ -113,28 +128,38 @@ public class GameArea {
                 if (currentPositionX > 0)
                     currentPositionX--;
                 else
+                    System.out.print("\033\143");
                     System.out.println("Cannot move up. You are at the edge.");
+                    
                 break;
             case 2: // Move Down
                 if (currentPositionX < rows - 1)
                     currentPositionX++;
                 else
+                    System.out.print("\033\143");
                     System.out.println("Cannot move down. You are at the edge.");
+                    
                 break;
             case 3: // Move Right
                 if (currentPositionY < cols - 1)
                     currentPositionY++;
                 else
+                    System.out.print("\033\143");
                     System.out.println("Cannot move right. You are at the edge.");
+                    
                 break;
             case 4: // Move Left
                 if (currentPositionY > 0)
                     currentPositionY--;
                 else
+                    System.out.print("\033\143");
                     System.out.println("Cannot move left. You are at the edge.");
+                    
                 break;
             default:
+                System.out.print("\033\143");
                 System.out.println("Invalid input. Please choose a valid move.");
+                Menus.Pause();
                 break;
         }
     }

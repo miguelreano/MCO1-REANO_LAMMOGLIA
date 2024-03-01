@@ -5,10 +5,20 @@ public class Menus {
 
   private static Character user;
 
+  /**
+   * Initializes the game by displaying the title screen and processing user input
+   * for starting the game or exiting.
+   */
+
   public Menus() {
     TitleScreen();
   }
 
+   /**
+   * Displays the game's title screen and options for starting or exiting the game.
+   * Handles user input to navigate to the character creation process or exit the game.
+   * 
+   */
   public static void TitleScreen() {
     Scanner scanner = new Scanner(System.in);
 
@@ -52,6 +62,12 @@ public class Menus {
     scanner.close();
   }
 
+  /**
+   * Displays the game lobby menu with options for fast travel, leveling up, accessing the inventory,
+   * visiting the shop, or quitting the game. Processes user input to navigate to the selected option.
+   *
+   * @param characterStats The current character's statistics, used for certain game actions such as leveling up.
+   */
   public static void menusGameLobby(Character.CharacterStats characterStats) {
     Scanner scanner = new Scanner(System.in);
 
@@ -103,7 +119,11 @@ public class Menus {
     scanner.close();
 
   }
-
+  
+  /**
+   * Pauses the execution for a brief moment, typically used to allow the user
+   * to read on-screen messages before proceeding.
+   */
   public static void Pause(){
     try {
       Thread.sleep(1500);
