@@ -1,6 +1,12 @@
 
 import java.util.Scanner;
 
+/**
+ * The {@code Menus} class provides the user interface for navigating through the game's main menu,
+ * initiating the character creation process, and accessing various game features such as fast travel,
+ * leveling up, inventory, and the shop. It serves as the central point for user interaction outside
+ * of the main gameplay loop.
+ */
 public class Menus {
 
   private static Character user;
@@ -14,7 +20,7 @@ public class Menus {
     TitleScreen();
   }
 
-   /**
+  /**
    * Displays the game's title screen and options for starting or exiting the game.
    * Handles user input to navigate to the character creation process or exit the game.
    * 

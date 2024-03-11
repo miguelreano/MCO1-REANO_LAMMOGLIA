@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+* The {@code GameArea} class represents the game environment where the player can navigate through
+* different floors, encounter various challenges, and collect treasures. It manages the game's
+* spatial logic, including movements, encounters, and transitions between floors.
+*/
 public class GameArea {
 
     private static final int ROWS1 = 7; // First floor rows
@@ -10,20 +15,29 @@ public class GameArea {
     private static final int ROWS3 = 7; // Third floor rows
     private static final int COLS3 = 5; // Third floor columns
 
-    private static int currentPositionX; // Generalized position row for any floor
-    private static int currentPositionY; // Generalized position column for any floor
+    private static int currentPositionX; 
+    private static int currentPositionY; 
 
     private static final int[] DOOR1 = { 0, 1 }; // Door position for the first floor
     private static final int[] DOOR2 = { 0, 3 }; // Door position for the second floor
     private static final int[][] SPAWNS1 = { { 1, 0 }, { 1, 2 } }; // Spawn positions for the first floor
     private static final int[][] SPAWNS2 = {
-            { 5, 2 }, { 5, 4 }, { 3, 0 }, { 3, 2 }, { 3, 3 }, { 3, 4 }, { 3, 6 }, { 1, 3 } // Spawn positions for the
-                                                                                           // second floor
+            { 5, 2 }, { 5, 4 }, { 3, 0 }, { 3, 2 }, 
+            { 3, 3 }, { 3, 4 }, { 3, 6 }, { 1, 3 } // 2nd floor Spawn positions                                                                                      
     };
+
     private static final int[] BOSS_TILE = { 3, 2 }; // Boss position for the third floor
     private static final int[] FAST_TRAVEL_TILE = { 0, 2 }; // Fast travel position for the third floor
 
     private static Character.CharacterStats characterStats;
+
+    /**
+    * Initiates the first floor of the game area, setting the player's starting position
+    * and managing gameplay logic including door and spawn encounters.
+    * 
+    * @param scanner The scanner object to read player inputs.
+    * @return {@code true} if the player reaches the door, {@code false} otherwise.
+    */
 
     public static boolean FirstFloor(Scanner scanner) {
         currentPositionX = 6;
@@ -36,6 +50,13 @@ public class GameArea {
         return doorReached;
     }
 
+    /**
+     * Initiates the second floor of the game area with a new set of challenges and updates
+     * the player's position accordingly. It also handles logic for door and spawn encounters.
+     * 
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean SecondFloor(Scanner scanner) {
         currentPositionX = 6; // Starting position for the second floor
         currentPositionY = 3;
@@ -47,6 +68,14 @@ public class GameArea {
         return doorReached;
     }
 
+
+    
+    /**
+     * Initiates the third floor of the game area, presenting the final set of challenges,
+     * including a boss fight and a fast travel tile to conclude the level.
+     * 
+     * @param scanner The scanner object to read player inputs.
+     */
     public static void ThirdFloor(Scanner scanner) {
         currentPositionX = 6; // Starting position for the third floor
         currentPositionY = 2;
@@ -55,8 +84,8 @@ public class GameArea {
         while (gameRunning) {
             System.out.print("\033\143");
             printGameBoard(ROWS3, COLS3, currentPositionX, currentPositionY);
-            System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
-            int choice = scanner.nextInt();
+            System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+            String choice = scanner.nextLine();
 
             updatePosition(choice, ROWS3, COLS3);
 
@@ -76,6 +105,19 @@ public class GameArea {
         }
     }
 
+
+    /**
+     * Contains the logic for player movement and interactions within a floor, including
+     * handling spawn points, door encounters, and displaying the game board.
+     * 
+     * @param scanner The scanner object for reading player inputs.
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * @param door The coordinates of the floor's door.
+     * @param spawns The spawn points within the floor.
+     * @param doorMessage The message to display when the door is reached.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[] door, int[][] spawns,
             String doorMessage) {
         boolean reachedDoor = false;
@@ -83,8 +125,8 @@ public class GameArea {
         while (!reachedDoor) {
             System.out.print("\033\143");
             printGameBoard(rows, cols, currentPositionX, currentPositionY);
-            System.out.println("Choose your move: [1] Up, [2] Down, [3] Right, [4] Left");
-            int choice = scanner.nextInt();
+            System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+            String choice = scanner.nextLine();
 
             updatePosition(choice, rows, cols);
 
@@ -119,12 +161,18 @@ public class GameArea {
         return reachedDoor;
     }
 
-    // Remaining methods (updatePosition, isTile, printGameBoard, treasureRunes,
-    // generateRandomNumber) are unchanged
 
-    private static void updatePosition(int choice, int rows, int cols) {
-        switch (choice) {
-            case 1: // Move Up
+    /**
+     * Updates the player's position based on the input command. It prevents movement
+     * outside the bounds of the game board.
+     * 
+     * @param choice The player's movement choice.
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     */
+    private static void updatePosition(String choice, int rows, int cols) {
+        switch (choice.toLowerCase()) {
+            case "w": // Move Up
                 if (currentPositionX > 0)
                     currentPositionX--;
                 else
@@ -132,7 +180,7 @@ public class GameArea {
                     System.out.println("Cannot move up. You are at the edge.");
                     
                 break;
-            case 2: // Move Down
+            case "s": // Move Down
                 if (currentPositionX < rows - 1)
                     currentPositionX++;
                 else
@@ -140,7 +188,7 @@ public class GameArea {
                     System.out.println("Cannot move down. You are at the edge.");
                     
                 break;
-            case 3: // Move Right
+            case "d": // Move Right
                 if (currentPositionY < cols - 1)
                     currentPositionY++;
                 else
@@ -148,7 +196,7 @@ public class GameArea {
                     System.out.println("Cannot move right. You are at the edge.");
                     
                 break;
-            case 4: // Move Left
+            case "a": // Move Left
                 if (currentPositionY > 0)
                     currentPositionY--;
                 else
@@ -164,10 +212,27 @@ public class GameArea {
         }
     }
 
+    /**
+     * Checks if the current position matches the specified tile coordinates.
+     * 
+     * @param x The x-coordinate of the current position.
+     * @param y The y-coordinate of the current position.
+     * @param tile The tile coordinates to compare with the current position.
+     * @return {@code true} if the current position matches the tile coordinates, {@code false} otherwise.
+     */
     private static boolean isTile(int x, int y, int[] tile) {
         return x == tile[0] && y == tile[1];
     }
 
+    /**
+     * Prints the game board to the console, showing the player's current position
+     * and the layout of the floor.
+     * 
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * @param x The x-coordinate of the player's current position.
+     * @param y The y-coordinate of the player's current position.
+     */
     private static void printGameBoard(int rows, int cols, int x, int y) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -180,6 +245,11 @@ public class GameArea {
         }
     }
 
+    /**
+     * Generates a random number of runes for the player to collect at treasure spawn points.
+     * 
+     * @return The number of runes generated.
+     */
     public static int treasureRunes() {
         Random random = new Random(); // Create a Random object
         int min = 50; // Set the minimum number (inclusive)
@@ -187,6 +257,11 @@ public class GameArea {
         return random.nextInt(max - min) + min; // Generate and return the random number
     }
 
+    /**
+     * Generates a random number used to determine if a spawn point will yield treasure.
+     * 
+     * @return A random number between 1 and 4.
+     */
     public static int generateRandomNumber() {
         Random randa = new Random();
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1

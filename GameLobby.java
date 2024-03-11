@@ -1,11 +1,20 @@
 import java.util.Scanner;
 
+/**
+ * The {@code GameLobby} class provides functionalities for the game lobby, including fast travel and leveling up options.
+ * It facilitates navigation between different game areas and managing character progression.
+ */
 public class GameLobby {
     private static Character.CharacterStats characterStats;
     
     private Character user;
     GameArea gameArea = new GameArea();
 
+    /**
+     * Presents the Fast Travel menu to the player, allowing them to choose different destinations.
+     * Depending on the player's choice, they can travel to various locations in the game or return to the game lobby.
+     * This method uses a scanner to capture user input and switch to the desired game location.
+     */
     public static void FastTravel() {
         Scanner scanner = new Scanner(System.in);
 
@@ -55,9 +64,17 @@ public class GameLobby {
         scanner.close(); 
     }
 
+
+    /**
+     * Allows the player to level up their character by spending runes. The player can choose which attribute to level up,
+     * affecting the character's overall stats. Each level up increases the cost in runes, requiring the player to manage
+     * their resources wisely.
+     *
+     * @param characterStats The character's current stats, used to calculate the cost and effect of leveling up.
+     * @param user The character instance being leveled up, which holds the rune balance and stats.
+     */
     public static void LevelUp(Character.CharacterStats characterStats, Character user) {
         Scanner scanner = new Scanner(System.in);
-        //Character.CharacterStats characterStats = user.getCharacterStats();
     
         int runeCost = (characterStats.getPlayerLevel() * 100) / 2;
 

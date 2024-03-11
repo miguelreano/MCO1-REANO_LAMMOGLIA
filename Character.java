@@ -1,29 +1,56 @@
 import java.util.Scanner;
 
+/**
+ * Represents a character in the game, including their stats, name, and runes.
+ * This class also handles the character creation process, allowing players to input their name,
+ * select a class, and confirm their choices.
+ */
 public class Character {
     private Scanner scanner = new Scanner(System.in);
     public static String characterName = "";
     private CharacterStats characterStats = null;
     private int Runes = 10000;
 
-    // Character character = new Character();
 
+    
+    /**
+     * Retrieves the current amount of runes the character has.
+     * @return The current amount of runes.
+     */
     public int getRunes() {
         return this.Runes;
     }
 
+    /**
+     * Sets the rune count for the character.
+     * @param Runes The new amount of runes to set.
+     */
     public void setRunes(int Runes) {
         this.Runes = Runes;
     }
 
+    
+    /**
+     * Increases the character's rune count by a specified amount.
+     * @param amount The amount to add to the current runes.
+     */
     public void addRunes(int amount) {
         this.Runes += amount;
     }
 
+    /**
+     * Decreases the character's rune count by a specified amount.
+     * @param amount The amount to subtract from the current runes.
+     */
     public void subtractRunes(int amount) {
         this.Runes -= amount;
     }
 
+    
+    /**
+     * Starts the character creation process, allowing the player to input their name,
+     * select a character class, and confirm their choices.
+     */
     public void startCharacterCreation() {
         boolean isConfirmed = false;
         while (!isConfirmed) {
@@ -93,6 +120,10 @@ public class Character {
         }
     }
 
+    /**
+     * Presents the class selection menu to the player and sets the character's stats
+     * based on the selected class.
+     */
     private void selectClass() {
         System.out.println("CLASS: \t\t HP  END  DEX  STR  INT  FTH \tLVL");
         System.out.println("[1] Vagabond \t 15   11   13   14    9    9     9");
@@ -156,14 +187,37 @@ public class Character {
         }
     }
 
+    /**
+     * Retrieves the character's stats.
+     *
+     * @return The current {@code CharacterStats} of the character.
+     */
     public CharacterStats getCharacterStats() {
         return characterStats;
     }
-
+    
+    /**
+     * Represents the statistics of a character, including class name, health points (HP),
+     * endurance (END), dexterity (DEX), strength (STR), intelligence (INT), faith (FTH),
+     * and player level.
+     */
     class CharacterStats {
         String className;
         int HP, END, DEX, STR, INT, FTH, playerLevel;
 
+        
+        /**
+         * Constructs a {@code CharacterStats} object with specified stats.
+         *
+         * @param className The class name of the character.
+         * @param HP The health points of the character.
+         * @param END The endurance level of the character.
+         * @param DEX The dexterity level of the character.
+         * @param STR The strength level of the character.
+         * @param INT The intelligence level of the character.
+         * @param FTH The faith level of the character.
+         * @param playerLevel The current level of the character.
+         */
         public CharacterStats(String className, int HP, int END, int DEX, int STR, int INT, int FTH, int playerLevel) {
             this.className = className;
             this.HP = HP;
@@ -176,6 +230,9 @@ public class Character {
 
         }
 
+          /**
+         * getters and setters for the constructor above
+         */
         public String getClassName() {
             return className;
         }
@@ -240,7 +297,11 @@ public class Character {
         public void setPlayerLevel(int playerLevel) {
             this.playerLevel = playerLevel;
         }
-
+        
+        
+        /**
+         * Displays the current stats of the character to the console.
+         */
         public void displayStats() {
             System.out.println("Class:" + className);
             System.out.println("Current Stats:");
