@@ -19,8 +19,10 @@ public class GameArea {
     private static int currentPositionY; 
 
     private static final int[] DOOR1 = { 0, 1 }; // Door position for the first floor
-    private static final int[] DOOR2 = { 0, 3 }; // Door position for the second floor
+    private static final int[][] DOOR2 = { {0, 3}, {6,3}}; // Door position for the second floor
+    private static final int[] DOOR3 = {6,2};
     private static final int[][] SPAWNS1 = { { 1, 0 }, { 1, 2 } }; // Spawn positions for the first floor
+    
     private static final int[][] SPAWNS2 = {
             { 5, 2 }, { 5, 4 }, { 3, 0 }, { 3, 2 }, 
             { 3, 3 }, { 3, 4 }, { 3, 6 }, { 1, 3 } // 2nd floor Spawn positions                                                                                      
@@ -42,12 +44,13 @@ public class GameArea {
     public static boolean FirstFloor(Scanner scanner) {
         currentPositionX = 6;
         currentPositionY = 1;
-        boolean doorReached = floorLogic(scanner, ROWS1, COLS1, DOOR1, SPAWNS1,
-                "You've reached the door of the first floor...");
+        boolean doorReached = floorLogic(scanner, ROWS1, COLS1, new int[][]{DOOR1}, SPAWNS1,
+        "You've reached the door of the first floor...");
         if (doorReached) {
-            SecondFloor(scanner);
+        SecondFloor(scanner);
         }
         return doorReached;
+
     }
 
     /**
@@ -61,10 +64,10 @@ public class GameArea {
         currentPositionX = 6; // Starting position for the second floor
         currentPositionY = 3;
         boolean doorReached = floorLogic(scanner, ROWS2, COLS2, DOOR2, SPAWNS2,
-                "You've reached the door of the second floor...");
+        "You've reached the door of the second floor...");
         if (doorReached) {
-            ThirdFloor(scanner);
-        }
+        ThirdFloor(scanner);
+    }
         return doorReached;
     }
 
@@ -118,48 +121,53 @@ public class GameArea {
      * @param doorMessage The message to display when the door is reached.
      * @return {@code true} if the player reaches the door, {@code false} otherwise.
      */
-    private static boolean floorLogic(Scanner scanner, int rows, int cols, int[] door, int[][] spawns,
-            String doorMessage) {
-        boolean reachedDoor = false;
-        Character user = new Character();
-        while (!reachedDoor) {
-            System.out.print("\033\143");
-            printGameBoard(rows, cols, currentPositionX, currentPositionY);
-            System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
-            String choice = scanner.nextLine();
+    private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
+        String doorMessage) {
+    boolean reachedDoor = false;
+    Character user = new Character();
+    while (!reachedDoor) {
+        System.out.print("\033\143");
+        printGameBoard(rows, cols, currentPositionX, currentPositionY);
+        System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+        String choice = scanner.nextLine();
 
-            updatePosition(choice, rows, cols);
+        updatePosition(choice, rows, cols);
 
-            for (int[] spawn : spawns) {
-                if (isTile(currentPositionX, currentPositionY, spawn)) {
-                    System.out.print("\033\143");
-                    System.out.println("You've reached a spawn point.");
-                    Menus.Pause();
-                    if (generateRandomNumber() == 3) {
-                        System.out.print("\033\143");
-                        System.out.println("\nIt's your lucky day! You reached a treasure tile");
-                        int runesObtained = treasureRunes();
-                        System.out.println("\nYou won this much runes:" + runesObtained);
-                        user.setRunes(user.getRunes() + runesObtained);
-                        Menus.Pause();
-                    } else {
-                        System.out.print("\033\143");
-                        System.out.println("\nYou got a battle tile!");
-                        Menus.Pause();
-                    }
-                    break;
-                }
-            }
-
-            if (isTile(currentPositionX, currentPositionY, door)) {
+        for (int[] currentDoor : doors) {
+            if (isTile(currentPositionX, currentPositionY, currentDoor)) {
                 System.out.print("\033\143");
                 System.out.println(doorMessage);
                 Menus.Pause();
                 reachedDoor = true;
+                break; // Exit the loop if a door is reached
             }
         }
-        return reachedDoor;
+        
+        // Removed the incorrect if statement checking for `door`
+
+        for (int[] spawn : spawns) {
+            if (isTile(currentPositionX, currentPositionY, spawn)) {
+                System.out.print("\033\143");
+                System.out.println("You've reached a spawn point.");
+                Menus.Pause();
+                if (generateRandomNumber() == 3) {
+                    System.out.print("\033\143");
+                    System.out.println("\nIt's your lucky day! You reached a treasure tile");
+                    int runesObtained = treasureRunes();
+                    System.out.println("\nYou won this much runes:" + runesObtained);
+                    user.setRunes(user.getRunes() + runesObtained);
+                    Menus.Pause();
+                } else {
+                    System.out.print("\033\143");
+                    System.out.println("\nYou got a battle tile!");
+                    Menus.Pause();
+                }
+                break;
+            }
+        }
     }
+    return reachedDoor;
+}
 
 
     /**
@@ -176,42 +184,40 @@ public class GameArea {
                 if (currentPositionX > 0)
                     currentPositionX--;
                 else
-                    System.out.print("\033\143");
                     System.out.println("Cannot move up. You are at the edge.");
-                    
                 break;
             case "s": // Move Down
-                if (currentPositionX < rows - 1)
+                if (isTile(currentPositionX, currentPositionY, DOOR2[1])) {
+                    // Player at Door2 moving down goes to Door1
+                    currentPositionX = DOOR1[0];
+                    currentPositionY = DOOR1[1];
+                } else if (isTile(currentPositionX, currentPositionY, DOOR3)) {
+                    // Player at Door3 moving down goes to Door2[0]
+                    currentPositionX = DOOR2[0][0];
+                    currentPositionY = DOOR2[0][1];
+                } else if (currentPositionX < rows - 1)
                     currentPositionX++;
                 else
-                    System.out.print("\033\143");
                     System.out.println("Cannot move down. You are at the edge.");
-                    
                 break;
             case "d": // Move Right
                 if (currentPositionY < cols - 1)
                     currentPositionY++;
                 else
-                    System.out.print("\033\143");
                     System.out.println("Cannot move right. You are at the edge.");
-                    
                 break;
             case "a": // Move Left
                 if (currentPositionY > 0)
                     currentPositionY--;
                 else
-                    System.out.print("\033\143");
                     System.out.println("Cannot move left. You are at the edge.");
-                    
                 break;
             default:
-                System.out.print("\033\143");
                 System.out.println("Invalid input. Please choose a valid move.");
-                Menus.Pause();
                 break;
         }
     }
-
+    
     /**
      * Checks if the current position matches the specified tile coordinates.
      * 
