@@ -6,8 +6,10 @@ import java.util.Random;
 * different floors, encounter various challenges, and collect treasures. It manages the game's
 * spatial logic, including movements, encounters, and transitions between floors.
 */
+
 public class GameArea {
 
+    //private static final Scanner scanner = new Scanner(System.in);
     private static final int ROWS1 = 7; // First floor rows
     private static final int COLS1 = 3; // First floor columns
     private static final int ROWS2 = 7; // Second floor rows
@@ -19,7 +21,7 @@ public class GameArea {
     private static int currentPositionY; 
 
     private static final int[] DOOR1 = { 0, 1 }; // Door position for the first floor
-    private static final int[][] DOOR2 = { {0, 3}, {6,3}}; // Door position for the second floor
+    private static final int[][] DOOR2 = { {0, 2}, {6,3}}; // Door position for the second floor
     private static final int[] DOOR3 = {6,2};
     private static final int[][] SPAWNS1 = { { 1, 0 }, { 1, 2 } }; // Spawn positions for the first floor
     
@@ -33,7 +35,7 @@ public class GameArea {
 
     private static Character.CharacterStats characterStats;
 
-    /**
+    /*
     * Initiates the first floor of the game area, setting the player's starting position
     * and managing gameplay logic including door and spawn encounters.
     * 
@@ -53,8 +55,7 @@ public class GameArea {
 
     }
 
-    /**
-     * Initiates the second floor of the game area with a new set of challenges and updates
+    /*Initiates the second floor of the game area with a new set of challenges and updates
      * the player's position accordingly. It also handles logic for door and spawn encounters.
      * 
      * @param scanner The scanner object to read player inputs.
@@ -73,7 +74,7 @@ public class GameArea {
 
 
     
-    /**
+    /*
      * Initiates the third floor of the game area, presenting the final set of challenges,
      * including a boss fight and a fast travel tile to conclude the level.
      * 
@@ -187,10 +188,10 @@ public class GameArea {
                     System.out.println("Cannot move up. You are at the edge.");
                 break;
             case "s": // Move Down
-                if (isTile(currentPositionX, currentPositionY, DOOR2[1])) {
-                    // Player at Door2 moving down goes to Door1
-                    currentPositionX = DOOR1[0];
-                    currentPositionY = DOOR1[1];
+            if (isTile(currentPositionX, currentPositionY, DOOR2[1])) {
+                    currentPositionX= DOOR1[0];
+                    currentPositionY=DOOR1[1];
+                
                 } else if (isTile(currentPositionX, currentPositionY, DOOR3)) {
                     // Player at Door3 moving down goes to Door2[0]
                     currentPositionX = DOOR2[0][0];
@@ -273,4 +274,168 @@ public class GameArea {
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
+} 
+
+/* 
+import java.util.Scanner;
+import java.util.Random;
+
+public class GameArea {
+
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final int ROWS1 = 7;
+    private static final int COLS1 = 3;
+    private static final int ROWS2 = 7;
+    private static final int COLS2 = 7;
+    private static final int ROWS3 = 7;
+    private static final int COLS3 = 5;
+
+    private static int currentPositionX;
+    private static int currentPositionY;
+
+    private static final int[] DOOR1 = {0, 1};
+    private static final int[][] DOOR2 = {{0, 2}, {6, 3}};
+    private static final int[] DOOR3 = {6, 2};
+    private static final int[][] SPAWNS1 = {{1, 0}, {1, 2}};
+    private static final int[][] SPAWNS2 = {
+        {5, 2}, {5, 4}, {3, 0}, {3, 2},
+        {3, 3}, {3, 4}, {3, 6}, {1, 3}
+    };
+    private static final int[] BOSS_TILE = {3, 2};
+    private static final int[] FAST_TRAVEL_TILE = {0, 2};
+
+    // New attribute to manage the current floor more dynamically
+    public static int currentFloor = 1;
+
+    // Public methods to initiate each floor
+    public static boolean FirstFloor() {
+        currentPositionX = 6;
+        currentPositionY = 1;
+        return floorLogic(ROWS1, COLS1, new int[][]{DOOR1}, SPAWNS1,
+                "You've reached the door of the first floor...");
+    }
+
+    public static boolean SecondFloor() {
+        currentPositionX = 6;
+        currentPositionY = 3;
+        return floorLogic(ROWS2, COLS2, DOOR2, SPAWNS2,
+                "You've reached the door of the second floor...");
+    }
+
+    public static void ThirdFloor() {
+        currentPositionX = 6;
+        currentPositionY = 2;
+        boolean gameRunning = true;
+
+        while (gameRunning) {
+            printGameBoard(ROWS3, COLS3, currentPositionX, currentPositionY);
+            System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+            String choice = scanner.nextLine();
+
+            updatePosition(choice, ROWS3, COLS3);
+
+            if (isTile(currentPositionX, currentPositionY, BOSS_TILE)) {
+                System.out.println("You've encountered a Boss but can still move to tiles.");
+            } else if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
+                gameRunning = false;
+                System.out.println("You have reached the end of this map! Redirecting you to the Game Lobby...");
+                // Consider adding functionality here to either end the game or transition to a different state
+            }
+        }
+    }
+
+    private static boolean floorLogic(int rows, int cols, int[][] doors, int[][] spawns, String doorMessage) {
+        boolean reachedDoor = false;
+        while (!reachedDoor) {
+            printGameBoard(rows, cols, currentPositionX, currentPositionY);
+            System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+            String choice = scanner.nextLine();
+
+            updatePosition(choice, rows, cols);
+
+            for (int[] currentDoor : doors) {
+                if (isTile(currentPositionX, currentPositionY, currentDoor)) {
+                    System.out.println(doorMessage);
+                    reachedDoor = true;
+                    break; // Exit the loop if a door is reached
+                }
+            }
+
+            for (int[] spawn : spawns) {
+                if (isTile(currentPositionX, currentPositionY, spawn)) {
+                    System.out.println("You've reached a spawn point.");
+                    if (generateRandomNumber() == 3) {
+                        System.out.println("It's your lucky day! You found treasure.");
+                    } else {
+                        System.out.println("You got into a battle!");
+                    }
+                    break;
+                }
+            }
+        }
+        return reachedDoor;
+    }
+
+    private static void updatePosition(String choice, int rows, int cols) {
+        switch (choice.toLowerCase        ()) {
+            case "w": // Move Up
+                if (currentPositionX > 0) currentPositionX--;
+                else System.out.println("Cannot move up. You are at the edge.");
+                break;
+            case "s": // Move Down
+                if (isTile(currentPositionX, currentPositionY, DOOR2[1]) && currentFloor == 2) {
+                    currentPositionX = DOOR1[0];
+                    currentPositionY = DOOR1[1];
+                    currentFloor = 1; // Set to first floor
+                    System.out.println("Transitioning back to the first floor...");
+                } else if (isTile(currentPositionX, currentPositionY, DOOR3) && currentFloor == 3) {
+                    currentPositionX = DOOR2[0][0];
+                    currentPositionY = DOOR2[0][1];
+                    currentFloor = 2; // Set to second floor
+                    System.out.println("Transitioning back to the second floor...");
+                } else if (currentPositionX < rows - 1) currentPositionX++;
+                else System.out.println("Cannot move down. You are at the edge.");
+                break;
+            case "d": // Move Right
+                if (currentPositionY < cols - 1) currentPositionY++;
+                else System.out.println("Cannot move right. You are at the edge.");
+                break;
+            case "a": // Move Left
+                if (currentPositionY > 0) currentPositionY--;
+                else System.out.println("Cannot move left. You are at the edge.");
+                break;
+            default:
+                System.out.println("Invalid input. Please choose a valid move.");
+                break;
+        }
+    }
+
+    private static boolean isTile(int x, int y, int[] tile) {
+        return x == tile[0] && y == tile[1];
+    }
+
+    private static void printGameBoard(int rows, int cols, int x, int y) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i == x && j == y)
+                    System.out.print("| ? |");
+                else
+                    System.out.print("|   |");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int treasureRunes() {
+        Random random = new Random();
+        int min = 50; // Minimum number of runes
+        int max = 150; // Maximum number of runes
+        return random.nextInt(max - min) + min; // Return a random number of runes
+    }
+
+    public static int generateRandomNumber() {
+        Random random = new Random();
+        return random.nextInt(4) + 1; // Returns a number between 1 and 4
+    }
 }
+*/

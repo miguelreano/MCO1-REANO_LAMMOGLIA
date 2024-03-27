@@ -89,5 +89,81 @@ public class GameArea2 {
         }
     }
 
+    private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
+        String doorMessage) {
+    boolean reachedDoor = false;
+    Character user = new Character();
+    while (!reachedDoor) {
+        System.out.print("\033\143");
+        printGameBoard(rows, cols, currentPosX, currentPosY);
+        System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
+        String choice = scanner.nextLine();
+
+        updatePosition(choice, rows, cols);
+
+        for (int[] currentDoor : doors) {
+            if (isTile(currentPosX, currentPosY, currentDoor)) {
+                System.out.print("\033\143");
+                System.out.println(doorMessage);
+                Menus.Pause();
+                reachedDoor = true;
+                break; // Exit the loop if a door is reached
+            }
+        }
+        
+        // Removed the incorrect if statement checking for `door`
+
+        for (int[] spawn : spawns) {
+            if (isTile(currentPosX, currentPosY, spawn)) {
+                System.out.print("\033\143");
+                System.out.println("You've reached a spawn point.");
+                Menus.Pause();
+                if (generateRandomNumber() == 3) {
+                    System.out.print("\033\143");
+                    System.out.println("\nIt's your lucky day! You reached a treasure tile");
+                    int runesObtained = treasureRunes();
+                    System.out.println("\nYou won this much runes:" + runesObtained);
+                    user.setRunes(user.getRunes() + runesObtained);
+                    Menus.Pause();
+                } else {
+                    System.out.print("\033\143");
+                    System.out.println("\nYou got a battle tile!");
+                    Menus.Pause();
+                }
+                break;
+            }
+        }
+    }
+    return reachedDoor;
+    }
+
+    private static void printGameBoard(int rows, int cols, int x, int y) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i == x && j == y)
+                    System.out.print("| ? |");
+                else
+                    System.out.print("|   |");
+            }
+            System.out.println();
+        }
+    }
     
+    private static boolean isTile(int x, int y, int[] tile) {
+        return x == tile[0] && y == tile[1];
+    }
+
+    public static int generateRandomNumber() {
+        Random randa = new Random();
+        return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
+    }
+
+    public static int treasureRunes() {
+        Random random = new Random(); // Create a Random object
+        int min = 50; // Set the minimum number (inclusive)
+        int max = 150; // Set the maximum number (exclusive)
+        return random.nextInt(max - min) + min; // Generate and return the random number
+    }
+
+
 }
