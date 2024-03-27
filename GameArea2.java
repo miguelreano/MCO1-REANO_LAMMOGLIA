@@ -18,13 +18,13 @@ public class GameArea2 {
     private static int currentPosX;
     private static int currentPosY;
 
-    private static int[] DOOR1 = {4,2};
-    private static int[][] DOOR2 = {{0,1}, {3,2}};
-    private static int[][] DOOR3 = {{3,0}, {0,2}, {3,4}};
-    private static int[] DOOR4 = {1,0};
-    private static int[] BossDOOR = {7, 3};
+    private static final int[] DOOR1 = {4,2};
+    private static final int[][] DOOR2 = {{0,1}, {3,2}};
+    private static final int[][] DOOR3 = {{3,0}, {0,2}, {3,4}};
+    private static final int[] DOOR4 = {1,0};
+    private static final int[] BossDOOR = {7, 3};
 
-    private static int[][] BossBOUNDS = {{0,0}, {0,1}, {0,5}, {0,6}};
+    private static final int[][] BossBOUNDS = {{0,0}, {0,1}, {0,5}, {0,6}};
     private static int[][] BOUNDS3 = {{0,0}, {1,0}, {0,4}, {1,4}, {5,0}, {6,0}, {5,4}, {6,4}};
 
     private static int[][] SPAWN1 = {{3,1}, {3,3}};
