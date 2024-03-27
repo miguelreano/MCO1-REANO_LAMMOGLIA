@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Menus {
 
   private static Character user;
+  private static Weapon[] weapons;
 
   /**
    * Initializes the game by displaying the title screen and processing user input
@@ -67,6 +68,7 @@ public class Menus {
    * @param characterStats The current character's statistics, used for certain game actions such as leveling up.
    */
   public static void menusGameLobby(Character.CharacterStats characterStats) {
+    Weapon[] weapons = Weapon.initializeWeapons();
     Scanner scanner = new Scanner(System.in);
 
 
@@ -101,7 +103,7 @@ public class Menus {
         break;
       case 4:
         System.out.print("\033\143");
-        System.out.println("Shop");
+        GameLobby.shop(weapons, user);
         Pause();
         System.out.print("\033\143");
         menusGameLobby(characterStats);

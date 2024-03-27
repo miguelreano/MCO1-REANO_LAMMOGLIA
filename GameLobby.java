@@ -9,6 +9,7 @@ public class GameLobby {
     
     private Character user;
     GameArea gameArea = new GameArea();
+    private static Weapon[] weapons;
 
     /**
      * Presents the Fast Travel menu to the player, allowing them to choose different destinations.
@@ -174,4 +175,61 @@ public class GameLobby {
         scanner.close();
     }
 
+    public static void shop(Weapon[] weapons, Character user) {
+        Scanner scanner = new Scanner(System.in);
+    
+        weapons = Weapon.initializeWeapons();
+    
+        while (true) {
+            Weapon.displayAvailableWeapons(weapons);
+            
+            System.out.println("\nCurrent Runes: " + user.getRunes());
+
+            System.out.println("\nType '0' to exit.");
+            System.out.print("Which weapon would you like to buy?: ");
+            
+    
+            int shopOption = scanner.nextInt();
+    
+            if (shopOption == 0) {
+                System.out.print("\033\143");
+                System.out.println("Exiting the shop...");
+                Menus.Pause();
+                System.out.print("\033\143");
+                return;
+            }
+    
+            try {
+                if (shopOption >= 1 && shopOption <= weapons.length) {
+                    Weapon selectedWeapon = weapons[shopOption]; // Adjust index to match array
+                    int cost = selectedWeapon.getWeaponCost();
+                    if (user.getRunes() >= cost) {
+                        user.subtractRunes(cost);
+                        System.out.print("\033\143");
+                        System.out.println("You have purchased: " + selectedWeapon.getName());
+                        Menus.Pause();
+                        System.out.print("\033\143");
+                    } else {
+                        System.out.print("\033\143");
+                        System.out.println("You don't have enough runes to buy this weapon!");
+                        Menus.Pause();
+                        System.out.print("\033\143");
+                }
+                    
+                } else {
+                    System.out.print("\033\143");
+                    System.out.println("Invalid Option.");
+                    Menus.Pause();
+                    System.out.print("\033\143");
+                }
+            } catch (Exception e) {
+                System.out.print("\033\143");
+                System.out.println("An error occurred: " + e.getMessage());
+                Menus.Pause();
+                System.out.print("\033\143");
+            }
+        }
+    }
+        
 }
+
