@@ -32,6 +32,22 @@ public class Spawn {
         this.iDef = iDef;
     }
 
+    public int gethealth(){
+        return health;
+    }
+
+    public void sethealth(){
+        this.health = health;
+    }
+
+    public int getattack(){
+        return attack;
+    }
+
+    public void setattack(){
+        this.attack = attack;
+
+    }
     public Spawn(double pDef, double sDef, double iDef){
         this.pDef = pDef;
         this.iDef = iDef;
@@ -39,9 +55,25 @@ public class Spawn {
 
     }
 
+    
+
     public static int typepickNumber() {
         Random random = new Random();
         return random.nextInt(3) + 1; // Generates a number between 0 (inclusive) and 3 (exclusive), then adds 1
+    }
+
+    public static int pickHealth1(){
+        Random random = new Random();
+        return random.nextInt(11) + 20; // Generates a number between 0 (inclusive) and 11 (exclusive), then adds 20
+    }
+
+    public static int pickAttack1(){
+        Random random = new Random();
+        return random.nextInt(11)+70;
+    }
+
+    public static int pickHealth2{
+        
     }
 
     public static Spawn[] initializeSpawn(){
@@ -56,6 +88,8 @@ public class Spawn {
     }
 
     public static void chosenType(){
-        if
+        if(typepickNumber() == 1){
+            
+        }
     }
 }
