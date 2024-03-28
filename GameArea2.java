@@ -37,7 +37,11 @@ public class GameArea2 {
     private static int[] FT1 = {0,2};
     private static int[] FTB = {4,3};
 
-
+    public static boolean firstFloor(Scanner scanner){
+        currentPosX = 0;
+        currentPosY = 2;
+        
+    }
 
     /**
      * Updates the player's position based on the input command. It prevents movement

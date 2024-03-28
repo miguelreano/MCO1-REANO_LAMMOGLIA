@@ -1,95 +1,123 @@
-import java.util.Scanner;
 import java.util.Random;
 
 public class Spawn {
-    private int health;
-    private int attack;
-    private double pDef; // physical defense
-    private double sDef; // sorcery defense
-    private double iDef; // incantation defense
-    Spawn[] battles = new Spawn[3];
-    public double getpDef(){
+    private static int health;
+    private static int attack;
+    private static double pDef; // physical defense
+    private static double sDef; // sorcery defense
+    private static double iDef; // incantation defense
+
+    // Constructor that includes health and attack
+    public Spawn(double pDef, double sDef, double iDef, int health, int attack) {
+        this.pDef = pDef;
+        this.sDef = sDef;
+        this.iDef = iDef;
+        this.health = health;
+        this.attack = attack;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Health: %d, Attack: %d, Physical Defense: %.2f, Sorcery Defense: %.2f, Incantation Defense: %.2f",
+                health, attack, pDef, sDef, iDef);
+    }
+
+    public double getpDef() {
         return pDef;
     }
 
-    public void setpDef(double pDef){
+    public void setpDef(double pDef) {
         this.pDef = pDef;
     }
 
-    public double getsDef(){
+    public double getsDef() {
         return sDef;
     }
 
-    public void setsDef(double sDef){
+    public void setsDef(double sDef) {
         this.sDef = sDef;
     }
 
-    public double getiDef(){
+    public double getiDef() {
         return iDef;
     }
 
-    public void setiDef(double iDef){
+    public void setiDef(double iDef) {
         this.iDef = iDef;
     }
 
-    public int gethealth(){
+    public int getHealth() {
         return health;
     }
 
-    public void sethealth(){
+    // Updated to take a parameter
+    public void setHealth(int health) {
         this.health = health;
     }
 
-    public int getattack(){
+    public int getAttack() {
         return attack;
     }
 
-    public void setattack(){
+    // Updated to take a parameter
+    public void setAttack(int attack) {
         this.attack = attack;
-
     }
-    public Spawn(double pDef, double sDef, double iDef){
-        this.pDef = pDef;
-        this.iDef = iDef;
-        this.sDef= sDef;
-
-    }
-
-    
 
     public static int typepickNumber() {
         Random random = new Random();
-        return random.nextInt(3) + 1; // Generates a number between 0 (inclusive) and 3 (exclusive), then adds 1
+        return random.nextInt(3) + 1;
     }
 
-    public static int pickHealth1(){
+    public static int pickHealth1() {
         Random random = new Random();
-        return random.nextInt(11) + 20; // Generates a number between 0 (inclusive) and 11 (exclusive), then adds 20
+        return random.nextInt(11) + 20;
     }
 
-    public static int pickAttack1(){
+    public static int pickAttack1() {
         Random random = new Random();
-        return random.nextInt(11)+70;
+        return random.nextInt(11) + 70;
     }
 
-    public static int pickHealth2{
-        
+    // Corrected pickHealth2 method (example correction, assuming similar behavior to pickHealth1)
+    public static int pickHealth2() {
+        Random random = new Random();
+        return random.nextInt(11) + 25;
     }
 
-    public static Spawn[] initializeSpawn(){
+    public static int pickAttack2(){
+        Random random = new Random();
+        return random.nextInt(11)+110;
+    }
+
+    public static int pickHealth3(){
+        Random random = new Random();
+        return random.nextInt(11) + 70;
+    }
+
+    public static int pickAttack3(){
+        Random random = new Random();
+        return random.nextInt(11) + 120;
+    }
+
+    public static Spawn[] initializeSpawn() {
         Spawn[] battles = new Spawn[3];
-        battles[1] = new Spawn(0.20, 0.15, 0.10);
-        battles[2] = new Spawn(0.50, 0.15, 0.20);
-        battles[3] = new Spawn(0.25,0.25,0.20);
-
-
+        // Corrected array indices to start from 0
+        battles[0] = new Spawn(0.20, 0.15, 0.10, pickHealth1(), pickAttack1());
+        battles[1] = new Spawn(0.50, 0.15, 0.20, pickHealth2(), pickAttack2());
+        battles[2] = new Spawn(0.25, 0.25, 0.20, pickHealth3(), pickAttack3());
         return battles;
-
     }
 
-    public static void chosenType(){
-        if(typepickNumber() == 1){
-            
+    public static void chosenType(Spawn[] battles) {
+        int choice = typepickNumber();
+        System.out.println("Chosen Type: " + choice);
+        if (choice >= 1 && choice <= battles.length) {
+            Spawn chosenSpawn = battles[choice - 1];
+            System.out.println(chosenSpawn.toString());
+        } else {
+            System.out.println("Invalid choice.");
         }
     }
+
 }
