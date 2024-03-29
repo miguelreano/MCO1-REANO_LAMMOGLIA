@@ -75,6 +75,7 @@ public class Menus {
     System.out.println("Name: " + Character.characterName);
     characterStats.displayStats();
     System.out.println("Current Runes: " + user.getRunes());
+    System.out.println("Weapon: " + (user.getEquippedWeapon() != null ? user.getEquippedWeapon().getName() : " "));
 
     System.out.println("\n[1] Fast Travel");
     System.out.println("[2] Level Up");
@@ -88,7 +89,7 @@ public class Menus {
     switch (option) {
       case 1:
         System.out.print("\033\143");
-        GameLobby.FastTravel();
+        GameLobby.FastTravel(characterStats);
         break;
       case 2:
         System.out.print("\033\143");
@@ -96,17 +97,12 @@ public class Menus {
         break;
       case 3:
         System.out.print("\033\143");
-        System.out.println("Inventory");
-        Pause();
-        System.out.print("\033\143");
-        menusGameLobby(characterStats);
+        GameLobby.Inventory(user);
         break;
       case 4:
         System.out.print("\033\143");
-        GameLobby.shop(weapons, user);
+        GameLobby.Shop(weapons, user);
         Pause();
-        System.out.print("\033\143");
-        menusGameLobby(characterStats);
         break;
       case 5:
         System.out.print("\033\143");

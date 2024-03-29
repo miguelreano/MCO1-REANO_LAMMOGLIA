@@ -7,16 +7,18 @@ import java.util.Scanner;
 public class GameLobby {
     private static Character.CharacterStats characterStats;
     
-    private Character user;
+    private static Character user;
     GameArea gameArea = new GameArea();
     private static Weapon[] weapons;
+
+
 
     /**
      * Presents the Fast Travel menu to the player, allowing them to choose different destinations.
      * Depending on the player's choice, they can travel to various locations in the game or return to the game lobby.
      * This method uses a scanner to capture user input and switch to the desired game location.
      */
-    public static void FastTravel() {
+    public static void FastTravel(Character.CharacterStats characterStats) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("[1] Stormveil Castle");
@@ -40,14 +42,14 @@ public class GameLobby {
                 System.out.println("Going to Raya Lucaria Academy");
                 Menus.Pause();
                 System.out.print("\033\143");
-                FastTravel();
+                FastTravel(characterStats);
                 break;
             case 3:
                 System.out.print("\033\143");
                 System.out.println("Going to The Elden Throne");
                 Menus.Pause();
                 System.out.print("\033\143");
-                FastTravel();
+                FastTravel(characterStats);
                 break;
             case 4:
                 System.out.print("\033\143");
@@ -58,7 +60,7 @@ public class GameLobby {
                 System.out.println("Invalid choice. Please try again.");
                 Menus.Pause();
                 System.out.print("\033\143");
-                FastTravel();
+                FastTravel(characterStats);
                 break;
         }
 
@@ -175,7 +177,57 @@ public class GameLobby {
         scanner.close();
     }
 
-    public static void shop(Weapon[] weapons, Character user) {
+    public static void Inventory(Character user) {
+        Scanner scanner = new Scanner(System.in);
+    
+        // Display equipped weapon
+        System.out.println("Equipped Weapon: " + (user.getEquippedWeapon() != null ? user.getEquippedWeapon().getName() : " "));
+    
+        // Display inventory
+        System.out.println("\nInventory:");
+        user.displayInventory();
+    
+        // Prompt user for action
+        System.out.println("\n[1] Select a weapon to equip");
+        System.out.println("[2] Back");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+    
+        switch (choice) {
+            case 1:
+                System.out.print("\033\143"); // Clear screen
+                user.displayInventory();
+                System.out.print("Enter the number of the weapon to equip: ");
+                int index = scanner.nextInt();
+                if (index >= 1 && index <= user.getInventory().size()) {
+                    Weapon selectedWeapon = user.getInventory().get(index - 1); // Adjust index to match list
+                    user.setEquippedWeapon(selectedWeapon);
+                    System.out.print("\033\143");
+                    System.out.println("Equipped " + selectedWeapon.getName());
+                } else {
+                    System.out.println("Invalid input.");
+                }
+                Menus.Pause();
+                System.out.print("\033\143");
+                Inventory(user); // Go back to manage inventory
+                break;
+            case 2:
+                System.out.print("\033\143"); // Clear screen
+                Menus.menusGameLobby(user.getCharacterStats()); // Back to main game lobby
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                Menus.Pause();
+                System.out.print("\033\143");
+                Inventory(user); // Go back to manage inventory
+                break;
+        }
+    
+        scanner.close();
+    }
+    
+
+    public static void Shop(Weapon[] weapons, Character user) {
         Scanner scanner = new Scanner(System.in);
     
         weapons = Weapon.initializeWeapons();
@@ -196,7 +248,7 @@ public class GameLobby {
                 System.out.println("Exiting the shop...");
                 Menus.Pause();
                 System.out.print("\033\143");
-                return;
+                Menus.menusGameLobby(user.getCharacterStats());
             }
     
             try {
@@ -207,6 +259,7 @@ public class GameLobby {
                         user.subtractRunes(cost);
                         System.out.print("\033\143");
                         System.out.println("You have purchased: " + selectedWeapon.getName());
+                        user.addtoInventory(selectedWeapon);
                         Menus.Pause();
                         System.out.print("\033\143");
                     } else {
@@ -228,7 +281,9 @@ public class GameLobby {
                 Menus.Pause();
                 System.out.print("\033\143");
             }
+            
         }
+        
     }
         
 }

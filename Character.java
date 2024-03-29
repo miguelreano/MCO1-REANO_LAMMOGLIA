@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Represents a character in the game, including their stats, name, and runes.
@@ -10,9 +12,26 @@ public class Character {
     public static String characterName = "";
     private CharacterStats characterStats = null;
     private int Runes = 10000;
+    private List<Weapon> inventory;
+    private Weapon equippedWeapon;
 
 
-    
+    public Character() {
+        inventory = new ArrayList<>();
+    }
+
+    public List<Weapon> getInventory() {
+        return inventory;
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
+    }
+
     /**
      * Retrieves the current amount of runes the character has.
      * @return The current amount of runes.
@@ -316,4 +335,27 @@ public class Character {
 
     }
 
+    public void addtoInventory(Weapon weapons) {
+        inventory.add(weapons);
+    }
+
+    public void displayInventory() {
+        if (inventory.isEmpty()){
+            System.out.println(":(");
+        } else {
+            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.printf("| %-35s | %-7s | %-3s | %-2s | %-1s | %s | %s | %s |\n", "NAME", "COST", "HP", "END", "DEX", "STR", "INT", "FTH");
+            System.out.println("-------------------------------------------------------------------------------------");
+            for (int i = 0; i < inventory.size(); i++) {
+                Weapon weapon = inventory.get(i);
+                String stats = String.format("| [%2d] %-30s | %-7d | %-3d | %-3d | %-3d | %-3d | %-3d | %-3d |",
+                        i + 1, weapon.getName(), weapon.getWeaponCost(), weapon.getWeaponHP(), weapon.getWeaponEND(), weapon.getWeaponDEX(),
+                        weapon.getWeaponSTR(), weapon.getWeaponINT(), weapon.getWeaponFTH());
+                System.out.println(stats);
+            }   
+            System.out.println("-------------------------------------------------------------------------------------");
+        }  
+    }
+
+    
 }
