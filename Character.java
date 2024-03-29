@@ -29,7 +29,7 @@ public class Character {
     }
 
     public void setEquippedWeapon(Weapon equippedWeapon) {
-        this.equippedWeapon = equippedWeapon;
+            this.equippedWeapon = equippedWeapon;
     }
 
     /**
@@ -343,17 +343,17 @@ public class Character {
         if (inventory.isEmpty()){
             System.out.println(":(");
         } else {
-            System.out.println("-------------------------------------------------------------------------------------");
-            System.out.printf("| %-35s | %-7s | %-3s | %-2s | %-1s | %s | %s | %s |\n", "NAME", "COST", "HP", "END", "DEX", "STR", "INT", "FTH");
-            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
+            System.out.printf("| %-35s | %-7s | %-3s | %-2s | %s | %s | %s |\n", "NAME", "REQDEX", "HP", "END", "STR", "INT", "FTH");
+            System.out.println("-------------------------------------------------------------------------------");
             for (int i = 0; i < inventory.size(); i++) {
                 Weapon weapon = inventory.get(i);
-                String stats = String.format("| [%2d] %-30s | %-7d | %-3d | %-3d | %-3d | %-3d | %-3d | %-3d |",
-                        i + 1, weapon.getName(), weapon.getWeaponCost(), weapon.getWeaponHP(), weapon.getWeaponEND(), weapon.getWeaponDEX(),
+                String stats = String.format("| [%2d] %-30s | %-7d | %-3d | %-3d | %-3d | %-3d | %-3d |",
+                        i + 1, weapon.getName(), weapon.getWeaponDEX(), weapon.getWeaponHP(), weapon.getWeaponEND(), weapon.getWeaponDEX(),
                         weapon.getWeaponSTR(), weapon.getWeaponINT(), weapon.getWeaponFTH());
                 System.out.println(stats);
             }   
-            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------");
         }  
     }
 

@@ -201,9 +201,15 @@ public class GameLobby {
                 int index = scanner.nextInt();
                 if (index >= 1 && index <= user.getInventory().size()) {
                     Weapon selectedWeapon = user.getInventory().get(index - 1); // Adjust index to match list
+                    if (user.getCharacterStats().getDEX() >= selectedWeapon.getWeaponDEX()) {
+                    // Set the chosen weapon as the equipped weapon
                     user.setEquippedWeapon(selectedWeapon);
                     System.out.print("\033\143");
-                    System.out.println("Equipped " + selectedWeapon.getName());
+                    System.out.println(selectedWeapon.getName() + " equipped successfully!");
+                } else {
+                    System.out.print("\033\143");
+                    System.out.println("You do not meet the dexterity requirement to equip this weapon.");
+                }
                 } else {
                     System.out.println("Invalid input.");
                 }
