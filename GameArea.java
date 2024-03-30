@@ -179,7 +179,7 @@ public class GameArea {
  * @param choice The player's movement choice.
  * @param rows The number of rows in the current floor.
  * @param cols The number of columns in the current floor.
- 
+ */
     private static void updatePosition(String choice, int rows, int cols) {
         switch (choice.toLowerCase()) {
             case "w": // Move Up
@@ -211,48 +211,8 @@ public class GameArea {
                 break;
         }
     }
-*/
-    private static void updatePosition(String choice, int rows, int cols) {
-        Scanner myScanner = new Scanner(System.in);
-        switch (choice.toLowerCase()) {
-            case "w": // Move Up
-                if (currentPositionX > 0) currentPositionX--;
-                else System.out.println("Cannot move up. You are at the edge.");
-                break;
-            case "s": // Move Down
-                // Check for specific door positions and floor transitions
-                if (isTile(currentPositionX, currentPositionY, DOOR2[1])) {
-                    // Transition from DOOR2 (6,3) to First Floor's DOOR1 (0, 1)
-                    FirstFloor(myScanner); // Reset or transition to the first floor
-                    currentPositionX = DOOR1[0]; // Set X to the first floor door position
-                    currentPositionY = DOOR1[1]; // Set Y to the first floor door position
-                    System.out.println("Transitioned to First Floor, Door 1");
-                } else if (isTile(currentPositionX, currentPositionY, DOOR3)) {
-                    // Transition from DOOR3 to Second Floor's DOOR2 (0,3)
-                    SecondFloor(myScanner); // Transition to the second floor
-                    currentPositionX = DOOR2[0][0]; // Adjust X to DOOR2's first entry
-                    currentPositionY = DOOR2[0][1]; // Adjust Y to match DOOR2 (assuming 0,3 is correct)
-                    System.out.println("Transitioned to Second Floor, Door 2");
-                } else if (currentPositionX < rows - 1) {
-                    currentPositionX++;
-                }else{
-                    System.out.println("Cannot move down. You are at the edge.");
-                }
-                break;
-                case "d": // Move Right
-                    if (currentPositionY < cols - 1) currentPositionY++;
-                    else System.out.println("Cannot move right. You are at the edge.");
-                    break;
-                case "a": // Move Left
-                    if (currentPositionY > 0) currentPositionY--;
-                    else System.out.println("Cannot move left. You are at the edge.");
-                    break;
-                default:
-                    System.out.println("Invalid input. Please choose a valid move.");
-                    break;
-            }
-        }
-        
+
+
 
     /**
      * Checks if the current position matches the specified tile coordinates.
