@@ -68,8 +68,11 @@ public class GameArea {
         currentPositionY = 3;
         boolean doorReached = floorLogic(scanner, ROWS2, COLS2, DOOR2, SPAWNS2,
         "You've reached the door of the second floor...");
+        System.out.println(doorReached);
         if (doorReached) {
             ThirdFloor(scanner);
+        } else {
+            FirstFloor(scanner);
         }
         return doorReached;
     }
@@ -88,7 +91,7 @@ public class GameArea {
         boolean gameRunning = true;
         
         while (gameRunning) {
-            System.out.print("\033\143");
+            //System.out.print("\033\143");
             printGameBoard(ROWS3, COLS3, currentPositionX, currentPositionY);
             System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
             String choice = scanner.nextLine();
@@ -96,14 +99,14 @@ public class GameArea {
             updatePosition(choice, ROWS3, COLS3);
 
             if (isTile(currentPositionX, currentPositionY, BOSS_TILE)) {
-                System.out.print("\033\143");
+                //System.out.print("\033\143");
                 System.out.println("You've encountered a Boss but can still move to tiles.");
                 Menus.Pause();
             }
 
             if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
                 gameRunning = false;
-                System.out.print("\033\143");
+                //System.out.print("\033\143");
                 System.out.println("You have reached the end of this map! Redirecting you to the Game Lobby...");
                 Menus.Pause();
                 Menus.menusGameLobby(characterStats);
@@ -129,13 +132,36 @@ public class GameArea {
     boolean reachedDoor = false;
     Character user = new Character();
     while (!reachedDoor) {
-        System.out.print("\033\143");
+        //System.out.print("\033\143");
         printGameBoard(rows, cols, currentPositionX, currentPositionY);
         System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
         String choice = scanner.nextLine();
 
         updatePosition(choice, rows, cols);
-
+        if (doors.length == 2) {
+            // first door to 1st floor
+            if (isTile(currentPositionX, currentPositionY, doors[0])) {
+                System.out.print("\033\143");
+                System.out.println(doorMessage);
+                Menus.Pause();
+                return false;
+            } else if (isTile(currentPositionX, currentPositionY, doors[1])){
+                System.out.print("\033\143");
+                System.out.println(doorMessage);
+                Menus.Pause();
+                return true;
+                
+            }
+        } else {
+            if (isTile(currentPositionX, currentPositionY, doors[0])) {
+                System.out.print("\033\143");
+                System.out.println(doorMessage);
+                Menus.Pause();
+                reachedDoor = true;
+                break; // Exit the loop if a door is reached
+            }
+        }
+        /* 
         for (int[] currentDoor : doors) {
             if (isTile(currentPositionX, currentPositionY, currentDoor)) {
                 System.out.print("\033\143");
@@ -145,7 +171,7 @@ public class GameArea {
                 break; // Exit the loop if a door is reached
             }
         }
-        
+        */
         // Removed the incorrect if statement checking for `door`
 
         for (int[] spawn : spawns) {

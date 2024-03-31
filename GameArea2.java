@@ -112,47 +112,47 @@ public class GameArea2 {
      * @param rows The number of rows in the current floor.
      * @param cols The number of columns in the current floor.
      */
-    private static void updatePosition(String choice, int rows, int cols) {
-        switch (choice.toLowerCase()) {
-            case "w": // Move Up
-                if (currentPosX > 0)
-                    currentPosX--;
-                else
-                    System.out.print("\033\143");
-                    System.out.println("Cannot move up. You are at the edge.");
-                    
-                break;
-            case "s": // Move Down
-                if (currentPosX < rows - 1)
-                    currentPosX++;
-                else
-                    System.out.print("\033\143");
-                    System.out.println("Cannot move down. You are at the edge.");
-                    
-                break;
-            case "d": // Move Right
-                if (currentPosY < cols - 1)
-                    currentPosY++;
-                else
-                    System.out.print("\033\143");
-                    System.out.println("Cannot move right. You are at the edge.");
-                    
-                break;
-            case "a": // Move Left
-                if (currentPosY > 0)
-                    currentPosY--;
-                else
-                    System.out.print("\033\143");
-                    System.out.println("Cannot move left. You are at the edge.");
-                    
-                break;
-            default:
-                System.out.print("\033\143");
-                System.out.println("Invalid input. Please choose a valid move.");
-                Menus.Pause();
-                break;
+   private static void updatePosition(String choice, int rows, int cols, int[][] bounds) {
+    int nextPosX = currentPosX;
+    int nextPosY = currentPosY;
+    switch (choice.toLowerCase()) {
+        case "w": // Move Up
+            nextPosX--;
+            break;
+        case "s": // Move Down
+            nextPosX++;
+            break;
+        case "d": // Move Right
+            nextPosY++;
+            break;
+        case "a": // Move Left
+            nextPosY--;
+            break;
+        default:
+            System.out.print("\033\143");
+            System.out.println("Invalid input. Please choose a valid move.");
+            Menus.Pause();
+            return;
+    }
+
+    // Check for out-of-bounds or moving into a boundary
+    if (nextPosX >= 0 && nextPosX < rows && nextPosY >= 0 && nextPosY < cols && !isInBounds(nextPosX, nextPosY, bounds)) {
+        currentPosX = nextPosX;
+        currentPosY = nextPosY;
+    } else {
+        System.out.print("\033\143");
+        System.out.println("Cannot move there. You've reached an edge or a boundary.");
+    }
+}
+
+private static boolean isInBounds(int x, int y, int[][] bounds) {
+    for (int[] bound : bounds) {
+        if (x == bound[0] && y == bound[1]) {
+            return true;
         }
     }
+    return false;
+}
 
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
         String doorMessage) {
