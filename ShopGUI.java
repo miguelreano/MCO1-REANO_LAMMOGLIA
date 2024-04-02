@@ -10,12 +10,15 @@ public class ShopGUI extends JFrame {
         "Astrologer's Staff", "Albinauric Staff", "Staff of the Guilty", "Carian Regal Scepter",
         "Finger Seal", "Godslayer's Seal", "Golden Order Seal", "Dragon Communion Seal"
     };
+    private JButton backButton;
     
 
     public ShopGUI() {
         setTitle("Shop");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
+
+        backButton = new JButton("Back");
 
         JPanel buttonPanel = new JPanel(new GridLayout(6, 4, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -24,7 +27,12 @@ public class ShopGUI extends JFrame {
             buttonPanel.add(button);
         }
 
+        JPanel panel = new JPanel(new GridLayout(1, 1));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 440));
+        panel.add(backButton);
+
         add(buttonPanel);
+        add(panel, BorderLayout.SOUTH);
         setVisible(true);
         setLocationRelativeTo(null);
     }
