@@ -16,6 +16,7 @@ public class GameLobbyGUI extends JFrame{
     private JTextArea statsTextArea;
 
     public GameLobbyGUI() {
+        try{
         setTitle("Game Lobby");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -56,6 +57,9 @@ public class GameLobbyGUI extends JFrame{
         setVisible(true);
 
         setLocationRelativeTo(null);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }  
 
     public void addFastTravelButtonListener(ActionListener listener) {

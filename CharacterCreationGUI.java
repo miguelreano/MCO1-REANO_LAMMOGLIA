@@ -91,17 +91,17 @@ public class CharacterCreationGUI extends JFrame {
         return (String) selectClassComboBox.getSelectedItem();
     }
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
     // Create model and view instances for character creation
-    Character character = new Character(); // Assuming you have a Character class
-    CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
+    //Character character = new Character(); // Assuming you have a Character class
+    //CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
 
     // Create controller instance for character creation
-    CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
+    //CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
 
     // Display the character creation GUI
-    characterCreationGUI.setVisible(true);
+    //characterCreationGUI.setVisible(true);
 }
 
 
-}
+

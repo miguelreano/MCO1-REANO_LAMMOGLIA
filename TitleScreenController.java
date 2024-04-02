@@ -1,4 +1,4 @@
-import java.awt.event.ActionEvent;
+    import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TitleScreenController {
@@ -14,16 +14,19 @@ public class TitleScreenController {
 
     // Inner class to handle the "START" button action
     class StartButtonListener implements ActionListener {
-        @Override
+        //@Override
         public void actionPerformed(ActionEvent e) {
             view.dispose();
             new CharacterCreationGUI().setVisible(true);
+            Character character = new Character();
+            CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
+            CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
         }
     }
 
     // Inner class to handle the "EXIT" button action
     class ExitButtonListener implements ActionListener {
-        @Override
+        //@Override
         public void actionPerformed(ActionEvent e) {
             // Exit the application
             System.exit(0);
