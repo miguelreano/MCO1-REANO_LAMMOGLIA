@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.SwingUtilities;
 
 public class GameLobbyController {
     private GameLobby model;
@@ -20,20 +21,22 @@ public class GameLobbyController {
 
     // Action listener for the Fast Travel button
     // Action listener for the Fast Travel button
-class FastTravelButtonListener implements ActionListener {
-    //@Override
-    public void actionPerformed(ActionEvent e) {
-        view.dispose(); // Close the current window
-        new FastTravelGUI().setVisible(true); // Open the FastTravelGUI window
+    class FastTravelButtonListener implements ActionListener {
+        //@Override
+        public void actionPerformed(ActionEvent e) {
+            view.dispose();
+            FastTravelGUI fastTravelGUI = new FastTravelGUI();
+            fastTravelGUI.setVisible(true);
+        }
     }
-}
 
 // Action listener for the Level Up button
     class LevelUpButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
-            view.dispose(); // Close the current window
-            new LevelUpGUI().setVisible(true); // Open the LevelUpGUI window
+            view.dispose();
+            LevelUpGUI levelUpGUI = new LevelUpGUI();
+            LevelUpController levelUpController = new LevelUpController(levelUpGUI, null);
         }
     }
 
@@ -41,8 +44,9 @@ class FastTravelButtonListener implements ActionListener {
     class InventoryButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
-            view.dispose(); // Close the current window
-            //new InventoryGUI().setVisible(true); // Open the InventoryGUI window
+            view.dispose();
+            FastTravelGUI fastTravelGUI = new FastTravelGUI();
+            fastTravelGUI.setVisible(true);
         }
     }
 
@@ -50,8 +54,9 @@ class FastTravelButtonListener implements ActionListener {
     class ShopButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
-            view.dispose(); // Close the current window
-            new ShopGUI().setVisible(true); // Open the ShopGUI window
+            view.dispose();
+            ShopGUI shopGUI = new ShopGUI();
+            shopGUI.setVisible(true);
         }
     }
 
@@ -59,9 +64,11 @@ class FastTravelButtonListener implements ActionListener {
     class QuitButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
-            view.dispose(); // Close the current window
-            System.exit(0); // Close the entire application
+            view.dispose();
+            TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
+            TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
         }
+        
     }
 
 }

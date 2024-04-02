@@ -82,13 +82,6 @@ public class GameLobbyGUI extends JFrame{
         quitButton.addActionListener(listener);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                GameLobbyGUI gui = new GameLobbyGUI();
-                gui.setVisible(true);
-            }
-        });
-    }
+    
 
 }

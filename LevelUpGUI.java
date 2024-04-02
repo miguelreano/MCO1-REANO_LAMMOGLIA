@@ -1,7 +1,9 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
+import java.awt.event.ActionListener;
+
+
 
 public class LevelUpGUI extends JFrame{
     private JButton HPButton;
@@ -50,6 +52,38 @@ public class LevelUpGUI extends JFrame{
         setVisible(true);
         setLocationRelativeTo(null);
 
+    }
+
+    public void addLevelHPButtonListener(ActionListener listener) {
+        HPButton.addActionListener(listener);
+    }
+
+    public void addLevelENDButtonListener(ActionListener listener) {
+        ENDButton.addActionListener(listener);
+    }
+
+    public void addLevelDEXButtonListener(ActionListener listener) {
+        DEXButton.addActionListener(listener);
+    }
+
+    public void addLevelSTRButtonListener(ActionListener listener) {
+        STRButton.addActionListener(listener);
+    }
+
+    public void addLevelINTButtonListener(ActionListener listener) {
+        INTButton.addActionListener(listener);
+    }
+
+    public void addLevelFTHButtonListener(ActionListener listener) {
+        FTHButton.addActionListener(listener);
+    }
+
+    public void addBackButtonListener(ActionListener listener) {
+        backButton.addActionListener(listener);
+    }
+
+    public JTextArea getStatsTextArea() {
+        return statsTextArea;
     }
 
     public static void main(String[] args) {

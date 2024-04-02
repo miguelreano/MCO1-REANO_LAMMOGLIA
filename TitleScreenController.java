@@ -17,7 +17,6 @@ public class TitleScreenController {
         //@Override
         public void actionPerformed(ActionEvent e) {
             view.dispose();
-            new CharacterCreationGUI().setVisible(true);
             Character character = new Character();
             CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
             CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);

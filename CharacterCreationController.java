@@ -10,14 +10,10 @@ public class CharacterCreationController {
     public CharacterCreationController(CharacterCreationGUI view, Character model) {
         this.view = view;
         this.model = model;
-
-        // Add action listeners to the buttons in the view
         this.view.addConfirmButtonListener(new ConfirmButtonListener());
         this.view.addBackButtonListener(new BackButtonListener());
     }
 
-    // Inner class to handle the "Confirm" button action
-    // Inner class to handle the "Confirm" button action
     class ConfirmButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
@@ -29,18 +25,18 @@ public class CharacterCreationController {
                 model.setCharacterName(name);
                 model.selectClass(selectedClass);
     
-                // Dispose of the current CharacterCreationGUI
-                view.dispose();
-    
                 // Log before attempting to display the GameLobbyGUI
                 System.out.println("Attempting to display GameLobbyGUI");
+
+                view.dispose();
     
                 // Proceed to the GameLobbyGUI
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         try {
+                            view.dispose();
                             GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
-                            gameLobbyGUI.setVisible(true);
+                            GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
                             System.out.println("GameLobbyGUI displayed successfully");
 
                         } catch (Exception ex) {
@@ -60,19 +56,9 @@ public class CharacterCreationController {
     class BackButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Back button clicked"); // Debugging statement
-
-            // Dispose of the current window
             view.dispose();
-           
-            // Open the TitleScreenGUI window
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
-                    titleScreenGUI.setVisible(true);
-                }
-            });
+            TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
+            TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
         }
     }
 
