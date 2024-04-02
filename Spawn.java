@@ -1,11 +1,11 @@
 import java.util.Random;
 
 public class Spawn {
-    private static int health;
-    private static int attack;
-    private static double pDef; // physical defense
-    private static double sDef; // sorcery defense
-    private static double iDef; // incantation defense
+    private int health;
+    private int attack;
+    private double pDef; // physical defense
+    private double sDef; // sorcery defense
+    private double iDef; // incantation defense
 
     // Constructor that includes health and attack
     public Spawn(double pDef, double sDef, double iDef, int health, int attack) {

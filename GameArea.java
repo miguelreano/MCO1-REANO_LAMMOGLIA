@@ -36,6 +36,13 @@ public class GameArea {
     private static Character.CharacterStats characterStats;
     Scanner myScanner = new Scanner(System.in);
     boolean result = FirstFloor(myScanner);
+    private static Character playerCharacter;
+
+    public static void setPlayerCharacter(Character character){
+        playerCharacter = character;
+        characterStats = character.getCharacterStats(); // Ensure characterStats is initialized
+    }
+
 
     /*
     * Initiates the first floor of the game area, setting the player's starting position
@@ -70,7 +77,7 @@ public class GameArea {
         "You've reached the door of the second floor...");
         System.out.println(doorReached);
         if (doorReached) {
-            ThirdFloor(scanner);
+            ThirdFloor(scanner, playerCharacter);
         } else {
             FirstFloor(scanner);
         }
@@ -85,7 +92,7 @@ public class GameArea {
      * 
      * @param scanner The scanner object to read player inputs.
      */
-    public static void ThirdFloor(Scanner scanner) {
+    public static void ThirdFloor(Scanner scanner, Character player) {
         currentPositionX = 6; // Starting position for the third floor
         currentPositionY = 2;
         boolean gameRunning = true;
@@ -98,10 +105,28 @@ public class GameArea {
 
             updatePosition(choice, ROWS3, COLS3);
 
-            if (isTile(currentPositionX, currentPositionY, BOSS_TILE)) {
-                //System.out.print("\033\143");
-                System.out.println("You've encountered a Boss but can still move to tiles.");
+            if (isTile(currentPositionX, currentPositionY, DOOR3)) {
+                System.out.print("\033\143");
                 Menus.Pause();
+                SecondFloor(scanner);
+            }
+
+            if (isTile(currentPositionX, currentPositionY, BOSS_TILE)) {
+                // Assuming you've initialized bosses somewhere; select the appropriate boss
+                Boss[] bosses = Boss.initializeBoss();
+                Boss theBoss = bosses[0]; // Example: Selecting the first boss for the battle
+                
+                System.out.println("You've encountered the boss: " + theBoss.getBossname());
+                Battle battle = new Battle(player, theBoss);
+                battle.start(); // Start the boss battle
+            
+                if (player.getCharacterStats().getHP() > 0) {
+                    System.out.println("You have defeated the boss: " + theBoss.getBossname());
+                    // Handle victory scenario, like going back to map or a reward screen
+                } else {
+                    System.out.println("You have been defeated. Returning to the lobby...");
+                    // Handle defeat scenario, like resetting stats or returning to the main menu
+                }
             }
 
             if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
@@ -139,13 +164,12 @@ public class GameArea {
 
         updatePosition(choice, rows, cols);
         if (doors.length == 2) {
-            // first door to 1st floor
-            if (isTile(currentPositionX, currentPositionY, doors[0])) {
+            if (isTile(currentPositionX, currentPositionY, doors[1])) {
                 System.out.print("\033\143");
                 System.out.println(doorMessage);
                 Menus.Pause();
                 return false;
-            } else if (isTile(currentPositionX, currentPositionY, doors[1])){
+            } else if (isTile(currentPositionX, currentPositionY, doors[0])){
                 System.out.print("\033\143");
                 System.out.println(doorMessage);
                 Menus.Pause();
@@ -189,7 +213,25 @@ public class GameArea {
                 } else {
                     System.out.print("\033\143");
                     System.out.println("\nYou got a battle tile!");
-                    Menus.Pause();
+                    /*Initialize Spawn and Battle
+                    Spawn[] spawnss = Spawn.initializeSpawn();
+                    Spawn chosenSpawn = spawnss[new Random().nextInt(spawns.length)]; // Select a random spawn
+                    Battle battle = new Battle(playerCharacter, chosenSpawn); // Assuming 'user' is your Character instance
+                    if (characterStats == null){
+                        System.out.println("pwet");
+                    }
+                    battle.start(); // Start the battle
+
+                    if (user.getCharacterStats().getHP() > 0) {
+                        System.out.println("Victory! You defeated the spawn.");
+                        // Optionally move the player to the original position or continue the adventure
+                    } else {
+                        System.out.println("Defeat! Returning to lobby...");
+                        user.setRunes(0); // Reset runes to 0
+                        // Implement logic to return to the lobby
+                        return false; // Or another approach based on your game's flow
+                    }
+                    */
                 }
                 break;
             }

@@ -112,7 +112,7 @@ public class GameArea2 {
      * @param rows The number of rows in the current floor.
      * @param cols The number of columns in the current floor.
      */
-   private static void updatePosition(String choice, int rows, int cols, int[][] bounds) {
+   private static void updatePosition(String choice, int rows, int cols) {
     int nextPosX = currentPosX;
     int nextPosY = currentPosY;
     switch (choice.toLowerCase()) {
@@ -136,7 +136,7 @@ public class GameArea2 {
     }
 
     // Check for out-of-bounds or moving into a boundary
-    if (nextPosX >= 0 && nextPosX < rows && nextPosY >= 0 && nextPosY < cols && !isInBounds(nextPosX, nextPosY, bounds)) {
+    if (nextPosX >= 0 && nextPosX < rows && nextPosY >= 0 && nextPosY < cols && !isInBounds(nextPosX, nextPosY, BOUNDS3)) {
         currentPosX = nextPosX;
         currentPosY = nextPosY;
     } else {

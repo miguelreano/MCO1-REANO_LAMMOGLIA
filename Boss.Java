@@ -1,12 +1,12 @@
 import java.util.Random;
 
 public class Boss{
-    private static int health;
-    private static int attack;
-    private static double pDef;
-    private static double sDef;
-    private static double iDef;
-    private static String bossName;
+    private int health;
+    private int attack;
+    private double pDef; // physical defense
+    private double sDef; // sorcery defense
+    private double iDef; // incantation defense
+    private String bossName;
 
     public Boss(String bossName, double pDef, double sDef, double iDef, int health, int attack) {
         this.bossName = bossName;
@@ -16,7 +16,6 @@ public class Boss{
         this.health = health;
         this.attack = attack;
     }
-
     @Override
     public String toString() {
         return String.format("Health: %d, Attack: %d, Physical Defense: %.2f, Sorcery Defense: %.2f, Incantation Defense: %.2f",
@@ -93,8 +92,8 @@ public class Boss{
 
         boss[0] = new Boss("Godrick Boss", 0.35, 0.20, 0.15, 200, bossAttack1());
         boss[1] = new Boss("Nala Boss", 0.15, 0.30, 0.25, 400, bossAttack2());
-        boss[2] = new Boss("Elden Beast", 0.25, 0.50, 0.40, bossAttack3());
-
+        boss[2] = new Boss("Elden Beast", 0.25, 0.50, 0.40, 800, bossAttack3());
+        return boss;
     }
 
     
