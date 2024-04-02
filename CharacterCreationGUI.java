@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class CharacterCreationGUI extends JFrame {
     private JLabel nameLabel;
@@ -71,11 +72,36 @@ public class CharacterCreationGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new CharacterCreationGUI();
-            }
-        });
+    public void addConfirmButtonListener(ActionListener listener) {
+        confirmButton.addActionListener(listener);
     }
+
+    // Method to add ActionListener to the "Back" button
+    public void addBackButtonListener(ActionListener listener) {
+        backButton.addActionListener(listener);
+    }
+
+    // Method to retrieve the entered name from the text field
+    public String getName() {
+        return nameField.getText();
+    }
+
+    // Method to retrieve the selected class from the combo box
+    public String getSelectedClass() {
+        return (String) selectClassComboBox.getSelectedItem();
+    }
+
+    public static void main(String[] args) {
+    // Create model and view instances for character creation
+    Character character = new Character(); // Assuming you have a Character class
+    CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
+
+    // Create controller instance for character creation
+    CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
+
+    // Display the character creation GUI
+    characterCreationGUI.setVisible(true);
+}
+
+
 }

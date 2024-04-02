@@ -20,3 +20,20 @@
     });
   }
 } */
+
+import javax.swing.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                // Create TitleScreenGUI and its controller
+                TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
+                TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
+                // Display the title screen
+                titleScreenGUI.setVisible(true);
+            }
+        });
+    }
+}

@@ -8,16 +8,19 @@ import java.util.ArrayList;
  * select a class, and confirm their choices.
  */
 public class Character {
-    private Scanner scanner = new Scanner(System.in);
-    public static String characterName = "";
-    private CharacterStats characterStats = null;
-    private int Runes = 10000;
+    private String characterName;
+    private int Runes;
+    private CharacterStats characterStats;
     private List<Weapon> inventory;
     private Weapon equippedWeapon;
 
-
     public Character() {
-        inventory = new ArrayList<>();
+        this.inventory = new ArrayList<>();
+        this.Runes = 10000; // Starting runes
+    }
+
+    public String getCharacterName() {
+        return characterName;
     }
 
     public List<Weapon> getInventory() {
@@ -65,12 +68,43 @@ public class Character {
         this.Runes -= amount;
     }
 
+    public void setCharacterName(String name) {
+        characterName = name;
+    }
+
+    // Method to select the character's class and update stats accordingly
+    public void selectClass(String className) {
+        switch (className) {
+            case "Vagabond":
+                characterStats = new CharacterStats("Vagabond", 15, 11, 13, 14, 9, 9, 9);
+                break;
+            case "Samurai":
+                characterStats = new CharacterStats("Samurai", 12, 13, 15, 12, 9, 8, 9);
+                break;
+            case "Warrior":
+                characterStats = new CharacterStats("Warrior", 11, 11, 16, 10, 10, 8, 8);
+                break;
+            case "Hero":
+                characterStats = new CharacterStats("Hero", 14, 12, 9, 16, 7, 8, 7);
+                break;
+            case "Astrologer":
+                characterStats = new CharacterStats("Astrologer", 9, 9, 12, 8, 16, 7, 6);
+                break;
+            case "Prophet":
+                characterStats = new CharacterStats("Prophet", 10, 8, 10, 11, 7, 16, 7);
+                break;
+            default:
+                // Handle invalid class selection
+                break;
+        }
+    }
+
     
     /**
      * Starts the character creation process, allowing the player to input their name,
      * select a character class, and confirm their choices.
      */
-    public void startCharacterCreation() {
+    /*public void startCharacterCreation() {
         boolean isConfirmed = false;
         while (!isConfirmed) {
 
@@ -137,13 +171,13 @@ public class Character {
                     
             }
         }
-    }
+    }*/
 
     /**
      * Presents the class selection menu to the player and sets the character's stats
      * based on the selected class.
      */
-    private void selectClass() {
+    /*private void selectClass() {
         System.out.println("CLASS: \t\t HP  END  DEX  STR  INT  FTH \tLVL");
         System.out.println("[1] Vagabond \t 15   11   13   14    9    9     9");
         System.out.println("[2] Samurai \t 12   13   15   12    9    8     9");
@@ -204,7 +238,7 @@ public class Character {
                 System.out.print("\033\143");
                 selectClass();
         }
-    }
+    }*/
 
     /**
      * Retrieves the character's stats.

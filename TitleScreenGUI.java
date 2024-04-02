@@ -1,7 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TitleScreenGUI extends JFrame {
     private JLabel titleLabel;
@@ -36,13 +36,25 @@ public class TitleScreenGUI extends JFrame {
         panel.add(buttonPanel, BorderLayout.CENTER);
         add(panel);
 
+        setVisible(true);
         setLocationRelativeTo(null);
+    }
+
+    public void addStartButtonListener(ActionListener listener) {
+        startButton.addActionListener(listener);
+    }
+
+    // Method to add ActionListener to the "EXIT" button
+    public void addExitButtonListener(ActionListener listener) {
+        exitButton.addActionListener(listener);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new TitleScreenGUI().setVisible(true); // Make the JFrame visible
+                TitleScreenGUI view = new TitleScreenGUI();
+                new TitleScreenController(view);
+                view.setVisible(true); // Make the JFrame visible
             }
         });
     }

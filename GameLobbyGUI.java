@@ -1,7 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GameLobbyGUI extends JFrame{
     private JLabel nameLabel;
@@ -58,10 +58,31 @@ public class GameLobbyGUI extends JFrame{
         setLocationRelativeTo(null);
     }  
 
+    public void addFastTravelButtonListener(ActionListener listener) {
+        fastTravelButton.addActionListener(listener);
+    }
+
+    public void addLevelUpButtonListener(ActionListener listener) {
+        levelUpButton.addActionListener(listener);
+    }
+
+    public void addInventoryButtonListener(ActionListener listener) {
+        inventoryButton.addActionListener(listener);
+    }
+
+    public void addShopButtonListener(ActionListener listener) {
+        shopButton.addActionListener(listener);
+    }
+
+    public void addQuitButtonListener(ActionListener listener) {
+        quitButton.addActionListener(listener);
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GameLobbyGUI(); // Make the JFrame visible
+                GameLobbyGUI gui = new GameLobbyGUI();
+                gui.setVisible(true);
             }
         });
     }
