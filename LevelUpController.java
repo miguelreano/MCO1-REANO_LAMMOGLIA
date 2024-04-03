@@ -5,12 +5,15 @@ import java.awt.event.ActionListener;
 public class LevelUpController {
     private LevelUpGUI view;
     private Character user;
+    private GameLobby gameLobby;
 
-    public LevelUpController(LevelUpGUI view, Character user) {
+    public LevelUpController(LevelUpGUI view, Character user, GameLobby gameLobby) {
         this.view = view;
         this.user = user;
+        this.gameLobby = gameLobby;
         this.view.addBackButtonListener(new BackButtonListener());
         initView();
+        updateView();
     }
 
     private void initView() {
@@ -25,30 +28,10 @@ public class LevelUpController {
     }
 
     private void levelUp(String attribute) {
-        Character.CharacterStats stats = user.getCharacterStats();
-        switch (attribute) {
-            case "HP":
-                stats.setHP(stats.getHP() + 1);
-                break;
-            case "END":
-                stats.setEND(stats.getEND() + 1);
-                break;
-            case "DEX":
-                stats.setDEX(stats.getDEX() + 1);
-                break;
-            case "STR":
-                stats.setSTR(stats.getSTR() + 1);
-                break;
-            case "INT":
-                stats.setINT(stats.getINT() + 1);
-                break;
-            case "FTH":
-                stats.setFTH(stats.getFTH() + 1);
-                break;
-        }
-        // Increment player level with each attribute increase
-        stats.setPlayerLevel(stats.getPlayerLevel() + 1);
-        updateView();
+            // Assuming you have a reference to the GameLobby instance
+            gameLobby.levelUpCharacter(attribute);
+            updateView(); // You might need to adjust this to ensure the view is updated correctly
+        
     }
 
 
@@ -63,7 +46,6 @@ public class LevelUpController {
     }
 
     class BackButtonListener implements ActionListener {
-        //@Override
         public void actionPerformed(ActionEvent e) {
             view.dispose();
             GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();

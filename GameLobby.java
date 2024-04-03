@@ -76,106 +76,38 @@ public class GameLobby {
      * @param characterStats The character's current stats, used to calculate the cost and effect of leveling up.
      * @param user The character instance being leveled up, which holds the rune balance and stats.
      */
-    public static void LevelUp(Character.CharacterStats characterStats, Character user) {
-        Scanner scanner = new Scanner(System.in);
+    public void levelUpCharacter(String attribute) {
+        Character.CharacterStats stats = user.getCharacterStats();
+        int runeCost = (stats.getPlayerLevel() * 100) / 2;
     
-        int runeCost = (characterStats.getPlayerLevel() * 100) / 2;
-
-        System.out.println("\nCurrent Runes: " + user.getRunes());
-
-        System.out.println("\n[1] Level Health");
-        System.out.println("[2] Level Endurance");
-        System.out.println("[3] Level Dexterity");
-        System.out.println("[4] Level Strength");
-        System.out.println("[5] Level Intelligence");
-        System.out.println("[6] Level Faith");
-        System.out.println("[7] Back");
-
-        System.out.print("\nEnter your choice: ");
-        int option = scanner.nextInt();
-
-        if (option >= 1 && option <= 6) {
-            if (user.getRunes() >= runeCost) {
-                user.subtractRunes(runeCost);
-
-                switch (option) {
-                    case 1:
-                        System.out.print("\033\143");
-                        characterStats.setHP(characterStats.getHP() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled HP");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                    case 2:
-                        System.out.print("\033\143");
-                        characterStats.setEND(characterStats.getEND() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled END");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                    case 3:
-                        System.out.print("\033\143");
-                        characterStats.setDEX(characterStats.getDEX() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled DEX");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                    case 4:
-                        System.out.print("\033\143");
-                        characterStats.setSTR(characterStats.getSTR() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled STR");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                    case 5:
-                        System.out.print("\033\143");
-                        characterStats.setINT(characterStats.getINT() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled INT");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                    case 6:
-                        System.out.print("\033\143");
-                        characterStats.setFTH(characterStats.getFTH() + 1);
-                        characterStats.setPlayerLevel(characterStats.getPlayerLevel() + 1);
-                        System.out.println("Leveled FTH");
-                        characterStats.displayStats();
-                        LevelUp(characterStats, user);
-                        System.out.print("\033\143");
-                        break;
-                }
-
-            } else {
-                System.out.print("\033\143");
-                System.out.println("Not Enough Runes!");
-                System.out.println("Current Runes: " + user.getRunes());
-                Menus.Pause();
-                System.out.print("\033\143");
-                Menus.menusGameLobby(characterStats);
+        if (user.getRunes() >= runeCost) {
+            user.subtractRunes(runeCost);
+            switch (attribute) {
+                case "HP":
+                    stats.setHP(stats.getHP() + 1);
+                    break;
+                case "END":
+                    stats.setEND(stats.getEND() + 1);
+                    break;
+                case "DEX":
+                    stats.setHP(stats.getHP() + 1);
+                    break;
+                case "STR":
+                    stats.setHP(stats.getHP() + 1);
+                    break;
+                case "INT":
+                    stats.setHP(stats.getHP() + 1);
+                    break;
+                case "FTH":
+                    stats.setHP(stats.getHP() + 1);
+                    break;
             }
-        } else if (option == 7) {
-            System.out.print("\033\143");
-            Menus.menusGameLobby(characterStats);
+            stats.setPlayerLevel(stats.getPlayerLevel() + 1);
         } else {
-            System.out.print("\033\143");
-            System.out.println("Invalid choice. Please try again.");
-            Menus.Pause();
-            System.out.print("\033\143");
-            LevelUp(characterStats, user);
+            // Handle not having enough runes, e.g., show a message dialog in the game lobby
         }
-
-        scanner.close();
     }
+    
 
     public static void Inventory(Character user) {
         Scanner scanner = new Scanner(System.in);

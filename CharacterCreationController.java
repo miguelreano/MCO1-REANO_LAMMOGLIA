@@ -54,7 +54,6 @@ public class CharacterCreationController {
 
 
     class BackButtonListener implements ActionListener {
-        //@Override
         public void actionPerformed(ActionEvent e) {
             view.dispose();
             TitleScreenGUI titleScreenGUI = new TitleScreenGUI();

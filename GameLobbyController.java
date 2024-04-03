@@ -11,11 +11,11 @@ public class GameLobbyController {
         this.view = view;
 
         // Add action listeners to buttons in the view
-        this.view.addFastTravelButtonListener(new FastTravelButtonListener());
-        this.view.addLevelUpButtonListener(new LevelUpButtonListener());
-        this.view.addInventoryButtonListener(new InventoryButtonListener());
-        this.view.addShopButtonListener(new ShopButtonListener());
-        this.view.addQuitButtonListener(new QuitButtonListener());
+        view.addFastTravelButtonListener(new FastTravelButtonListener());
+        view.addLevelUpButtonListener(new LevelUpButtonListener());
+        view.addInventoryButtonListener(new InventoryButtonListener());
+        view.addShopButtonListener(new ShopButtonListener());
+        view.addQuitButtonListener(new QuitButtonListener());
         //view.updateCharacterInfo(character);
     }
 
@@ -36,7 +36,7 @@ public class GameLobbyController {
         public void actionPerformed(ActionEvent e) {
             view.dispose();
             LevelUpGUI levelUpGUI = new LevelUpGUI();
-            LevelUpController levelUpController = new LevelUpController(levelUpGUI, null);
+            LevelUpController levelUpController = new LevelUpController(levelUpGUI, null, null);
         }
     }
 

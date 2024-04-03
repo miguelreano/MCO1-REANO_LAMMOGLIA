@@ -31,8 +31,6 @@ public class Main {
                 //Create TitleScreenGUI and its controller
                 TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
                 TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
-                // Display the title screen
-                titleScreenGUI.setVisible(true);
                 //Character character = new Character();
                 //CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
                 //CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
