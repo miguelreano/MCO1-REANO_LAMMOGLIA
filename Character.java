@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Character {
     private String characterName;
-    private int Runes;
+    private int Runes = 0;
     private CharacterStats characterStats;
     private List<Weapon> inventory;
     private Weapon equippedWeapon;
@@ -22,7 +22,7 @@ public class Character {
     }
 
     public String getCharacterName() {
-        return characterName = "juls";
+        return characterName;
     }
 
     public List<Weapon> getInventory() {
@@ -96,10 +96,18 @@ public class Character {
                 characterStats = new CharacterStats("Prophet", 10, 8, 10, 11, 7, 16, 7);
                 break;
             default:
-                // Handle invalid class selection
+                characterStats = null;
                 break;
         }
         
+    }
+
+    public String getStatsForClass(String className) {
+        selectClass(className);
+        if (characterStats != null) {
+            return characterStats.toString();
+        } 
+        return "Class not found";
     }
 
 
@@ -144,6 +152,11 @@ public class Character {
             this.FTH = FTH;
             this.playerLevel = playerLevel;
 
+        }
+
+        public String toString() {
+            return String.format("Class: %s\nHP: %d\nEND: %d\nDEX: %d\nSTR: %d\nINT: %d\nFTH: %d\nLVL: %d",
+                    className, HP, END, DEX, STR, INT, FTH, playerLevel);
         }
 
           /**

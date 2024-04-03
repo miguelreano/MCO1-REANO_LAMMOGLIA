@@ -76,19 +76,24 @@ public class CharacterCreationGUI extends JFrame {
         confirmButton.addActionListener(listener);
     }
 
-    // Method to add ActionListener to the "Back" button
     public void addBackButtonListener(ActionListener listener) {
         backButton.addActionListener(listener);
     }
 
-    // Method to retrieve the entered name from the text field
-    public String getName() {
-        return nameField.getText();
+    public void addSelectClassListener(ActionListener listener) {
+        selectClassComboBox.addActionListener(listener);
     }
 
-    // Method to retrieve the selected class from the combo box
+    public String getName() {
+        return nameField.getText().trim();
+    }
+
     public String getSelectedClass() {
         return (String) selectClassComboBox.getSelectedItem();
+    }
+
+    public void updateStatsTextArea(String stats) {
+        statsTextArea.setText(stats);
     }
 
     //public static void main(String[] args) {

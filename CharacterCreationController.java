@@ -10,11 +10,37 @@ public class CharacterCreationController {
     public CharacterCreationController(CharacterCreationGUI view, Character model) {
         this.view = view;
         this.model = model;
-        this.view.addConfirmButtonListener(new ConfirmButtonListener());
-        this.view.addBackButtonListener(new BackButtonListener());
+
+        this.view.addConfirmButtonListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Confirm button action
+                model.setCharacterName(view.getName());
+                view.dispose();
+                GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
+                GameLobbyController gameLobbyController = new GameLobbyController(model, gameLobbyGUI);
+            }
+        });
+
+        this.view.addBackButtonListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
+                TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
+            }
+        });
+
+        this.view.addSelectClassListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedClass = view.getSelectedClass();
+                String stats = model.getStatsForClass(selectedClass);
+                view.updateStatsTextArea(stats);
+            }
+        });
     }
 
-    class ConfirmButtonListener implements ActionListener {
+
+
+    /*class ConfirmButtonListener implements ActionListener {
         //@Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -59,6 +85,6 @@ public class CharacterCreationController {
             TitleScreenGUI titleScreenGUI = new TitleScreenGUI();
             TitleScreenController titleScreenController = new TitleScreenController(titleScreenGUI);
         }
-    }
+    }*/
 
 }

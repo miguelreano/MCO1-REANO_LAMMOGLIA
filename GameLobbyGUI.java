@@ -21,10 +21,10 @@ public class GameLobbyGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
 
-        nameLabel = new JLabel("Name: ");
-        levelLabel = new JLabel("Level: ");
-        runesLabel = new JLabel("Runes: ");
-        currentWeaponLabel = new JLabel("Weapon: ");
+        nameLabel = new JLabel();
+        levelLabel = new JLabel();
+        runesLabel = new JLabel();
+        currentWeaponLabel = new JLabel();
 
         fastTravelButton = new JButton("Fast Travel");
         levelUpButton = new JButton("Level Up");
@@ -32,7 +32,7 @@ public class GameLobbyGUI extends JFrame{
         shopButton = new JButton("Shop");
         quitButton = new JButton("Quit Game");
 
-        statsTextArea = new JTextArea();
+        statsTextArea = new JTextArea(10, 30);
         statsTextArea.setEditable(false);
 
         JPanel leftPanel = new JPanel(new GridLayout(9, 1, 0, 10));
@@ -61,6 +61,21 @@ public class GameLobbyGUI extends JFrame{
             e.printStackTrace();
         }
     }  
+
+    public void updateCharacter(Character character) {
+        nameLabel.setText("Name: " + character.getCharacterName());
+        levelLabel.setText("Level: " + character.getCharacterStats().getPlayerLevel());
+        runesLabel.setText("Runes: " + character.getRunes());
+        if (character.getEquippedWeapon() != null) {
+            currentWeaponLabel.setText("Weapon: " + character.getEquippedWeapon().getName());
+        } else {
+            currentWeaponLabel.setText("Weapon: None");
+        }
+    }
+
+    public void displayStatsTextArea(String stats) {
+        statsTextArea.setText(stats);
+    }
 
     public void addFastTravelButtonListener(ActionListener listener) {
         fastTravelButton.addActionListener(listener);
