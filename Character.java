@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import javax.xml.stream.events.Characters;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class Character {
     }
 
     public String getCharacterName() {
-        return characterName;
+        return characterName = "juls";
     }
 
     public List<Weapon> getInventory() {
@@ -97,148 +99,9 @@ public class Character {
                 // Handle invalid class selection
                 break;
         }
+        
     }
 
-    
-    /**
-     * Starts the character creation process, allowing the player to input their name,
-     * select a character class, and confirm their choices.
-     */
-    /*public void startCharacterCreation() {
-        boolean isConfirmed = false;
-        while (!isConfirmed) {
-
-            System.out.print("\033\143");
-            Menus.Title();
-            System.out.println("\n[1] Input Name");
-            System.out.println("[2] Select Class");
-            System.out.println("[3] Confirm");
-            System.out.println("[4] Back");
-
-            System.out.print("\nEnter choice: ");
-            int choice = scanner.nextInt();
-
-            scanner.nextLine(); // Consume newline
-            switch (choice) {
-                case 1:
-                    System.out.print("\033\143");
-                    System.out.print("Enter character name: ");
-                    characterName = scanner.nextLine();
-                    Menus.Pause();
-                    System.out.print("\033\143");
-                    System.out.println("Name set to " + characterName);
-                    Menus.Pause();
-                    System.out.print("\033\143");
-                    break;
-                case 2:
-                    System.out.print("\033\143");
-                    selectClass();
-                    break;
-                case 3:
-                    System.out.print("\033\143");
-                    if (characterName.isEmpty() || characterStats == null) {
-                        System.out.print("\033\143");
-                        System.out.println("Please ensure you have chosen a name and job class.");
-                        Menus.Pause();
-                        System.out.print("\033\143");
-                    } else {
-                        System.out.println("Confirm Character?");
-                        System.out.println("[YES] [NO]");
-                        System.out.print("\nEnter Choice: ");
-                        String confirm = scanner.nextLine();
-                        if (confirm.equalsIgnoreCase("yes")) {
-                            System.out.print("\033\143");
-                            isConfirmed = true;
-                            Menus.menusGameLobby(characterStats);
-                        } else if (confirm.equalsIgnoreCase("no")) {
-                            System.out.print("\033\143");
-                            System.out.println("Character creation not confirmed, returning to options.");
-                            Menus.Pause();
-                            System.out.print("\033\143");
-                        }
-                    }
-                    break;
-                case 4:
-                    System.out.print("\033\143");
-                    Menus.TitleScreen();
-                    break;
-                default:
-                    System.out.print("\033\143");
-                    System.out.println("Invalid Input!");
-                    Menus.Pause();
-                    System.out.print("\033\143");
-                    startCharacterCreation();
-                    
-            }
-        }
-    }*/
-
-    /**
-     * Presents the class selection menu to the player and sets the character's stats
-     * based on the selected class.
-     */
-    /*private void selectClass() {
-        System.out.println("CLASS: \t\t HP  END  DEX  STR  INT  FTH \tLVL");
-        System.out.println("[1] Vagabond \t 15   11   13   14    9    9     9");
-        System.out.println("[2] Samurai \t 12   13   15   12    9    8     9");
-        System.out.println("[3] Warrior \t 11   11   16   10   10    8     8");
-        System.out.println("[4] Hero \t 14   12    9   16    7    8     7");
-        System.out.println("[5] Astrologer \t  9    9   12    8   16    7     6");
-        System.out.println("[6] Prophet \t 10    8   10   11    7   16     7");
-
-        System.out.print("\nEnter choice: ");
-        int selectedClass = scanner.nextInt();
-        switch (selectedClass) {
-            case 1:
-                characterStats = new CharacterStats("Vagabond", 15, 11, 13, 14, 9, 9, 9);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Vagabond class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            case 2:
-                characterStats = new CharacterStats("Samurai", 12, 13, 15, 12, 9, 8, 9);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Samurai class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            case 3:
-                characterStats = new CharacterStats("Warrior", 11, 11, 16, 10, 10, 8, 8);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Warrior class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            case 4:
-                characterStats = new CharacterStats("Hero", 14, 12, 9, 16, 7, 8, 7);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Hero class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            case 5:
-                characterStats = new CharacterStats("Astrologer", 9, 9, 12, 8, 16, 7, 6);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Astrologer class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            case 6:
-                characterStats = new CharacterStats("Prophet", 10, 8, 10, 11, 7, 16, 7);
-                System.out.print("\033\143");
-                System.out.println("You have selected the Prophet class.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                break;
-            default:
-                System.out.print("\033\143");
-                System.out.println("Invalid selection. Please select a number between 1 and 6.");
-                Menus.Pause();
-                System.out.print("\033\143");
-                selectClass();
-        }
-    }*/
 
     /**
      * Retrieves the character's stats.
@@ -246,7 +109,7 @@ public class Character {
      * @return The current {@code CharacterStats} of the character.
      */
     public CharacterStats getCharacterStats() {
-        return characterStats;
+       return characterStats;
     }
     
     /**

@@ -3,11 +3,14 @@ import java.util.Scanner;
 
 public class Battle {
 
-
-    private Character player ;
+    
+    
+    private Character player;
     private Object enemy; // Can be an instance of Spawn or Boss
     private Scanner scanner = new Scanner(System.in);
-
+    Character character = new Character();
+    
+    Character.CharacterStats characterStats = character.getCharacterStats();
     private int getEnemyHealth() {
         if (enemy instanceof Spawn) {
             return ((Spawn) enemy).getHealth();
@@ -30,24 +33,24 @@ public class Battle {
         this.enemy = enemy;
     }
 
-    public void start() {
+    public void start(Character.CharacterStats characterStats) {
         System.out.println("A fierce battle begins!");
         // Initial battle state display
-        displayInitialBattleState();
+        displayInitialBattleState(characterStats, character);
         
-        while (player.getCharacterStats().getHP() > 0 && getEnemyHealth() > 0) {
+        while (characterStats.getHP() > 0 && getEnemyHealth() > 0) {
             playerTurn();
             if (getEnemyHealth() > 0) {
-                enemyTurn();
+                enemyTurn(characterStats);
             }
         }
 
-        concludeBattle();
+        concludeBattle(characterStats);
     }
 
-    private void displayInitialBattleState() {
-        if (player.getCharacterStats() != null) {
-            System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getCharacterStats().getHP());
+    private void displayInitialBattleState(Character.CharacterStats characterStats, Character character) {
+        if (characterStats != null) {
+            System.out.println("Player: " + character.getCharacterName() + " | Health: " + characterStats.getHP());
         } else {
             System.out.println("Player stats not initialized.");
         }
@@ -63,7 +66,7 @@ public class Battle {
                 executePlayerAttack();
                 break;
             case 2: // Dodge
-                if (attemptDodge()) {
+                if (attemptDodge(characterStats)) {
                     System.out.println("Dodge successful! Enemy's turn is skipped.");
                     return;
                 } else {
@@ -84,17 +87,17 @@ public class Battle {
     
         switch (attackType) {
             case 1: // Physical attack
-                damage = calculatePlayerDamage("physical");
+                damage = calculatePlayerDamage("physical", characterStats);
                 break;
             case 2: // Sorcery attack
-                damage = calculatePlayerDamage("sorcery");
+                damage = calculatePlayerDamage("sorcery", characterStats);
                 break;
             case 3: // Incantation attack
-                damage = calculatePlayerDamage("incantation");
+                damage = calculatePlayerDamage("incantation", characterStats);
                 break;
             default:
                 System.out.println("Invalid attack type selected. Defaulting to physical attack.");
-                damage = calculatePlayerDamage("physical");
+                damage = calculatePlayerDamage("physical", characterStats);
                 break;
         }
     
@@ -104,12 +107,12 @@ public class Battle {
     }
     
 
-    private boolean attemptDodge() {
+    private boolean attemptDodge(Character.CharacterStats characterStats) {
         Random random = new Random();
-        return random.nextInt(100) < player.getCharacterStats().getEND(); // Example dodge logic
+        return random.nextInt(100) < characterStats.getEND(); // Example dodge logic
     }
 
-    private void enemyTurn() {
+    private void enemyTurn(Character.CharacterStats characterStats) {
         // Example adaptation for Boss and Spawn attacks
         int damage = 0;
         if (enemy instanceof Boss) {
@@ -119,23 +122,23 @@ public class Battle {
             damage = ((Spawn) enemy).getAttack(); // Use Spawn's getAttack
             System.out.println("Spawn attacks, dealing " + damage + " damage.");
         }
-        player.getCharacterStats().setHP(player.getCharacterStats().getHP() - damage);
+        characterStats.setHP(characterStats.getHP() - damage);
     }
 
-    private void concludeBattle() {
-        if (player.getCharacterStats().getHP() <= 0) {
-            System.out.println(player.getCharacterName() + " has been defeated. Returning to game lobby...");
-            player.setRunes(0);
+    private void concludeBattle(Character.CharacterStats characterStats) {
+        if (characterStats.getHP() <= 0) {
+            System.out.println(character.getCharacterName() + " has been defeated. Returning to game lobby...");
+            character.setRunes(0);
             // Logic to return to game lobby goes here
         } else {
             System.out.println("Enemy defeated! Gaining runes...");
-            player.addRunes(getEnemyHealth() * 2); // Placeholder logic for rune reward
+            character.addRunes(getEnemyHealth() * 2); // Placeholder logic for rune reward
         }
     }
 
-    private int calculatePlayerDamage(String attackType) {
-        Character.CharacterStats stats = player.getCharacterStats();
-        Weapon equippedWeapon = player.getEquippedWeapon();
+    private int calculatePlayerDamage(String attackType, Character.CharacterStats stats) {
+        
+        Weapon equippedWeapon = character.getEquippedWeapon();
         int damage = 0;
     
         // Retrieve enemy defenses

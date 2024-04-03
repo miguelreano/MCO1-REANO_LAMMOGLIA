@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+//import Character.CharacterStats;
+
 import java.util.Random;
 
 /**
@@ -34,14 +37,11 @@ public class GameArea {
     private static final int[] FAST_TRAVEL_TILE = { 0, 2 }; // Fast travel position for the third floor
 
     private static Character.CharacterStats characterStats;
-    Scanner myScanner = new Scanner(System.in);
+    static Scanner myScanner = new Scanner(System.in);
     boolean result = FirstFloor(myScanner);
     private static Character playerCharacter;
 
-    public static void setPlayerCharacter(Character character){
-        playerCharacter = character;
-        characterStats = character.getCharacterStats(); // Ensure characterStats is initialized
-    }
+
 
 
     /*
@@ -77,7 +77,7 @@ public class GameArea {
         "You've reached the door of the second floor...");
         System.out.println(doorReached);
         if (doorReached) {
-            ThirdFloor(scanner, playerCharacter);
+            ThirdFloor(scanner);
         } else {
             FirstFloor(scanner);
         }
@@ -92,7 +92,7 @@ public class GameArea {
      * 
      * @param scanner The scanner object to read player inputs.
      */
-    public static void ThirdFloor(Scanner scanner, Character player) {
+    public static void ThirdFloor(Scanner scanner) {
         currentPositionX = 6; // Starting position for the third floor
         currentPositionY = 2;
         boolean gameRunning = true;
@@ -117,16 +117,18 @@ public class GameArea {
                 Boss theBoss = bosses[0]; // Example: Selecting the first boss for the battle
                 
                 System.out.println("You've encountered the boss: " + theBoss.getBossname());
-                Battle battle = new Battle(player, theBoss);
-                battle.start(); // Start the boss battle
+                Battle battle = new Battle(playerCharacter, theBoss);
+                battle.start(characterStats); // Start the boss battle
             
-                if (player.getCharacterStats().getHP() > 0) {
+                if (characterStats.getHP() > 0) {
                     System.out.println("You have defeated the boss: " + theBoss.getBossname());
                     // Handle victory scenario, like going back to map or a reward screen
                 } else {
                     System.out.println("You have been defeated. Returning to the lobby...");
                     // Handle defeat scenario, like resetting stats or returning to the main menu
                 }
+                
+                System.out.println("boss lol");
             }
 
             if (isTile(currentPositionX, currentPositionY, FAST_TRAVEL_TILE)) {
@@ -213,16 +215,16 @@ public class GameArea {
                 } else {
                     System.out.print("\033\143");
                     System.out.println("\nYou got a battle tile!");
-                    /*Initialize Spawn and Battle
+                    Character character = new Character();
+                    character.selectClass("Vagabond");
+                    Character.CharacterStats characterStats = character.getCharacterStats();                
+                    //Initialize Spawn and Battle
                     Spawn[] spawnss = Spawn.initializeSpawn();
                     Spawn chosenSpawn = spawnss[new Random().nextInt(spawns.length)]; // Select a random spawn
                     Battle battle = new Battle(playerCharacter, chosenSpawn); // Assuming 'user' is your Character instance
-                    if (characterStats == null){
-                        System.out.println("pwet");
-                    }
-                    battle.start(); // Start the battle
+                    battle.start(characterStats); // Start the battle
 
-                    if (user.getCharacterStats().getHP() > 0) {
+                    if (characterStats.getHP() > 0) {
                         System.out.println("Victory! You defeated the spawn.");
                         // Optionally move the player to the original position or continue the adventure
                     } else {
@@ -231,7 +233,7 @@ public class GameArea {
                         // Implement logic to return to the lobby
                         return false; // Or another approach based on your game's flow
                     }
-                    */
+
                 }
                 break;
             }
@@ -337,6 +339,9 @@ public class GameArea {
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
+    public static void main(String[] args) {
+        FirstFloor(myScanner);
+    }
 } 
 
 
