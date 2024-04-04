@@ -16,7 +16,7 @@ public class GameLobbyController {
         view.addFastTravelButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
+                FastTravelGUI fastTravelGUI = new FastTravelGUI();
                 //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
             }
         });
@@ -25,7 +25,7 @@ public class GameLobbyController {
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
                 LevelUpGUI levelUpGUI = new LevelUpGUI();
-                LevelUpController levelUpController = new LevelUpController(levelUpGUI, null, null);
+                LevelUpController levelUpController = new LevelUpController(levelUpGUI, model, null);
                 //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
                 //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
             }
@@ -41,14 +41,7 @@ public class GameLobbyController {
         view.addShopButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
-                //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
-            }
-        });
-        view.addFastTravelButtonListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                view.dispose();
-                //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
+                ShopGUI shopGUI = new ShopGUI();
                 //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
             }
         });
