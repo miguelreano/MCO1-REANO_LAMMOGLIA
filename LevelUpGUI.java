@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 
 public class LevelUpGUI extends JFrame{
+    private JLabel runeLabel;
     private JButton HPButton;
     private JButton ENDButton;
     private JButton DEXButton;
@@ -20,6 +21,7 @@ public class LevelUpGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
 
+        runeLabel = new JLabel();
         HPButton = new JButton("HP");
         ENDButton = new JButton("END");
         DEXButton = new JButton("DEX");
@@ -31,7 +33,8 @@ public class LevelUpGUI extends JFrame{
         statsTextArea = new JTextArea(20, 30);
         statsTextArea.setEditable(false);
 
-        JPanel leftPanel = new JPanel(new GridLayout(7, 1, 0, 10));
+        JPanel leftPanel = new JPanel(new GridLayout(8, 1, 0, 10));
+        leftPanel.add(runeLabel);
         leftPanel.add(HPButton);
         leftPanel.add(ENDButton);
         leftPanel.add(DEXButton);
@@ -89,5 +92,10 @@ public class LevelUpGUI extends JFrame{
     public JTextArea getStatsTextArea() {
         return statsTextArea;
     }
+
+    public void updateRuneDisplay(int runes) {
+        runeLabel.setText("Runes: " + runes);
+    }
+    
 
 }
