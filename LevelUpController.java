@@ -11,9 +11,24 @@ public class LevelUpController {
         this.view = view;
         this.user = user;
         this.gameLobby = gameLobby;
-        this.view.addBackButtonListener(new BackButtonListener());
         initView();
-        updateView();
+        updateCharacterStatsDisplay();
+
+        view.addBackButtonListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                transitionToGameLobby();
+                //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI(); add back
+                //GameLobbyController gameLobbyController = new GameLobbyController(user, gameLobbyGUI);
+            }
+        });
+    }
+
+    private void updateCharacterStatsDisplay() {
+        String characterStats = user.getCharacterStats().toString(); // Ensure CharacterStats has a suitable toString method
+        SwingUtilities.invokeLater(() -> {
+            view.displayStatsTextArea(characterStats);
+        });
     }
 
     private void initView() {
@@ -30,28 +45,26 @@ public class LevelUpController {
     private void levelUp(String attribute) {
             // Assuming you have a reference to the GameLobby instance
             gameLobby.levelUpCharacter(attribute);
-            updateView(); // You might need to adjust this to ensure the view is updated correctly
+            updateCharacterStatsDisplay(); // You might need to adjust this to ensure the view is updated correctly
         
     }
 
-
-
-    private void updateView() {
-        // Format and set the character's stats text in the GUI's text area
-        Character.CharacterStats stats = user.getCharacterStats();
-        String statsText = String.format("Class: %s\nHP: %d\nEND: %d\nDEX: %d\nSTR: %d\nINT: %d\nFTH: %d\nLevel: %d",
-                                         stats.getClassName(), stats.getHP(), stats.getEND(), stats.getDEX(), 
-                                         stats.getSTR(), stats.getINT(), stats.getFTH(), stats.getPlayerLevel());
-        view.getStatsTextArea().setText(statsText);
-    }
-
-    class BackButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            view.dispose();
-            GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
-            GameLobby gameLobby = new GameLobby();
-            GameLobbyController gameLobbyController = new GameLobbyController(gameLobby, gameLobbyGUI);
-        }
+    //remove
+    private void transitionToGameLobby() {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                if (view != null) {
+                    view.dispose(); // Ensure the current view is disposed properly
+                }
+                GameLobbyGUI gameLobbyGUI = new GameLobbyGUI(); // Initialize the Game Lobby GUI
+                new GameLobbyController(user, gameLobbyGUI); // Initialize the Game Lobby Controller with the current user model
+                // Make sure GameLobbyGUI is made visible if it's not automatically done in its constructor
+                gameLobbyGUI.setVisible(true);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                // Handle any exceptions, possibly show an error message to the user
+            }
+        });
     }
 
 }

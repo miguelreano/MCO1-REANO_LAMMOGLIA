@@ -53,6 +53,11 @@ public class LevelUpGUI extends JFrame{
         setLocationRelativeTo(null);
 
     }
+    
+
+    public void displayStatsTextArea(String stats) {
+        statsTextArea.setText(stats);
+    }
 
     public void addLevelHPButtonListener(ActionListener listener) {
         HPButton.addActionListener(listener);

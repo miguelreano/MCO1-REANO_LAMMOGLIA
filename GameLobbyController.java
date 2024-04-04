@@ -24,7 +24,6 @@ public class GameLobbyController {
         view.addLevelUpButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                view.dispose();
                 LevelUpGUI levelUpGUI = new LevelUpGUI();
                 LevelUpController levelUpController = new LevelUpController(levelUpGUI, null, null);
                 //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
