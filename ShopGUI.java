@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ShopGUI extends JFrame {
     private String[] weaponNames = {
@@ -41,4 +42,14 @@ public class ShopGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    public void addBackButtonListener(ActionListener actionListener) {
+        backButton.addActionListener(actionListener);
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
 }
+
+
