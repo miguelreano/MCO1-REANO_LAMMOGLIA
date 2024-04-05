@@ -13,6 +13,7 @@ public class ShopGUI extends JFrame {
     };
     private JButton backButton;
     private JLabel runesLabel;
+    private JButton[] weaponButtons;
     
 
     public ShopGUI() {
@@ -29,11 +30,14 @@ public class ShopGUI extends JFrame {
         for (int i = 0; i < 24; i++) {
             JButton button = new JButton(weaponNames[i]);
             buttonPanel.add(button);
+
         }
 
         JPanel panel = new JPanel(new GridLayout(1, 1));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 440));
         panel.add(backButton);
+
+        initializeWeaponButtons();
 
         add(runesLabel, BorderLayout.NORTH);
         add(buttonPanel);
@@ -42,8 +46,21 @@ public class ShopGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    private void initializeWeaponButtons() {
+        weaponButtons = new JButton[24]; // Assuming you have 24 weapons
+        for (int i = 0; i < weaponNames.length; i++) {
+            weaponButtons[i] = new JButton(weaponNames[i]);
+            // Add the buttons to your GUI layout
+        }
+        // Don't forget to add these buttons to your GUI in the appropriate panel
+    }
+
     public void addBackButtonListener(ActionListener actionListener) {
         backButton.addActionListener(actionListener);
+    }
+
+    public JButton[] getWeaponButtons() {
+        return weaponButtons;
     }
 
     public JButton getBackButton() {
