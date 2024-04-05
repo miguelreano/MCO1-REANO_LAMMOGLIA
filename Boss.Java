@@ -1,5 +1,10 @@
 import java.util.Random;
 
+/**
+* The {@code Boss} class represents a boss enemy in the RPG game.
+* It contains properties such as the boss's name, health, attack, physical defense, sorcery defense,
+* incantation defense, and a method to display the boss's stats.
+*/
 public class Boss{
     private int health;
     private int attack;
@@ -8,6 +13,18 @@ public class Boss{
     private double iDef; // incantation defense
     private String bossName;
 
+    /**
+     * The {@code Boss} constructor initializes the boss with the provided name, health, attack, physical defense,
+     * sorcery defense, and incantation defense.
+     *
+     * @param bossName The name of the boss.
+     * @param health The health of the boss.
+     * @param attack The attack power of the boss.
+     * @param pDef The physical defense of the boss.
+     * @param sDef The sorcery defense of the boss.
+     * @param iDef The incantation defense of the boss.
+     */
+    
     public Boss(String bossName, double pDef, double sDef, double iDef, int health, int attack) {
         this.bossName = bossName;
         this.pDef = pDef;

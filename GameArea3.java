@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * The {@code GameArea3} class represents the game environment where the player can navigate through
+ * different floors, encounter various challenges, and collect treasures. It manages the game's
+ * spatial logic, including movements, encounters, and transitions between floors.
+ */
 public class GameArea3 {
 
     private static final int ROW1 = 9;
@@ -27,6 +32,14 @@ public class GameArea3 {
 
     private static Character playerCharacter;
 
+    
+    /**
+     * Initiates the first floor of the game area, setting the player's starting position
+     * and managing gameplay logic including door and spawn encounters.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean firstFloor(Scanner scanner){
         currentPosX = 8;
         currentPosY = 1;
@@ -39,6 +52,13 @@ public class GameArea3 {
         return doorReached;
     }
     
+    /**
+     * Initiates the second floor of the game area with a new set of challenges
+     * and updates the player's position accordingly. It also handles logic for door and spawn encounters.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean SecondFloor(Scanner scanner){
         currentPosX = 6; // Starting position for the third floor
         currentPosY = 2;
@@ -93,6 +113,12 @@ public class GameArea3 {
         return bossdefeat;
     }
 
+    /**
+     * Initiates the third floor of the game area, presenting the final set of challenges,
+     * including a boss fight and a fast travel tile to conclude the level.
+     *
+     * @param scanner The scanner object to read player inputs.
+     */
     public static boolean ThirdFloor(Scanner scanner){
         currentPosX = 8;
         currentPosY = 1;
@@ -217,6 +243,16 @@ public class GameArea3 {
     return reachedDoor;
     }
 
+    /**
+     * Prints the game board to the console, showing the player's current position
+     * and the layout of the floor.
+     *
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * * @param x The x-coordinate of the player's current position.
+     * @param y The y-coordinate of the player's current position.
+     */
+    
     private static void printGameBoard(int rows, int cols, int x, int y) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -229,6 +265,14 @@ public class GameArea3 {
         }
     }
     
+    /**
+     * Checks if the current position matches the specified tile coordinates.
+     *
+     * @param x The x-coordinate of the current position.
+     * @param y The y-coordinate of the current position.
+     * @param tile The tile coordinates to compare with the current position.
+     * @return {@code true} if the current position matches the tile coordinates, {@code false} otherwise.
+     */
     private static boolean isTile(int x, int y, int[] tile) {
         return x == tile[0] && y == tile[1];
     }

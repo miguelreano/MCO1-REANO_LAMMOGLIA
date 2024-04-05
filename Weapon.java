@@ -1,3 +1,8 @@
+/**
+ * The {@code Weapon} class represents a weapon that the player can use in the RPG game.
+ * It contains properties such as the weapon's name, cost, HP, END, DEX, STR, INT, and FTH.
+ */
+
 public class Weapon {
     private String weaponName;
     private int weaponCost;
@@ -9,6 +14,19 @@ public class Weapon {
     private int weaponFTH;
     Weapon[] weapons = new Weapon[25];
 
+    
+    /**
+     * The {@code Weapon} constructor initializes the weapon with the provided name, cost, HP, END, DEX, STR, INT, and FTH.
+     *
+     * @param weaponName The name of the weapon.
+     * @param weaponCost The cost of the weapon.
+     * @param weaponHP The HP bonus provided by the weapon.
+     * @param weaponEND The END bonus provided by the weapon.
+     * @param weaponDEX The DEX bonus provided by the weapon.
+     * @param weaponSTR The STR bonus provided by the weapon.
+     * @param weaponINT The INT bonus provided by the weapon.
+     * @param weaponFTH The FTH bonus provided by the weapon.
+     */
     public Weapon(String weaponName, int weaponCost, int weaponHP, int weaponEND, int weaponDEX, int weaponSTR, int weaponINT, int weaponFTH) {
         this.weaponName = weaponName;
         this.weaponCost = weaponCost;
@@ -85,6 +103,11 @@ public class Weapon {
         this.weaponFTH = weaponFTH;
     }
 
+    /**
+     * Initializes an array of weapons with predefined values.
+     *
+     * @return An array of weapons.
+     */
     public static Weapon[] initializeWeapons() {
         Weapon[] weapons = new Weapon[25];
 
@@ -121,6 +144,11 @@ public class Weapon {
         return weapons;
     }
 
+    /**
+     * Displays the available weapons in a formatted table.
+     *
+     * @param weapons The array of weapons to display.
+     */
     public static void displayAvailableWeapons(Weapon[] weapons) {
         if (weapons != null && weapons.length > 0) {
             System.out.println("-------------------------------------------------------------------------------------");
@@ -169,7 +197,9 @@ public class Weapon {
     
     
     
-
+    /**
+     * Displays the stats of the weapon.
+     */
     public void displayWeaponStats(){
         System.out.println("Weapon Name:" + weaponName);
         System.out.println("Cost: " + weaponCost);

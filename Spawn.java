@@ -1,5 +1,10 @@
 import java.util.Random;
 
+/**
+ * The {@code Spawn} class represents a spawn enemy in the RPG game.
+ * It contains properties such as the spawn's health, attack, physical defense, sorcery defense,
+ * and incantation defense.
+ */
 public class Spawn {
     private int health;
     private int attack;
@@ -7,7 +12,16 @@ public class Spawn {
     private double sDef; // sorcery defense
     private double iDef; // incantation defense
 
-    // Constructor that includes health and attack
+    /**
+     * The {@code Spawn} constructor initializes the spawn with the provided physical defense, sorcery defense,
+     * incantation defense, health, and attack.
+     *
+     * @param pDef The physical defense of the spawn.
+     * @param sDef The sorcery defense of the spawn.
+     * @param iDef The incantation defense of the spawn.
+     * @param health The health of the spawn.
+     * @param attack The attack power of the spawn.
+     */
     public Spawn(double pDef, double sDef, double iDef, int health, int attack) {
         this.pDef = pDef;
         this.sDef = sDef;
