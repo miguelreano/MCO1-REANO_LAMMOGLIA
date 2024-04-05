@@ -36,22 +36,23 @@ public class GameLobby {
                 Menus.Pause();
                 System.out.print("\033\143");
                 GameArea gameArea = new GameArea();
-                GameAreaGui gameAreaGui = new GameAreaGui();
-                GameAreaControll gameAreaControll = new GameAreaControll(gameAreaGui, gameArea);
+                gameArea.FirstFloor(scanner);
                 break;
             case 2:
                 System.out.print("\033\143");
                 System.out.println("Going to Raya Lucaria Academy");
                 Menus.Pause();
                 System.out.print("\033\143");
-                FastTravel(characterStats);
+                GameArea2 gameArea2 = new GameArea2();
+                gameArea2.firstFloor(scanner);
                 break;
             case 3:
                 System.out.print("\033\143");
                 System.out.println("Going to The Elden Throne");
                 Menus.Pause();
                 System.out.print("\033\143");
-                FastTravel(characterStats);
+                GameArea3 gameArea3 = new GameArea3();
+                gameArea3.firstFloor(scanner);
                 break;
             case 4:
                 System.out.print("\033\143");

@@ -22,6 +22,7 @@ public class GameArea2 {
     private static final int[][] DOOR2 = {{0,1}, {3,2}};
     private static final int[][] DOOR3 = {{3,0}, {0,2}};
     private static final int[] DOOR4 = {1,0};
+    private static final int[] BossDOOR = {7,3};
 
     private static final int[][] BossBOUNDS = {{0,0}, {0,1}, {0,5}, {0,6}};
     private static int[][] BOUNDS3 = {{0,0}, {1,0}, {0,4}, {1,4}, {5,0}, {6,0}, {5,4}, {6,4}};
@@ -35,6 +36,8 @@ public class GameArea2 {
     private static int[] BOSSTILE = {4,3};
     //sprivate static int[] FT1 = {0,2};
     private static int[] FTB = {4,3};
+
+    private static Character playerCharacter;
 
     private static Character.CharacterStats characterStats;
 
@@ -69,40 +72,104 @@ public class GameArea2 {
         boolean doorReached = floorLogic(scanner, ROW3, COL3, DOOR3, SPAWN3,
         "You've reached the door of the second floor...");
         if (doorReached) {
-            BossFloor(scanner);
+            BossFloor(scanner, BossSPAWN);
         }
         return doorReached;
         
     }
 
     public static boolean fourthFloor(Scanner scanner){
-        currentPosX = 0;
+        currentPosX = 1;
         currentPosY = 0;
-        boolean doorReached = floorLogic(scanner, ROW4, COL4, new int[][] {DOOR4}, SPAWN4, null)
+        boolean doorReached = floorLogic(scanner, ROW4, COL4, new int[][] {DOOR4}, SPAWN4, null);
+        if(doorReached){
+            ThirdFloor(scanner);
+        }
+
+        return doorReached;
     }
 
-    public static void BossFloor(Scanner scanner){
-        currentPosX = 7; // Starting position for the third floor
-        currentPosY = 3;
+    public static void BossFloor(Scanner scanner, int[][] spawns){
+        currentPosX = 6; // Starting position for the third floor
+        currentPosY = 2;
         boolean gameRunning = true;
-        
+        Character user = new Character();
         while (gameRunning) {
-            System.out.print("\033\143");
+            //System.out.print("\033\143");
             printGameBoard(BossROW, BossCOL, currentPosX, currentPosY);
             System.out.println("Choose your move: [W] Up, [S] Down, [D] Right, [A] Left");
             String choice = scanner.nextLine();
+            
 
             updatePosition(choice, BossROW, BossCOL);
 
-            if (isTile(currentPosX, currentPosY, BOSSTILE)) {
+            if (isTile(currentPosX, currentPosY, BossDOOR)) {
                 System.out.print("\033\143");
-                System.out.println("You've encountered a Boss but can still move to tiles.");
                 Menus.Pause();
+                SecondFloor(scanner);
+            }
+
+            for (int[] spawn : spawns) {
+                if (isTile(currentPosX, currentPosY, spawn)) {
+                    System.out.print("\033\143");
+                    System.out.println("You've reached a spawn point.");
+                    Menus.Pause();
+                    if (generateRandomNumber() == 3) {
+                        System.out.print("\033\143");
+                        System.out.println("\nIt's your lucky day! You reached a treasure tile");
+                        int runesObtained = treasureRunes();
+                        System.out.println("\nYou won this much runes:" + runesObtained);
+                        user.setRunes(user.getRunes() + runesObtained);
+                        Menus.Pause();
+                    } else {
+                        System.out.print("\033\143");
+                        System.out.println("\nYou got a battle tile!");
+                        Character character = new Character();
+                        character.selectClass("Vagabond");
+                        Character.CharacterStats characterStats = character.getCharacterStats();                
+                        //Initialize Spawn and Battle
+                        Spawn[] spawnss = Spawn.initializeSpawn();
+                        Spawn chosenSpawn = spawnss[new Random().nextInt(spawns.length)]; // Select a random spawn
+                        Battle battle = new Battle(playerCharacter, chosenSpawn); // Assuming 'user' is your Character instance
+                        battle.start(characterStats); // Start the battle
+    
+                        if (characterStats.getHP() > 0) {
+                            System.out.println("Victory! You defeated the spawn.");
+                            // Optionally move the player to the original position or continue the adventure
+                        } else {
+                            System.out.println("Defeat! Returning to lobby...");
+                            user.setRunes(0); // Reset runes to 0
+                            // Implement logic to return to the lobby
+                             // Or another approach based on your game's flow
+                        }
+    
+                    }
+                    break;
+                }
+            }
+            if (isTile(currentPosX, currentPosY, BOSSTILE)) {
+                // Assuming you've initialized bosses somewhere; select the appropriate boss
+                Boss[] bosses = Boss.initializeBoss();
+                Boss theBoss = bosses[0]; // Example: Selecting the first boss for the battle
+                
+                System.out.println("You've encountered the boss: " + theBoss.getBossname());
+                Battle battle = new Battle(playerCharacter, theBoss);
+                battle.start(characterStats); // Start the boss battle
+            
+                if (characterStats.getHP() > 0) {
+                    System.out.println("You have defeated the boss: " + theBoss.getBossname());
+                    // Handle victory scenario, like going back to map or a reward screen
+                } else {
+                    System.out.println("You have been defeated. Returning to the lobby...");
+                    // Handle defeat scenario, like resetting stats or returning to the main menu
+                }
+                
+                System.out.println("boss lol");
             }
 
             if (isTile(currentPosX, currentPosY, FTB)) {
                 gameRunning = false;
-                System.out.print("\033\143");
+                //System.out.print("\033\143");
                 System.out.println("You have reached the end of this map! Redirecting you to the Game Lobby...");
                 Menus.Pause();
                 Menus.menusGameLobby(characterStats);
@@ -118,47 +185,41 @@ public class GameArea2 {
      * @param rows The number of rows in the current floor.
      * @param cols The number of columns in the current floor.
      */
-   private static void updatePosition(String choice, int rows, int cols) {
-    int nextPosX = currentPosX;
-    int nextPosY = currentPosY;
-    switch (choice.toLowerCase()) {
-        case "w": // Move Up
-            nextPosX--;
-            break;
-        case "s": // Move Down
-            nextPosX++;
-            break;
-        case "d": // Move Right
-            nextPosY++;
-            break;
-        case "a": // Move Left
-            nextPosY--;
-            break;
-        default:
-            System.out.print("\033\143");
-            System.out.println("Invalid input. Please choose a valid move.");
-            Menus.Pause();
-            return;
-    }
-
-    // Check for out-of-bounds or moving into a boundary
-    if (nextPosX >= 0 && nextPosX < rows && nextPosY >= 0 && nextPosY < cols && !isInBounds(nextPosX, nextPosY, BOUNDS3)) {
-        currentPosX = nextPosX;
-        currentPosY = nextPosY;
-    } else {
-        System.out.print("\033\143");
-        System.out.println("Cannot move there. You've reached an edge or a boundary.");
-    }
-}
-
-private static boolean isInBounds(int x, int y, int[][] bounds) {
-    for (int[] bound : bounds) {
-        if (x == bound[0] && y == bound[1]) {
-            return true;
+    private static void updatePosition(String choice, int rows, int cols) {
+        Scanner myScanner = new Scanner(System.in);
+        switch (choice.toLowerCase()) {
+            case "w": // Move Up
+                if (currentPosX > 0) currentPosX--;
+                else System.out.println("Cannot move up. You are at the edge.");
+                break;
+            case "s": // Move Down
+                if (currentPosX < rows - 1) 
+                    currentPosX++;
+                else
+                    System.out.println("Cannot move down. You are at the edge.");
+                break;
+                case "d": // Move Right
+                    if (currentPosY < cols - 1) currentPosY++;
+                    else System.out.println("Cannot move right. You are at the edge.");
+                    break;
+                case "a": // Move Left
+                    if (currentPosY > 0) currentPosY--;
+                    else System.out.println("Cannot move left. You are at the edge.");
+                    break;
+                default:
+                    System.out.println("Invalid input. Please choose a valid move.");
+                    break;
+            }
         }
+
+    private static boolean isInBounds(int x, int y, int[][] bounds) {
+        for (int[] bound : bounds) {
+            if (x == bound[0] && y == bound[1]) {
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
-}
 
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
         String doorMessage) {

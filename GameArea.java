@@ -214,9 +214,7 @@ public class GameArea {
                     System.out.print("\033\143");
                     System.out.println("\nYou got a battle tile!");
                     Character character = new Character();
-                    character.selectClass("Vagabond");
                     Character.CharacterStats characterStats = character.getCharacterStats();                
-                    //Initialize Spawn and Battle
                     Spawn[] spawnss = Spawn.initializeSpawn();
                     Spawn chosenSpawn = spawnss[new Random().nextInt(spawns.length)]; // Select a random spawn
                     Battle battle = new Battle(playerCharacter, chosenSpawn); // Assuming 'user' is your Character instance
@@ -335,9 +333,7 @@ private static void updatePosition(String choice, int rows, int cols) {
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
-    public static void main(String[] args) {
-        FirstFloor(myScanner);
-    }
+    
 } 
 
 

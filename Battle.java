@@ -1,6 +1,10 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * The {@code Battle} class manages the game's battle system, handling player and enemy interactions,
+ * turn-based mechanics, and battle outcomes.
+ */
 public class Battle {
 
     
@@ -28,11 +32,23 @@ public class Battle {
         }
     }
     
+    /**
+     * The {@code Battle} constructor initializes the battle with the provided player and enemy.
+     *
+     * @param player The player character.
+     * @param enemy The enemy object, which can be an instance of {@code Spawn} or {@code Boss}.
+     */
     public Battle(Character player, Object enemy) {
         this.player = player;
         this.enemy = enemy;
     }
 
+    /**
+     * Starts the battle, displaying the initial battle state and managing the turn-based mechanics
+     * until either the player or the enemy is defeated.
+     *
+     * @param characterStats The player's character stats.
+     */
     public void start(Character.CharacterStats characterStats) {
         System.out.println("A fierce battle begins!");
         // Initial battle state display
@@ -48,6 +64,12 @@ public class Battle {
         concludeBattle(characterStats);
     }
 
+    /**
+     * Displays the initial battle state, showing the player and enemy information.
+     *
+     * @param characterStats The player's character stats.
+     * @param character The player character.
+     */
     private void displayInitialBattleState(Character.CharacterStats characterStats, Character character) {
         if (characterStats != null) {
             System.out.println("Player: " + character.getCharacterName() + " | Health: " + characterStats.getHP());
@@ -58,6 +80,9 @@ public class Battle {
         System.out.println("Enemy Sprite: [xx]"); // Placeholder sprite
     }
 
+     /**
+     * Manages the player's turn, allowing them to attack or dodge.
+     */
     private void playerTurn() {
         System.out.println("\nPlayer Turn. Choose action:\n1. Attack\n2. Dodge");
         int action = scanner.nextInt();
@@ -80,6 +105,9 @@ public class Battle {
         }
     }
 
+    /**
+     * Executes the player's attack, dealing damage to the enemy based on the selected attack type.
+     */
     private void executePlayerAttack() {
         System.out.println("Choose your attack type:\n1. Physical\n2. Sorcery\n3. Incantation");
         int attackType = scanner.nextInt();
@@ -106,12 +134,22 @@ public class Battle {
         System.out.println("Dealt " + damage + " damage to the enemy.");
     }
     
-
+    /**
+     * Attempts to dodge the enemy's attack, with a success rate based on the player's END stat.
+     *
+     * @param characterStats The player's character stats.
+     * @return {@code true} if the dodge is successful, {@code false} otherwise.
+     */
     private boolean attemptDodge(Character.CharacterStats characterStats) {
         Random random = new Random();
         return random.nextInt(100) < characterStats.getEND(); // Example dodge logic
     }
 
+    /**
+     * Manages the enemy's turn, allowing them to attack the player.
+     *
+     * @param characterStats The player's character stats.
+     */
     private void enemyTurn(Character.CharacterStats characterStats) {
         // Example adaptation for Boss and Spawn attacks
         int damage = 0;
@@ -125,6 +163,11 @@ public class Battle {
         characterStats.setHP(characterStats.getHP() - damage);
     }
 
+    /**
+     * Concludes the battle, updating the player's runes and returning to the game lobby if the player is defeated.
+     *
+     * @param characterStats The player's character stats.
+     */
     private void concludeBattle(Character.CharacterStats characterStats) {
         if (characterStats.getHP() <= 0) {
             System.out.println(character.getCharacterName() + " has been defeated. Returning to game lobby...");
@@ -136,6 +179,13 @@ public class Battle {
         }
     }
 
+    /**
+     * Calculates the player's damage based on the selected attack type and their character stats.
+     *
+     * @param attackType The selected attack type (physical, sorcery, or incantation).
+     * @param stats The player's character stats.
+     * @return The calculated damage.
+     */
     private int calculatePlayerDamage(String attackType, Character.CharacterStats stats) {
         
         Weapon equippedWeapon = character.getEquippedWeapon();
