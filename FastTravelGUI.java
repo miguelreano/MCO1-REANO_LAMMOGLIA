@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class FastTravelGUI extends JFrame{
     private JButton Warp1;
@@ -30,12 +31,17 @@ public class FastTravelGUI extends JFrame{
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new FastTravelGUI(); // Make the JFrame visible
-            }
-        });
+    public void addWarp1(ActionListener listener){
+        Warp1.addActionListener(listener);
     }
+
+    public void addWarp2(ActionListener listener){
+        Warp2.addActionListener(listener);
+    }
+
+    public void addWarp3(ActionListener listener){
+        Warp3.addActionListener(listener);
+    }
+
     
 }

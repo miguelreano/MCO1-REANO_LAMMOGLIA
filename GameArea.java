@@ -41,9 +41,6 @@ public class GameArea {
     boolean result = FirstFloor(myScanner);
     private static Character playerCharacter;
 
-
-
-
     /*
     * Initiates the first floor of the game area, setting the player's starting position
     * and managing gameplay logic including door and spawn encounters.
@@ -55,6 +52,7 @@ public class GameArea {
     public static boolean FirstFloor(Scanner scanner) {
         currentPositionX = 6;
         currentPositionY = 1;
+        //printGameBoard(ROWS1, COLS1, currentPositionX, currentPositionY);
         boolean doorReached = floorLogic(scanner, ROWS1, COLS1, new int[][]{DOOR1}, SPAWNS1,
         "You've reached the door of the first floor...");
         if (doorReached) {
@@ -250,38 +248,32 @@ public class GameArea {
  * @param rows The number of rows in the current floor.
  * @param cols The number of columns in the current floor.
  */
-    private static void updatePosition(String choice, int rows, int cols) {
-        switch (choice.toLowerCase()) {
-            case "w": // Move Up
-                if (currentPositionX > 0)
-                    currentPositionX--;
-                else
-                    System.out.println("Cannot move up. You are at the edge.");
-                break;
-            case "s": // Move Down
-                if (currentPositionX < rows - 1)
-                    currentPositionX++;
-                else
-                    System.out.println("Cannot move down. You are at the edge.");
-                break;
+private static void updatePosition(String choice, int rows, int cols) {
+    Scanner myScanner = new Scanner(System.in);
+    switch (choice.toLowerCase()) {
+        case "w": // Move Up
+            if (currentPositionX > 0) currentPositionX--;
+            else System.out.println("Cannot move up. You are at the edge.");
+            break;
+        case "s": // Move Down
+            if (currentPositionX < rows - 1) 
+                currentPositionX++;
+            else
+                System.out.println("Cannot move down. You are at the edge.");
+            break;
             case "d": // Move Right
-                if (currentPositionY < cols - 1)
-                    currentPositionY++;
-                else
-                    System.out.println("Cannot move right. You are at the edge.");
+                if (currentPositionY < cols - 1) currentPositionY++;
+                else System.out.println("Cannot move right. You are at the edge.");
                 break;
             case "a": // Move Left
-                if (currentPositionY > 0)
-                    currentPositionY--;
-                else
-                    System.out.println("Cannot move left. You are at the edge.");
+                if (currentPositionY > 0) currentPositionY--;
+                else System.out.println("Cannot move left. You are at the edge.");
                 break;
             default:
                 System.out.println("Invalid input. Please choose a valid move.");
                 break;
         }
     }
-
 
 
     /**
@@ -317,6 +309,10 @@ public class GameArea {
         }
     }
 
+    public int[] getPlayerPosition() {
+        return new int[]{currentPositionX, currentPositionY};
+    }
+    
     /**
      * Generates a random number of runes for the player to collect at treasure spawn points.
      * 
@@ -343,6 +339,7 @@ public class GameArea {
         FirstFloor(myScanner);
     }
 } 
+
 
 
 

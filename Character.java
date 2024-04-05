@@ -128,7 +128,7 @@ public class Character {
     class CharacterStats {
         String className;
         int HP, END, DEX, STR, INT, FTH, playerLevel;
-
+ 
         
         /**
          * Constructs a {@code CharacterStats} object with specified stats.

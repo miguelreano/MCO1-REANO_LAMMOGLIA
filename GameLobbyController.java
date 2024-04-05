@@ -17,6 +17,7 @@ public class GameLobbyController {
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
                 FastTravelGUI fastTravelGUI = new FastTravelGUI();
+                FastTravelCtrl fastTravelCtrl = new FastTravelCtrl(null, fastTravelGUI);
                 //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
             }
         });

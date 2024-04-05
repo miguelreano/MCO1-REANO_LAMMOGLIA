@@ -64,10 +64,6 @@ public class Spawn {
         this.attack = attack;
     }
 
-    public static int typepickNumber() {
-        Random random = new Random();
-        return random.nextInt(3) + 1;
-    }
 
     public static int pickHealth1() {
         Random random = new Random();
@@ -109,15 +105,5 @@ public class Spawn {
         return battles;
     }
 
-    public static void chosenType(Spawn[] battles) {
-        int choice = typepickNumber();
-        System.out.println("Chosen Type: " + choice);
-        if (choice >= 1 && choice <= battles.length) {
-            Spawn chosenSpawn = battles[choice - 1];
-            System.out.println(chosenSpawn.toString());
-        } else {
-            System.out.println("Invalid choice.");
-        }
-    }
 
 }

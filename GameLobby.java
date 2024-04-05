@@ -35,7 +35,9 @@ public class GameLobby {
                 System.out.println("Going to Stormveil Castle");
                 Menus.Pause();
                 System.out.print("\033\143");
-                GameArea.FirstFloor(scanner);
+                GameArea gameArea = new GameArea();
+                GameAreaGui gameAreaGui = new GameAreaGui();
+                GameAreaControll gameAreaControll = new GameAreaControll(gameAreaGui, gameArea);
                 break;
             case 2:
                 System.out.print("\033\143");

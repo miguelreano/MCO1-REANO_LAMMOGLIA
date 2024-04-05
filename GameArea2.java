@@ -21,7 +21,7 @@ public class GameArea2 {
     private static final int[] DOOR1 = {4,2};
     private static final int[][] DOOR2 = {{0,1}, {3,2}};
     private static final int[][] DOOR3 = {{3,0}, {0,2}};
-    //private static final int[] DOOR4 = {1,0};
+    private static final int[] DOOR4 = {1,0};
 
     private static final int[][] BossBOUNDS = {{0,0}, {0,1}, {0,5}, {0,6}};
     private static int[][] BOUNDS3 = {{0,0}, {1,0}, {0,4}, {1,4}, {5,0}, {6,0}, {5,4}, {6,4}};
@@ -29,7 +29,7 @@ public class GameArea2 {
     private static int[][] SPAWN1 = {{3,1}, {3,3}};
     private static int[][] SPAWN2 = {{1,0}, {3,0}, {5,0}};
     private static int[][] SPAWN3 = {{5,2}, {1,2}};
-    //private static int[][] SPAWN4 = {{0,2}, {0,4}, {2,2}, {2,4}};
+    private static int[][] SPAWN4 = {{0,2}, {0,4}, {2,2}, {2,4}};
     private static int[][] BossSPAWN = {{2,1}, {2,3}, {2,5}, {4,1}, {4,5}, {6,1}, {6,5}};
 
     private static int[] BOSSTILE = {4,3};
@@ -73,6 +73,12 @@ public class GameArea2 {
         }
         return doorReached;
         
+    }
+
+    public static boolean fourthFloor(Scanner scanner){
+        currentPosX = 0;
+        currentPosY = 0;
+        boolean doorReached = floorLogic(scanner, ROW4, COL4, new int[][] {DOOR4}, SPAWN4, null)
     }
 
     public static void BossFloor(Scanner scanner){
