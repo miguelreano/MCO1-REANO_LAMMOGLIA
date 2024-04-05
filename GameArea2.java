@@ -1,7 +1,11 @@
 import java.util.Scanner;
 import java.util.Random;
 
-
+/**
+ * The {@code GameArea2} class represents the game environment where the player can navigate through
+ * different floors, encounter various challenges, and collect treasures. It manages the game's
+ * spatial logic, including movements, encounters, and transitions between floors.
+ */
 public class GameArea2 {
 
     private static final int ROW1 = 5;
@@ -41,6 +45,13 @@ public class GameArea2 {
 
     private static Character.CharacterStats characterStats;
 
+    /**
+     * Initiates the first floor of the game area, setting the player's starting position
+     * and managing gameplay logic including door and spawn encounters.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean firstFloor(Scanner scanner){
         currentPosX = 0;
         currentPosY = 2;
@@ -54,6 +65,13 @@ public class GameArea2 {
         
     }
 
+    /**
+     * Initiates the second floor of the game area with a new set of challenges
+     * and updates the player's position accordingly. It also handles logic for door and spawn encounters.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean SecondFloor(Scanner scanner){
         currentPosX = 0;
         currentPosY = 1;
@@ -66,6 +84,12 @@ public class GameArea2 {
 
     }
 
+    /**
+     * Initiates the third floor of the game area, presenting the final set of challenges,
+     * including a boss fight and a fast travel tile to conclude the level.
+     *
+     * @param scanner The scanner object to read player inputs.
+     */
     public static boolean ThirdFloor(Scanner scanner){
         currentPosX=3;
         currentPosY=0;
@@ -78,6 +102,13 @@ public class GameArea2 {
         
     }
 
+    /**
+     * Initiates the fourth floor of the game area, setting the player's starting position
+     * and managing gameplay logic including door and spawn encounters.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     public static boolean fourthFloor(Scanner scanner){
         currentPosX = 1;
         currentPosY = 0;
@@ -89,6 +120,12 @@ public class GameArea2 {
         return doorReached;
     }
 
+    /**
+     * Handles the boss floor gameplay, including spawn encounters, boss encounters, and fast travel.
+     *
+     * @param scanner The scanner object to read player inputs.
+     * @param spawns The spawn points within the boss floor.
+     */
     public static void BossFloor(Scanner scanner, int[][] spawns){
         currentPosX = 6; // Starting position for the third floor
         currentPosY = 2;
@@ -180,7 +217,7 @@ public class GameArea2 {
     /**
      * Updates the player's position based on the input command. It prevents movement
      * outside the bounds of the game board.
-     * 
+     *
      * @param choice The player's movement choice.
      * @param rows The number of rows in the current floor.
      * @param cols The number of columns in the current floor.
@@ -212,15 +249,20 @@ public class GameArea2 {
             }
         }
 
-    private static boolean isInBounds(int x, int y, int[][] bounds) {
-        for (int[] bound : bounds) {
-            if (x == bound[0] && y == bound[1]) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
+    /**
+     * Contains the logic for player movement and interactions within a floor, including
+     * handling spawn points, door encounters, and displaying the game board.
+     * 
+     * @param scanner The scanner object for reading player inputs.
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * @param door The coordinates of the floor's door.
+     * @param spawns The spawn points within the floor.
+     * @param doorMessage The message to display when the door is reached.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
         String doorMessage) {
     boolean reachedDoor = false;
@@ -269,6 +311,15 @@ public class GameArea2 {
     return reachedDoor;
     }
 
+    /**
+     * Prints the game board to the console, showing the player's current position
+     * and the layout of the floor.
+     * 
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * @param x The x-coordinate of the player's current position.
+     * @param y The y-coordinate of the player's current position.
+     */
     private static void printGameBoard(int rows, int cols, int x, int y) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -281,15 +332,33 @@ public class GameArea2 {
         }
     }
     
+    /**
+     * Checks if the current position matches the specified tile coordinates.
+     *
+     * @param x The x-coordinate of the current position.
+     * @param y The y-coordinate of the current position.
+     * @param tile The tile coordinates to compare with the current position.
+     * @return {@code true} if the current position matches the tile coordinates, {@code false} otherwise.
+     */
     private static boolean isTile(int x, int y, int[] tile) {
         return x == tile[0] && y == tile[1];
     }
 
+    /**
+     * Generates a random number of runes for the player to collect at treasure spawn points.
+     * 
+     * @return The number of runes generated.
+     */
     public static int generateRandomNumber() {
         Random randa = new Random();
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
+    /**
+     * Generates a random number used to determine if a spawn point will yield treasure.
+     * 
+     * @return A random number between 1 and 4.
+     */
     public static int treasureRunes() {
         Random random = new Random(); // Create a Random object
         int min = 50; // Set the minimum number (inclusive)

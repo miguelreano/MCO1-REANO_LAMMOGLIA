@@ -165,6 +165,18 @@ public class GameArea3 {
             }
         }
     
+        /**
+     * Contains the logic for player movement and interactions within a floor, including
+     * handling spawn points, door encounters, and displaying the game board.
+     * 
+     * @param scanner The scanner object for reading player inputs.
+     * @param rows The number of rows in the current floor.
+     * @param cols The number of columns in the current floor.
+     * @param door The coordinates of the floor's door.
+     * @param spawns The spawn points within the floor.
+     * @param doorMessage The message to display when the door is reached.
+     * @return {@code true} if the player reaches the door, {@code false} otherwise.
+     */
     private static boolean floorLogic(Scanner scanner, int rows, int cols, int[][] doors, int[][] spawns,
         String doorMessage) {
     boolean reachedDoor = false;
@@ -277,11 +289,21 @@ public class GameArea3 {
         return x == tile[0] && y == tile[1];
     }
 
+    /**
+     * Generates a random number of runes for the player to collect at treasure spawn points.
+     * 
+     * @return The number of runes generated.
+     */
     public static int generateRandomNumber() {
         Random randa = new Random();
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
+    /**
+     * Generates a random number used to determine if a spawn point will yield treasure.
+     * 
+     * @return A random number between 1 and 4.
+     */
     public static int treasureRunes() {
         Random random = new Random(); // Create a Random object
         int min = 50; // Set the minimum number (inclusive)
