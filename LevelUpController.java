@@ -4,10 +4,24 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
 
+/**
+ * Controls the interactions between the LevelUpGUI and the Character model for leveling up attributes.
+ * This class handles the logic for updating character attributes when the player chooses to level up
+ * using in-game runes. It also manages the display of the character's current stats and rune balance.
+ */
 public class LevelUpController {
     private LevelUpGUI view;
     private Character user;
     
+    /**
+     * Constructs a LevelUpController with a view and a character model.
+     * Initializes the controller, sets up the initial display of character stats and runes,
+     * and configures action listeners for the GUI's buttons.
+     *
+     * @param view       The GUI for leveling up the character.
+     * @param user       The character model being leveled up.
+     * @param gameLobby  The game lobby instance to return to after leveling up (currently not used directly in the controller).
+     */
     public LevelUpController(LevelUpGUI view, Character user, GameLobby gameLobby) {
         this.view = view;
         this.user = user;
@@ -50,6 +64,12 @@ public class LevelUpController {
         });
     }
     
+    /**
+     * Updates the specified attribute of the character and levels up if there are sufficient runes.
+     * If not enough runes are available, displays a message indicating insufficient runes.
+     *
+     * @param attribute The attribute to level up.
+     */
     private void updateAttributeAndLevel(String attribute) {
         int runeCost = calculateRuneCost();
         if (user.getRunes() >= runeCost) {
@@ -64,10 +84,20 @@ public class LevelUpController {
         }
     }
 
+    /**
+     * Calculates the cost in runes to level up based on the character's current level.
+     *
+     * @return The rune cost for leveling up.
+     */
     private int calculateRuneCost() {
         return (user.getCharacterStats().getPlayerLevel() * 100) / 2;
     }
 
+    /**
+     * Levels up the specified attribute of the character.
+     *
+     * @param attribute The attribute to be leveled up.
+     */
     private void levelUpAttribute(String attribute) {
         Character.CharacterStats stats = user.getCharacterStats();
         switch (attribute) {
@@ -93,6 +123,10 @@ public class LevelUpController {
         }
     }
 
+    /**
+     * Updates the character stats display in the GUI.
+     * Fetches the latest stats from the character model and updates the view.
+     */
     private void updateCharacterStatsDisplay() {
         String characterStats = user.getCharacterStats().toString(); // Ensure CharacterStats has a suitable toString method
         SwingUtilities.invokeLater(() -> {
@@ -100,6 +134,9 @@ public class LevelUpController {
         });
     }
 
+    /**
+     * Displays a message dialog indicating the player does not have enough runes to level up.
+     */
     private void displayInsufficientRunesMessage() {
     SwingUtilities.invokeLater(() -> {
         JOptionPane.showMessageDialog(view, "You do not have enough runes to level up.", "Insufficient Runes", JOptionPane.WARNING_MESSAGE);

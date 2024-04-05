@@ -132,11 +132,19 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * A class representing the title screen of a game, extending JFrame.
+ */
 public class TitleScreenGUI extends JFrame {
     private JLabel titleLabel;
     private JButton startButton;
     private JButton exitButton;
 
+    /**
+     * Constructs a TitleScreenGUI object.
+     * Initializes the GUI components and layouts for the title screen, including a title label and start/exit buttons.
+     * The title screen is set with a predefined size and layout, and it becomes visible upon creation.
+     */
     public TitleScreenGUI() {
         setTitle("Elden Rogue");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,10 +187,18 @@ public class TitleScreenGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Adds an ActionListener to the start button.
+     * @param listener The ActionListener to be added to the start button.
+     */
     public void addStartButtonListener(ActionListener listener) {
         startButton.addActionListener(listener);
     }
 
+    /**
+     * Adds an ActionListener to the exit button.
+     * @param listener The ActionListener to be added to the exit button.
+     */
     public void addExitButtonListener(ActionListener listener) {
         exitButton.addActionListener(listener);
     }

@@ -33,6 +33,11 @@ public class Character {
         return equippedWeapon;
     }
 
+    /**
+     * Sets the weapon currently equipped by the character.
+     *
+     * @param equippedWeapon The weapon to equip.
+     */
     public void setEquippedWeapon(Weapon equippedWeapon) {
             this.equippedWeapon = equippedWeapon;
     }
@@ -70,11 +75,20 @@ public class Character {
         this.Runes -= amount;
     }
 
+    /**
+     * Sets the name of the character.
+     *
+     * @param name The name to set for the character.
+     */
     public void setCharacterName(String name) {
         characterName = name;
     }
 
-    // Method to select the character's class and update stats accordingly
+    /**
+     * Selects the character's class and updates its stats accordingly.
+     *
+     * @param className The name of the class to select.
+     */
     public void selectClass(String className) {
         switch (className) {
             case "Vagabond":
@@ -102,6 +116,12 @@ public class Character {
         
     }
 
+    /**
+     * Retrieves a string representation of stats for a specified class.
+     *
+     * @param className The class name to retrieve stats for.
+     * @return A string representation of the stats for the specified class.
+     */
     public String getStatsForClass(String className) {
         selectClass(className);
         if (characterStats != null) {
@@ -128,7 +148,14 @@ public class Character {
     class CharacterStats {
         String className;
         int HP, END, DEX, STR, INT, FTH, playerLevel;
- 
+
+        /**
+         * Converts the character stats to string.
+         */
+        public String toString() {
+            return String.format("Class: %s\nHP: %d\nEND: %d\nDEX: %d\nSTR: %d\nINT: %d\nFTH: %d\nLVL: %d",
+                    className, HP, END, DEX, STR, INT, FTH, playerLevel);
+        }
         
         /**
          * Constructs a {@code CharacterStats} object with specified stats.
@@ -152,11 +179,6 @@ public class Character {
             this.FTH = FTH;
             this.playerLevel = playerLevel;
 
-        }
-
-        public String toString() {
-            return String.format("Class: %s\nHP: %d\nEND: %d\nDEX: %d\nSTR: %d\nINT: %d\nFTH: %d\nLVL: %d",
-                    className, HP, END, DEX, STR, INT, FTH, playerLevel);
         }
 
           /**
@@ -229,7 +251,7 @@ public class Character {
         
         
         /**
-         * Displays the current stats of the character to the console.
+         * Represents the detailed statistics of a character.
          */
         public void displayStats() {
             System.out.println("Class:" + className);
@@ -245,10 +267,18 @@ public class Character {
 
     }
 
+    /**
+     * Adds a weapon to the character's inventory.
+     *
+     * @param weapons The weapon to add to the inventory.
+     */
     public void addtoInventory(Weapon weapons) {
         inventory.add(weapons);
     }
 
+    /**
+     * Prints a representation of the character's inventory to the console.
+     */
     public void displayInventory() {
         if (inventory.isEmpty()){
             System.out.println(":(");

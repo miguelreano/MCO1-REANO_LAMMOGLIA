@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Provides a graphical user interface for character creation in a game.
+ * This includes input fields for character name, a selection dropdown for character class,
+ * and a text area to display character stats. Confirm and Back buttons are provided for navigation.
+ */
 public class CharacterCreationGUI extends JFrame {
     private JLabel nameLabel;
     private JLabel selectClassLabel;
@@ -11,6 +16,9 @@ public class CharacterCreationGUI extends JFrame {
     private JButton confirmButton;
     private JButton backButton;
 
+    /**
+     * Constructs the character creation GUI, setting up the layout and initializing components.
+     */
     public CharacterCreationGUI() {
         setTitle("Character Creation");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,41 +80,57 @@ public class CharacterCreationGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Adds an ActionListener to the Confirm button.
+     *
+     * @param listener The ActionListener to attach to the Confirm button.
+     */
     public void addConfirmButtonListener(ActionListener listener) {
         confirmButton.addActionListener(listener);
     }
 
+    /**
+     * Adds an ActionListener to the Back button.
+     *
+     * @param listener The ActionListener to attach to the Back button.
+     */
     public void addBackButtonListener(ActionListener listener) {
         backButton.addActionListener(listener);
     }
 
+    /**
+     * Adds an ActionListener to the class selection JComboBox.
+     *
+     * @param listener The ActionListener to attach to the class selection JComboBox.
+     */
     public void addSelectClassListener(ActionListener listener) {
         selectClassComboBox.addActionListener(listener);
     }
 
+    /**
+     * Returns the name entered in the name JTextField.
+     *
+     * @return The trimmed text from the name JTextField.
+     */
     public String getName() {
         return nameField.getText().trim();
     }
 
+    /**
+     * Returns the selected class from the JComboBox.
+     *
+     * @return The selected item in the selectClassComboBox as a String.
+     */
     public String getSelectedClass() {
         return (String) selectClassComboBox.getSelectedItem();
     }
 
+    /**
+     * Updates the stats text area with the provided stats.
+     *
+     * @param stats The new text to display in the statsTextArea.
+     */
     public void updateStatsTextArea(String stats) {
         statsTextArea.setText(stats);
     }
-
-    //public static void main(String[] args) {
-    // Create model and view instances for character creation
-    //Character character = new Character(); // Assuming you have a Character class
-    //CharacterCreationGUI characterCreationGUI = new CharacterCreationGUI();
-
-    // Create controller instance for character creation
-    //CharacterCreationController characterCreationController = new CharacterCreationController(characterCreationGUI, character);
-
-    // Display the character creation GUI
-    //characterCreationGUI.setVisible(true);
 }
-
-
-
