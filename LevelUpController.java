@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class LevelUpController {
     private LevelUpGUI view;
     private Character user;
+    private GameLobby gameLobby;
     
     /**
      * Constructs a LevelUpController with a view and a character model.

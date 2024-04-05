@@ -18,7 +18,7 @@ public class Character {
 
     public Character() {
         this.inventory = new ArrayList<>();
-        this.Runes = 10000; // Starting runes
+        this.Runes = 0; // Starting runes
     }
 
     public String getCharacterName() {
