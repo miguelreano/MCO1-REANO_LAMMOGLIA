@@ -26,6 +26,7 @@ public class LevelUpController {
     public LevelUpController(LevelUpGUI view, Character user, GameLobby gameLobby) {
         this.view = view;
         this.user = user;
+        this.gameLobby = gameLobby;
 
         updateCharacterStatsDisplay();
         view.updateRuneDisplay(user.getRunes());
