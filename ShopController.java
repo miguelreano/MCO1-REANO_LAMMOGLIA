@@ -1,4 +1,4 @@
-import javax.swing.JButton;
+/*import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class ShopController {
@@ -32,4 +32,4 @@ public class ShopController {
             JOptionPane.showMessageDialog(view, "You don't have enough runes to buy this weapon!");
         }
     }
-}
+}*/

@@ -144,7 +144,7 @@ public class TitleScreenGUI extends JFrame {
         setLayout(new BorderLayout());
 
         titleLabel = new JLabel("Elden Rogue", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Mantinia", Font.BOLD, 30)); // Setting custom font and size
+        titleLabel.setFont(new Font("Mantinia", Font.BOLD, 30));
 
         // Make the first and last letters larger
         Font originalFont = titleLabel.getFont();
@@ -154,17 +154,22 @@ public class TitleScreenGUI extends JFrame {
         startButton = new JButton("START");
         exitButton = new JButton("EXIT");
 
-        startButton.setSize(80, 30);
-        exitButton.setSize(80, 30);
+        // Set fixed size for the buttons
+        Dimension buttonSize = new Dimension(100, 50);
+        startButton.setPreferredSize(buttonSize);
+        exitButton.setPreferredSize(buttonSize);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(Box.createVerticalStrut(10));
         panel.add(titleLabel, BorderLayout.NORTH);
         panel.add(Box.createVerticalStrut(20));
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 0, 10));
+        // Use FlowLayout for the button panel to respect the preferred size
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         buttonPanel.add(startButton);
         buttonPanel.add(exitButton);
+
+        // Adjusting the border to maintain layout consistency
         buttonPanel.setBorder(new EmptyBorder(30, 100, 30, 100));
 
         panel.add(buttonPanel, BorderLayout.CENTER);
@@ -178,10 +183,7 @@ public class TitleScreenGUI extends JFrame {
         startButton.addActionListener(listener);
     }
 
-    // Method to add ActionListener to the "EXIT" button
     public void addExitButtonListener(ActionListener listener) {
         exitButton.addActionListener(listener);
     }
-
 }
-

@@ -153,8 +153,7 @@ public class GameLobby {
                 break;
             case 2:
                 System.out.print("\033\143"); // Clear screen
-                Menus.menusGameLobby(user.getCharacterStats()); // Back to main game lobby
-                break;
+                return; // Back to main game lobby
             default:
                 System.out.println("Invalid choice. Please try again.");
                 Menus.Pause();
@@ -188,7 +187,7 @@ public class GameLobby {
                 System.out.println("Exiting the shop...");
                 Menus.Pause();
                 System.out.print("\033\143");
-                Menus.menusGameLobby(user.getCharacterStats());
+                return;
             }
     
             try {

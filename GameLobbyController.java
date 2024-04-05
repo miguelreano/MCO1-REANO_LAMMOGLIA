@@ -34,16 +34,40 @@ public class GameLobbyController {
 
         view.addInventoryButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                view.dispose();
-                //GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
-                //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
+                // Hide the GUI to shift focus to the terminal
+                view.setVisible(false);
+    
+                // Call the inventory interaction
+                GameLobby.Inventory(model); // Assuming `model` is your character object
+    
+                // After exiting the inventory, make the GUI visible and refresh
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        updateCharacterStatsDisplay();
+                        view.setVisible(true);
+                    }
+                });
             }
         });
+
         view.addShopButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                view.dispose();
-                ShopGUI shopGUI = new ShopGUI();
-                //GameLobbyController gameLobbyController = new GameLobbyController(null, gameLobbyGUI);
+                // Hide the GUI to prevent interaction while in terminal mode
+                view.setVisible(false);
+
+                // Assuming GameLobby.Shop() is correctly defined to handle terminal-based shop logic
+                // And assuming model.getWeapons() correctly retrieves an array of Weapon objects
+                Weapon[] weapons = Weapon.initializeWeapons();
+                GameLobby.Shop(weapons, model);
+
+
+                // After the shop interaction completes, update and make the GUI visible again
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        updateCharacterStatsDisplay();
+                        view.setVisible(true);
+                    }
+                });
             }
         });
 
