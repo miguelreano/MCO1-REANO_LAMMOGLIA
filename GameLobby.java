@@ -111,7 +111,12 @@ public class GameLobby {
         }
     }
     
-
+    /**
+     * Manages the player's inventory, allowing them to equip weapons or return to the game lobby.
+     * Players can view their equipped weapon and inventory, and choose to equip a different weapon.
+     *
+     * @param user The character whose inventory is being managed.
+     */
     public static void Inventory(Character user) {
         Scanner scanner = new Scanner(System.in);
     
@@ -166,7 +171,13 @@ public class GameLobby {
         scanner.close();
     }
     
-
+    /**
+     * Displays the shop menu where the player can purchase weapons with runes.
+     * Players can view available weapons and their costs, then select a weapon to purchase.
+     *
+     * @param weapons Array of available weapons in the shop.
+     * @param user The character making the purchase.
+     */
     public static void Shop(Weapon[] weapons, Character user) {
         Scanner scanner = new Scanner(System.in);
     
