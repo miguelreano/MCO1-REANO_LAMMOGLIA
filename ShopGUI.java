@@ -8,13 +8,8 @@ public class ShopGUI extends JFrame {
     private JScrollPane scrollPane;
     private JButton backButton;
     private Character character; // Reference to the Character instance
-    private Weapon[] weapons;
-    
-    
+
     public ShopGUI(Weapon[] weapons, Character character) {
-        if(weapons == null){
-        System.out.println("weapons is null");
-        }
         this.character = character; // Initialize the character
         setTitle("Shop");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,19 +22,17 @@ public class ShopGUI extends JFrame {
         if (weapons != null) {
             for (Weapon weapon : weapons) {
                 if (weapon != null) {
-                    final Weapon currentWeapon = weapon;
-                    JButton button = new JButton("<html>" + currentWeapon.getName() + "<br/>Cost: " + currentWeapon.getWeaponCost() + "</html>");
+                    JButton button = new JButton("<html>" + weapon.getName() + "<br/>Cost: " + weapon.getWeaponCost() + "</html>");
                     button.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             // Use the purchaseWeapon method when a button is clicked
-                            character.purchaseWeapon(currentWeapon);
-
+                            character.purchaseWeapon(weapon);
                         }
                     });
                     weaponsPanel.add(button);
                 }
             }
-        }//why not work
+        }
 
         // Add weaponsPanel to the center of mainPanel
         mainPanel.add(weaponsPanel, BorderLayout.CENTER);
@@ -66,6 +59,5 @@ public class ShopGUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
 
 }
