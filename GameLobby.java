@@ -236,6 +236,11 @@ public class GameLobby {
         }
         
     }
+
+    public Weapon[] getWeapons(){
+        weapons = Weapon.initializeWeapons();
+        return weapons;
+    }
         
 }
 
