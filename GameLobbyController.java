@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 public class GameLobbyController {
     private GameLobbyGUI view;
     private Character model;
+    private Weapon[] weapons;
     
     /**
      * Constructs a new GameLobbyController to manage interactions between the game lobby GUI and the character model.
@@ -60,15 +61,8 @@ public class GameLobbyController {
 
         view.addShopButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                view.setVisible(false);
-                Weapon[] weapons = Weapon.initializeWeapons();
-                GameLobby.Shop(weapons, model);
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        updateCharacterStatsDisplay();
-                        view.setVisible(true);
-                    }
-                });
+                view.dispose();
+                ShopGUI shopGUI = new ShopGUI(weapons, model);
             }
         });
 

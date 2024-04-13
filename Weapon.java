@@ -211,4 +211,13 @@ public class Weapon {
         System.out.println("INT: " + weaponINT);
         System.out.println("FTH: " + weaponFTH);
     }
+
+    /**
+     * Returns a string containing detailed information about the weapon.
+     * @return details of the weapon
+     */
+    public String getDetails() {
+        return "Name: " + weaponName + "\nCost: " + weaponCost + "\nHP: " + weaponHP + "\nEND: " + weaponEND
+                + "\nDEX: " + weaponDEX + "\nSTR: " + weaponSTR + "\nINT: " + weaponINT + "\nFTH: " + weaponFTH;
+    }
 }

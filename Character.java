@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import javax.xml.stream.events.Characters;
-
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 /**
  * Represents a character in the game, including their stats, name, and runes.
@@ -18,7 +19,18 @@ public class Character {
 
     public Character() {
         this.inventory = new ArrayList<>();
-        this.Runes = 0; // Starting runes
+        this.Runes = 10000; // Starting runes
+    }
+
+    public void purchaseWeapon(Weapon weapon) {
+        if (weapon != null && this.Runes >= weapon.getWeaponCost()) {
+            this.Runes -= weapon.getWeaponCost();
+            inventory.add(weapon);
+            JOptionPane.showMessageDialog(null, "You have successfully purchased: " + weapon.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "You do not have enough runes to purchase this weapon. Required: " + weapon.getWeaponCost() + ", Available: " + this.Runes,
+                                          "Insufficient Runes", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public String getCharacterName() {
