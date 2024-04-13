@@ -32,7 +32,7 @@ public class ShopGUI extends JFrame {
                     weaponsPanel.add(button);
                 }
             }
-        }
+        }//why not work
 
         // Add weaponsPanel to the center of mainPanel
         mainPanel.add(weaponsPanel, BorderLayout.CENTER);
