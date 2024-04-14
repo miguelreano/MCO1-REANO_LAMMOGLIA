@@ -42,10 +42,7 @@ public class FastTravelCtrl {
          */
         view.addWarp2(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                view.setVisible(false);
-                Scanner scanner = new Scanner(System.in);
-                GameArea2 gameArea2 = new GameArea2();
-                gameArea2.firstFloor(scanner);
+                warpToGameArea2(5,5);
 
             }
         });
@@ -57,10 +54,8 @@ public class FastTravelCtrl {
          */
         view.addWarp3(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                view.setVisible(false);
-                Scanner scanner = new Scanner(System.in);
-                GameArea3 gameArea3 = new GameArea3();
-                gameArea3.firstFloor(scanner);
+                warpToGameArea3(9,3);
+
             }
         });
 
@@ -91,6 +86,20 @@ public class FastTravelCtrl {
         GameAreaModel1 gameModel = new GameAreaModel1();
         GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 1, 6); // Create a new GameAreaGUI
         GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel);
+    }
+
+    private void warpToGameArea2(int numRows, int numCols) {
+        view.setVisible(false);
+        GameAreaModel2 gameModel2 = new GameAreaModel2();
+        GameAreaGUI2 gameAreaGUI2 = new GameAreaGUI2(numCols, numCols, 2, 0);
+        GameAreaController2 gameAreaController2 = new GameAreaController2(model, gameAreaGUI2, gameModel2);
+    }
+
+    private void warpToGameArea3(int numRows, int numCols){
+        view.setVisible(false);
+        GameAreaModel3 gameModel3 = new GameAreaModel3();
+        GameAreaGUI3 gameAreaGUI3 = new GameAreaGUI3(numCols, numCols, 1, 8);
+        GameAreaController3 gameAreaController3 = new GameAreaController3(model, gameAreaGUI3, gameModel3);
     }
     
 }
