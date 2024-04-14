@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 import java.util.Scanner;
 
 /**
@@ -11,8 +10,7 @@ import java.util.Scanner;
 
 public class FastTravelCtrl {
     private FastTravelGUI view;
-    private GameLobby model;
-    private Character charac;
+    private Character model;
 
     /**
      * The {@code FastTravelCtrl} constructor initializes the controller with the provided
@@ -21,56 +19,78 @@ public class FastTravelCtrl {
      * @param model The game lobby model.
      * @param view The fast travel GUI view.
      */
-    public FastTravelCtrl(GameLobby model, FastTravelGUI view, Character charac){
+    public FastTravelCtrl(Character model, FastTravelGUI view){
         this.model = model;
         this.view = view;
-        this.charac = charac;
     
 
+        /**
+         * Adds an action listener to the warp 1 button in the fast travel GUI.
+         *
+         * @param actionListener The action listener to be added.
+         */    
+        view.addWarp1(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                warpToGameArea(7, 3);
+            }
+        });
+
+        /**
+         * Adds an action listener to the warp 2 button in the fast travel GUI.
+         *
+         * @param actionListener The action listener to be added.
+         */
+        view.addWarp2(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                view.setVisible(false);
+                Scanner scanner = new Scanner(System.in);
+                GameArea2 gameArea2 = new GameArea2();
+                gameArea2.firstFloor(scanner);
+
+            }
+        });
+
+        /**
+         * Adds an action listener to the warp 3 button in the fast travel GUI.
+         *
+         * @param actionListener The action listener to be added.
+         */
+        view.addWarp3(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                view.setVisible(false);
+                Scanner scanner = new Scanner(System.in);
+                GameArea3 gameArea3 = new GameArea3();
+                gameArea3.firstFloor(scanner);
+            }
+        });
+
+        /**
+         * Adds an action listener to the warp 3 button in the fast travel GUI.
+         *
+         * @param actionListener The action listener to be added.
+         */
+        view.addBack(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                view.setVisible(false);
+                // Proceed to game lobby
+                GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
+                GameLobbyController gameLobbyController = new GameLobbyController(model, gameLobbyGUI);
+                gameLobbyGUI.setVisible(true);
+            }
+        });
+    }
+
     /**
-     * Adds an action listener to the warp 1 button in the fast travel GUI.
+     * Warps the player to the specified game area dimensions.
      *
-     * @param actionListener The action listener to be added.
-     */    
-    view.addWarp1(new ActionListener(){
-        public void actionPerformed(ActionEvent e){
-            view.setVisible(false);
-            Scanner scanner = new Scanner(System.in);
-            GameArea gameArea = new GameArea();
-            gameArea.FirstFloor(scanner);
-
-
-        }
-    });
-
-    /**
-     * Adds an action listener to the warp 2 button in the fast travel GUI.
-     *
-     * @param actionListener The action listener to be added.
+     * @param numRows The number of rows in the game area.
+     * @param numCols The number of columns in the game area.
      */
-    view.addWarp2(new ActionListener() {
-        public void actionPerformed(ActionEvent e){
-            view.setVisible(false);
-            Scanner scanner = new Scanner(System.in);
-            GameArea2 gameArea2 = new GameArea2();
-            gameArea2.firstFloor(scanner);
-
-        }
-    });
-
-    /**
-     * Adds an action listener to the warp 3 button in the fast travel GUI.
-     *
-     * @param actionListener The action listener to be added.
-     */
-    view.addWarp3(new ActionListener() {
-        public void actionPerformed(ActionEvent e){
-            view.setVisible(false);
-            Scanner scanner = new Scanner(System.in);
-            GameArea3 gameArea3 = new GameArea3();
-            gameArea3.firstFloor(scanner);
-        }
-    });
+    private void warpToGameArea(int numRows, int numCols) {
+        view.setVisible(false); // Hide the fast travel GUI
+        GameAreaModel1 gameModel = new GameAreaModel1();
+        GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 1, 6); // Create a new GameAreaGUI
+        GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel);
     }
     
 }

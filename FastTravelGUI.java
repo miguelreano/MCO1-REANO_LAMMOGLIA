@@ -1,6 +1,10 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The {@code FastTravelGUI} class represents the graphical user interface for the fast travel feature in the game.
@@ -62,6 +66,15 @@ public class FastTravelGUI extends JFrame{
      */
     public void addWarp3(ActionListener listener){
         Warp3.addActionListener(listener);
+    }
+
+    /**
+     * Adds an action listener to the back button.
+     *
+     * @param listener The action listener to be added.
+     */
+    public void addBack(ActionListener listener){
+        backButton.addActionListener(listener);
     }
 
     
