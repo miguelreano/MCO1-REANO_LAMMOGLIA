@@ -2,12 +2,12 @@
 
 import java.util.Random;
 
-public class GameAreaModel3 {
+public class GameAreaModel3 extends GameAreaModel {
     private final int[][] FLOORS = {{9,3}, {7,7}, {9,3}}; 
     private final int[][] START_POS = {{6,1}, {6,3}, {6,2}}; 
     private final int[][] DOORS = {{0,1}, {0, 3}, {6,2}}; 
-    public int currentFloor3 = 0;
-
+    private int currentFloor = 0;
+    private int bossFloor = 2;
 
     private final int[][] SPAWNS1 = {{4,1}, {0,0}}; // Spawn positions for the first floor
     
@@ -20,21 +20,21 @@ public class GameAreaModel3 {
     private final int[] FAST_TRAVEL_TILE = { 0, 1 }; // Fast travel position for the third floor
 
     public String isDoor(int x, int y) {
-        if (currentFloor3 == 1) {
-            if (x == DOORS[currentFloor3][1] && y == DOORS[currentFloor3][0]) {
+        if (currentFloor == 1) {
+            if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0]) {
                 return "UP";
             }
             
-            if (x == START_POS[currentFloor3][1] && y == START_POS[currentFloor3][0]) {
+            if (x == START_POS[currentFloor][1] && y == START_POS[currentFloor][0]) {
                 return "DOWN";
             }
         }
-        else if (currentFloor3 == 2) {
-            if (x == DOORS[currentFloor3][1] && y == DOORS[currentFloor3][0]) {
+        else if (currentFloor == 2) {
+            if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0]) {
                 return "DOWN";
             }
         }
-        else if (x == DOORS[currentFloor3][1] && y == DOORS[currentFloor3][0])
+        else if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0])
             return "UP";
         else if (x == FAST_TRAVEL_TILE[1] && y == FAST_TRAVEL_TILE[0])
             return "FAST-TRAVEL";
@@ -42,17 +42,21 @@ public class GameAreaModel3 {
         return "NOPE";
     }
 
+    public boolean isBoss(int x, int y) {
+        return  this.currentFloor == this.bossFloor && x == BOSS_TILE[1] && y == BOSS_TILE[0];
+    }
+
     public boolean isSpawn(int x, int y) {
-        if (currentFloor3 == 0) {
+        if (currentFloor == 0) {
             for (int[] i : SPAWNS1) {
                 if (x == i[1] && y == i[0]) return true;
             }
         } 
-        else if (currentFloor3 == 1) {
+        else if (currentFloor == 1) {
             for (int[] i : SPAWNS3) {
                 if (x == i[1] && y == i[0]) return true;
             }
-        } else if (currentFloor3 == 2) return x == BOSS_TILE[1] && y == BOSS_TILE[0];
+        }
         
         return false;
     }
@@ -81,25 +85,25 @@ public class GameAreaModel3 {
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
-    public int[] getFloorDimension3() {
-        return FLOORS[currentFloor3];
+    public int[] getFloorDimension() {
+        return FLOORS[currentFloor];
     }
 
-    public void setCurrentFloor3(int num) {
-        this.currentFloor3 = num;
+    public void setCurrentFloor(int num) {
+        this.currentFloor = num;
     }
 
-    public int getCurrentFloor3() {
-        return this.currentFloor3;
+    public int getCurrentFloor() {
+        return this.currentFloor;
     }
 
-    public int[] getStartPos3() {
-        return START_POS[currentFloor3];
+    public int[] getStartPos() {
+        return START_POS[currentFloor];
     }
 
-    public int getSpawnLen3() {
-        if (currentFloor3 == 0) return SPAWNS1.length;
-        else if (currentFloor3 == 1) return SPAWNS3.length;
+    public int getSpawnLen() {
+        if (currentFloor == 0) return SPAWNS1.length;
+        else if (currentFloor == 1) return SPAWNS3.length;
         return 0;
     }
 

@@ -7,15 +7,18 @@ import javax.swing.JOptionPane;
 public class GameAreaController {
     private Character player;
     private GameAreaGUI gameArea;
-    private GameAreaModel1 model;
+    private GameAreaModel model;
     private int NUM_ROWS;
     private int NUM_COLS;
 
-    public GameAreaController(Character player, GameAreaGUI gameArea, GameAreaModel1 model) {
+    public GameAreaController(Character player, GameAreaGUI gameArea, GameAreaModel model) {
         this.player = player;
         this.gameArea = gameArea;
         this.model = model;
-        
+        init();
+    }
+
+    private void init() {
         int[] dimensions = this.model.getFloorDimension();
         this.NUM_ROWS = dimensions[0];
         this.NUM_COLS = dimensions[1];
@@ -37,36 +40,110 @@ public class GameAreaController {
             case KeyEvent.VK_W:
                 if (gameArea.getPlayerY() > 0) {
                     gameArea.movePlayerUp();
-                    gameArea.updateGameArea();
-                    checkIfDoor();
-                    checkifSpawn();
+                    checkAll();
                 }
                 break;
             case KeyEvent.VK_S:
                 if (gameArea.getPlayerY() < NUM_ROWS - 1) {
                     gameArea.movePlayerDown();
-                    gameArea.updateGameArea();
-                    checkIfDoor();
-                    checkifSpawn();
+                    checkAll();
                 }
                 break;
             case KeyEvent.VK_A:
                 if (gameArea.getPlayerX() > 0) {
                     gameArea.movePlayerLeft();
-                    gameArea.updateGameArea();
-                    checkIfDoor();
-                    checkifSpawn();
+                    checkAll();
                 }
                 break;
             case KeyEvent.VK_D:
                 if (gameArea.getPlayerX() < NUM_COLS - 1) {
                     gameArea.movePlayerRight();
-                    gameArea.updateGameArea();
-                    checkIfDoor();
-                    checkifSpawn();
+                    checkAll();
                 }
                 break;
 
+        }
+    }
+
+    private void checkAll() {
+        gameArea.updateGameArea();
+        checkIfDoor();
+        checkifSpawn();
+        checkifBoss();
+    }
+
+
+    private void battleEnemy(Battle battle, String intro, Boss theBoss) {
+        Character.CharacterStats characterStats = this.player.getCharacterStats();                
+        String message;
+
+        while (characterStats.getHP() > 0 && battle.getEnemyHealth() > 0) {
+            int option = JOptionPane.showOptionDialog(null, intro + "A fierce battle begins!\n\n" + battle.displayInitialBattleState() +"\n\nChoose an action:", "Player Turn", JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, new String[]{"2. Dodge", "1. Attack"}, null);
+
+            // Determine which option was selected
+            if (option == JOptionPane.NO_OPTION) {
+                int attackType = JOptionPane.showOptionDialog(null, "Choose an option", "Popup", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, new String[]{"3. Incantation", "2. Sorcery", "1. Physical"}, null);
+                
+                // Determine which option was selected
+                if (attackType == JOptionPane.CANCEL_OPTION) {
+                    message = battle.executePlayerAttack(1);
+                } else if (attackType == JOptionPane.NO_OPTION) {
+                    message = battle.executePlayerAttack(2);
+                } else { // (attackType == JOptionPane.CANCEL_OPTION)
+                    message = battle.executePlayerAttack(3);
+                }
+                
+                JOptionPane.showMessageDialog(null, message);
+
+                if (battle.getEnemyHealth() > 0) {
+                    message = battle.enemyTurn();
+                    JOptionPane.showMessageDialog(null, message);
+                }
+            } else {
+                if (battle.attemptDodge()) {
+                    JOptionPane.showMessageDialog(null, "Dodge successful! Enemy's turn is skipped.");
+                    return;
+                }
+                else {
+                    message = battle.enemyTurn();
+                    JOptionPane.showMessageDialog(null, message);
+                }
+            }
+        }
+
+        if (characterStats.getHP() > 0) {
+            String endMessage = "";
+            if (this.model.getCurrentFloor() == 2) {
+                endMessage += "You have defeated the boss: " + theBoss.getBossname();
+            } else {
+                endMessage += "You got a battle tile!\nVictory! You defeated the spawn.\nGaining runes...";
+            }
+            
+            JOptionPane.showMessageDialog(null, endMessage);
+            this.player.addRunes(battle.getEnemyHealth() * 2); // Placeholder logic for rune reward
+            updateCharacterStatsDisplay();
+        } else {
+            JOptionPane.showMessageDialog(null, "You have been defeated. Returning to the lobby...");
+            this.player.setRunes(0); // Reset runes to 0
+            // Proceed to game lobby
+            GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
+            GameLobbyController gameLobbyController = new GameLobbyController(this.player, gameLobbyGUI);
+            this.gameArea.dispose();
+            gameLobbyGUI.setVisible(true);
+        }
+    }
+
+    private void checkifBoss() {
+        if (this.model.isBoss(gameArea.getPlayerX(), gameArea.getPlayerY())) {
+            // Assuming you've initialized bosses somewhere; select the appropriate boss
+            Boss[] bosses = Boss.initializeBoss();
+            Boss theBoss = bosses[0]; // Example: Selecting the first boss for the battle
+            
+            String message = "You've encountered the boss: " + theBoss.getBossname() + "\n\n";
+            Battle battle = new Battle(this.player, theBoss);
+            battleEnemy(battle, message, theBoss);
         }
     }
 
@@ -79,61 +156,11 @@ public class GameAreaController {
                 this.player.setRunes(this.player.getRunes() + runesObtained);
             } 
             else {
-                Character.CharacterStats characterStats = this.player.getCharacterStats();                
                 Spawn[] spawnss = Spawn.initializeSpawn();
                 Spawn chosenSpawn = spawnss[new Random().nextInt(this.model.getSpawnLen())]; // Select a random spawn
                 Battle battle = new Battle(this.player, chosenSpawn); // Assuming 'user' is your Character instance
-                String message;
 
-                while (characterStats.getHP() > 0 && battle.getEnemyHealth() > 0) {
-                    int option = JOptionPane.showOptionDialog(null, "A fierce battle begins!\n\n" + battle.displayInitialBattleState() +"\n\nChoose an action:", "Player Turn", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, new String[]{"2. Dodge", "1. Attack"}, null);
-
-                    // Determine which option was selected
-                    if (option == JOptionPane.NO_OPTION) {
-                        int attackType = JOptionPane.showOptionDialog(null, "Choose an option", "Popup", JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE, null, new String[]{"3. Incantation", "2. Sorcery", "1. Physical"}, null);
-                        
-                        // Determine which option was selected
-                        if (attackType == JOptionPane.CANCEL_OPTION) {
-                            message = battle.executePlayerAttack(1);
-                        } else if (attackType == JOptionPane.NO_OPTION) {
-                            message = battle.executePlayerAttack(2);
-                        } else { // (attackType == JOptionPane.CANCEL_OPTION)
-                            message = battle.executePlayerAttack(3);
-                        }
-                        
-                        JOptionPane.showMessageDialog(null, message);
-
-                        if (battle.getEnemyHealth() > 0) {
-                            message = battle.enemyTurn();
-                            JOptionPane.showMessageDialog(null, message);
-                        }
-                    } else {
-                        if (battle.attemptDodge()) {
-                            JOptionPane.showMessageDialog(null, "Dodge successful! Enemy's turn is skipped.");
-                            return;
-                        }
-                        else {
-                            message = battle.enemyTurn();
-                            JOptionPane.showMessageDialog(null, message);
-                        }
-                    }
-                }
-
-                if (characterStats.getHP() > 0) {
-                    JOptionPane.showMessageDialog(null, "You got a battle tile!\nVictory! You defeated the spawn.\nGaining runes...");
-                    this.player.addRunes(battle.getEnemyHealth() * 2); // Placeholder logic for rune reward
-                    updateCharacterStatsDisplay();
-                } else {
-                    JOptionPane.showMessageDialog(null, "You got a battle tile!\nDefeat! Returning to lobby...");
-                    this.player.setRunes(0); // Reset runes to 0
-                    // Proceed to game lobby
-                    GameLobbyGUI gameLobbyGUI = new GameLobbyGUI();
-                    GameLobbyController gameLobbyController = new GameLobbyController(this.player, gameLobbyGUI);
-                    this.gameArea.dispose();
-                    gameLobbyGUI.setVisible(true);
-                }
+                battleEnemy(battle, "", null);
             }
         }
     }

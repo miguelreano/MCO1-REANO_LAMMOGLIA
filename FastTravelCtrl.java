@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 /**
  * The {@code FastTravelCtrl} class is a controller that manages the fast travel functionality
@@ -83,23 +82,23 @@ public class FastTravelCtrl {
      */
     private void warpToGameArea(int numRows, int numCols) {
         view.setVisible(false); // Hide the fast travel GUI
-        GameAreaModel1 gameModel = new GameAreaModel1();
+        GameAreaModel gameModel = new GameAreaModel1();
         GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 1, 6); // Create a new GameAreaGUI
         GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel);
     }
 
     private void warpToGameArea2(int numRows, int numCols) {
         view.setVisible(false);
-        GameAreaModel2 gameModel2 = new GameAreaModel2();
-        GameAreaGUI2 gameAreaGUI2 = new GameAreaGUI2(numCols, numCols, 2, 0);
-        GameAreaController2 gameAreaController2 = new GameAreaController2(model, gameAreaGUI2, gameModel2);
+        GameAreaModel gameModel2 = new GameAreaModel2();
+        GameAreaGUI gameAreaGUI = new GameAreaGUI(numCols, numCols, 2, 0);
+        GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel2);
     }
 
     private void warpToGameArea3(int numRows, int numCols){
         view.setVisible(false);
-        GameAreaModel3 gameModel3 = new GameAreaModel3();
-        GameAreaGUI3 gameAreaGUI3 = new GameAreaGUI3(numCols, numCols, 1, 8);
-        GameAreaController3 gameAreaController3 = new GameAreaController3(model, gameAreaGUI3, gameModel3);
+        GameAreaModel gameModel3 = new GameAreaModel3();
+        GameAreaGUI gameAreaGUI = new GameAreaGUI(numCols, numCols, 1, 8);
+        GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel3);
     }
     
 }

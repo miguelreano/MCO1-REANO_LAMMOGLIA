@@ -2,12 +2,12 @@
 
 import java.util.Random;
 
-public class GameAreaModel1 {
+public class GameAreaModel1 extends GameAreaModel {
     private final int[][] FLOORS = {{7,3}, {7,7}, {7,5}}; 
     private final int[][] START_POS = {{6,1}, {6,3}, {6,2}}; 
     private final int[][] DOORS = {{0,1}, {0, 3}, {6,2}}; 
-    public int currentFloor = 0;
-
+    private int currentFloor = 0;
+    private int bossFloor = 2;
 
     private final int[][] SPAWNS1 = { { 1, 0 }, { 1, 2 } }; // Spawn positions for the first floor
     
@@ -43,6 +43,10 @@ public class GameAreaModel1 {
         return "NOPE";
     }
 
+    public boolean isBoss(int x, int y) {
+        return  this.currentFloor == this.bossFloor && x == BOSS_TILE[1] && y == BOSS_TILE[0];
+    }
+
     public boolean isSpawn(int x, int y) {
         if (currentFloor == 0) {
             for (int[] i : SPAWNS1) {
@@ -53,7 +57,7 @@ public class GameAreaModel1 {
             for (int[] i : SPAWNS2) {
                 if (x == i[1] && y == i[0]) return true;
             }
-        } else if (currentFloor == 2) return x == BOSS_TILE[1] && y == BOSS_TILE[0];
+        }
         
         return false;
     }

@@ -1,10 +1,11 @@
 import java.util.Random;
 
-public class GameAreaModel2 {
+public class GameAreaModel2 extends GameAreaModel{
     private final int[][] FLOORS = {{5,5}, {7,3}, {7,5}, {3,6}, {8,7}};
     private final int[][] START_POS = {{0,2}, {0,1}, {3,0}, {1,0}, {7,3}};
     private final int[][] DOORS ={{4,2}, {3,2}, {0,2}};
-    public int currentFloor2 = 0;
+    private int currentFloor = 0;
+    private int bossFloor = 4;
 
     private final int[][] SPAWNS1 = {{3,1}, {3,3}};
     private final int[][] SPAWNS2 = {{1,0}, {3,0}, {5,0}};
@@ -16,21 +17,21 @@ public class GameAreaModel2 {
     private final int[] FAST_TRAVEL_TILE = {0,3};
 
     public String isDoor(int x, int y) {
-        if (currentFloor2 == 1) {
-            if (x == DOORS[currentFloor2][1] && y == DOORS[currentFloor2][0]) {
+        if (currentFloor == 1) {
+            if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0]) {
                 return "UP";
             }
             
-            if (x == START_POS[currentFloor2][1] && y == START_POS[currentFloor2][0]) {
+            if (x == START_POS[currentFloor][1] && y == START_POS[currentFloor][0]) {
                 return "DOWN";
             }
         }
-        else if (currentFloor2 == 2) {
-            if (x == DOORS[currentFloor2][1] && y == DOORS[currentFloor2][0]) {
+        else if (currentFloor == 2) {
+            if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0]) {
                 return "DOWN";
             }
         }
-        else if (x == DOORS[currentFloor2][1] && y == DOORS[currentFloor2][0])
+        else if (x == DOORS[currentFloor][1] && y == DOORS[currentFloor][0])
             return "UP";
         else if (x == FAST_TRAVEL_TILE[1] && y == FAST_TRAVEL_TILE[0])
             return "FAST-TRAVEL";
@@ -38,27 +39,31 @@ public class GameAreaModel2 {
         return "NOPE";
     }
 
+    public boolean isBoss(int x, int y) {
+        return  this.currentFloor == this.bossFloor && x == BOSS_TILE[1] && y == BOSS_TILE[0];
+    }
+
     public boolean isSpawn(int x, int y) {
-        if (currentFloor2 == 0) {
+        if (currentFloor == 0) {
             for (int[] i : SPAWNS1) {
                 if (x == i[1] && y == i[0]) return true;
             }
         } 
-        else if (currentFloor2 == 1) {
+        else if (currentFloor == 1) {
             for (int[] i : SPAWNS2) {
                 if (x == i[1] && y == i[0]) return true;
             }
         }  
-        else if (currentFloor2 == 2) {
+        else if (currentFloor == 2) {
                 for (int[] i : SPAWNS3) {
                     if (x == i[1] && y == i[0]) return true;
                 }
         }
-        else if (currentFloor2 == 3) {
+        else if (currentFloor == 3) {
             for (int[] i : SPAWNS4) {
                     if (x == i[1] && y == i[0]) return true;
             }
-        } else if (currentFloor2 == 4) return x == BOSS_TILE[1] && y == BOSS_TILE[0];
+        }
         
         return false;
     }
@@ -85,25 +90,25 @@ public class GameAreaModel2 {
         return randa.nextInt(4) + 1; // Generate a number between 0-3 and then add 1
     }
 
-    public int[] getFloorDimension2() {
-        return FLOORS[currentFloor2];
+    public int[] getFloorDimension() {
+        return FLOORS[currentFloor];
     }
 
-    public void setCurrentFloor2(int num) {
-        this.currentFloor2 = num;
+    public void setCurrentFloor(int num) {
+        this.currentFloor = num;
     }
 
-    public int getCurrentFloor2() {
-        return this.currentFloor2;
+    public int getCurrentFloor() {
+        return this.currentFloor;
     }
 
-    public int[] getStartPos2() {
-        return START_POS[currentFloor2];
+    public int[] getStartPos() {
+        return START_POS[currentFloor];
     }
 
-    public int getSpawnLen2() {
-        if (currentFloor2 == 0) return SPAWNS1.length;
-        else if (currentFloor2 == 1) return SPAWNS2.length;
+    public int getSpawnLen() {
+        if (currentFloor == 0) return SPAWNS1.length;
+        else if (currentFloor == 1) return SPAWNS2.length;
         return 0;
     }
 
