@@ -13,6 +13,8 @@ public class ShopGUI extends JFrame {
 
     public ShopGUI(Weapon[] weapons, Character character) {
         this.character = character; // Initialize the character
+        this.inventoryGUI = new InventoryGUI(character);
+        this.inventoryGUI.setVisible(false);
         setTitle("Shop");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 400);

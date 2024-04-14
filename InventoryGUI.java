@@ -115,8 +115,13 @@ public class InventoryGUI extends JFrame {
             JButton button = new JButton(weapon.getName());
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    character.setEquippedWeapon(weapon);
-                    JOptionPane.showMessageDialog(null, weapon.getName() + " is now equipped.");
+                    // Check if character DEX meets weapon DEX requirements
+                    if (character.getCharacterStats().getDEX() >= weapon.getWeaponDEX()) {
+                        character.setEquippedWeapon(weapon);
+                        JOptionPane.showMessageDialog(null, weapon.getName() + " is now equipped.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Your Dexterity is too low to equip this weapon. Required: " + weapon.getWeaponDEX(), "Requirement Not Met", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             });
             inventoryPanel.add(button);
@@ -124,4 +129,5 @@ public class InventoryGUI extends JFrame {
         inventoryPanel.revalidate();
         inventoryPanel.repaint();
     }
+    
 }
