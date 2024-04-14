@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-
+//pwet
 public class GameAreaController {
     private Character player;
     private GameAreaGUI gameArea;
