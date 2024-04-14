@@ -7,6 +7,7 @@ public class ShopGUI extends JFrame {
     private JPanel mainPanel;
     private JScrollPane scrollPane;
     private JButton backButton;
+    private JLabel runeLabel;
     private Character character; // Reference to the Character instance
 
     public ShopGUI(Weapon[] weapons, Character character) {
@@ -14,6 +15,8 @@ public class ShopGUI extends JFrame {
         setTitle("Shop");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 400);
+
+        runeLabel = new JLabel("Runes: " + character.getRunes());
 
         mainPanel = new JPanel(new BorderLayout()); // Use BorderLayout for main panel
 
@@ -27,6 +30,7 @@ public class ShopGUI extends JFrame {
                         public void actionPerformed(ActionEvent e) {
                             // Use the purchaseWeapon method when a button is clicked
                             character.purchaseWeapon(weapon);
+                            updateRuneDisplay(character.getRunes());
                         }
                     });
                     weaponsPanel.add(button);
@@ -53,11 +57,19 @@ public class ShopGUI extends JFrame {
         backPanel.add(backButton);
         mainPanel.add(backPanel, BorderLayout.SOUTH); // Place backPanel at the bottom of the mainPanel
 
+        JPanel runeDisplay = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        runeDisplay.add(runeLabel);
+        mainPanel.add(runeDisplay, BorderLayout.NORTH);
+
         scrollPane = new JScrollPane(mainPanel);
         setContentPane(scrollPane);
         pack();  // Adjusts frame size based on the components
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void updateRuneDisplay(int runes) {
+        runeLabel.setText("Runes: " + runes);
     }
 
 }
