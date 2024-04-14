@@ -42,7 +42,6 @@ public class FastTravelCtrl {
         view.addWarp2(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 warpToGameArea2(5,5);
-
             }
         });
 
@@ -54,7 +53,6 @@ public class FastTravelCtrl {
         view.addWarp3(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 warpToGameArea3(9,3);
-
             }
         });
 
@@ -82,22 +80,22 @@ public class FastTravelCtrl {
      */
     private void warpToGameArea(int numRows, int numCols) {
         view.setVisible(false); // Hide the fast travel GUI
-        GameAreaModel gameModel = new GameAreaModel1();
+        GameAreaModel1 gameModel = new GameAreaModel1();
         GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 1, 6); // Create a new GameAreaGUI
         GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel);
     }
 
     private void warpToGameArea2(int numRows, int numCols) {
         view.setVisible(false);
-        GameAreaModel gameModel2 = new GameAreaModel2();
-        GameAreaGUI gameAreaGUI = new GameAreaGUI(numCols, numCols, 2, 0);
+        GameAreaModel2 gameModel2 = new GameAreaModel2();
+        GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 2, 0);
         GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel2);
     }
 
     private void warpToGameArea3(int numRows, int numCols){
         view.setVisible(false);
-        GameAreaModel gameModel3 = new GameAreaModel3();
-        GameAreaGUI gameAreaGUI = new GameAreaGUI(numCols, numCols, 1, 8);
+        GameAreaModel3 gameModel3 = new GameAreaModel3();
+        GameAreaGUI gameAreaGUI = new GameAreaGUI(numRows, numCols, 1, 8);
         GameAreaController gameAreaController = new GameAreaController(model, gameAreaGUI, gameModel3);
     }
     
