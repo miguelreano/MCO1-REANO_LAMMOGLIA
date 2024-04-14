@@ -8,7 +8,8 @@ public class ShopGUI extends JFrame {
     private JScrollPane scrollPane;
     private JButton backButton;
     private JLabel runeLabel;
-    private Character character; // Reference to the Character instance
+    private Character character;
+    private InventoryGUI inventoryGUI; // Reference to the Character instance
 
     public ShopGUI(Weapon[] weapons, Character character) {
         this.character = character; // Initialize the character
@@ -28,11 +29,11 @@ public class ShopGUI extends JFrame {
                     JButton button = new JButton("<html>" + weapon.getName() + "<br/>Cost: " + weapon.getWeaponCost() + "</html>");
                     button.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            // Use the purchaseWeapon method when a button is clicked
-                            character.purchaseWeapon(weapon);
+                            character.purchaseWeapon(weapon, inventoryGUI); 
                             updateRuneDisplay(character.getRunes());
                         }
                     });
+                    
                     weaponsPanel.add(button);
                 }
             }

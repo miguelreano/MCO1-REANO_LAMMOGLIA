@@ -22,16 +22,18 @@ public class Character {
         this.Runes = 10000; // Starting runes
     }
 
-    public void purchaseWeapon(Weapon weapon) {
+    public void purchaseWeapon(Weapon weapon, InventoryGUI inventoryGUI) {
         if (weapon != null && this.Runes >= weapon.getWeaponCost()) {
             this.Runes -= weapon.getWeaponCost();
             inventory.add(weapon);
             JOptionPane.showMessageDialog(null, "You have successfully purchased: " + weapon.getName());
+            inventoryGUI.updateInventory(); // Update inventory GUI
         } else {
             JOptionPane.showMessageDialog(null, "You do not have enough runes to purchase this weapon. Required: " + weapon.getWeaponCost() + ", Available: " + this.Runes,
                                           "Insufficient Runes", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
 
     public String getCharacterName() {
         return characterName;

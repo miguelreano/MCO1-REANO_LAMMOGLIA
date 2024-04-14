@@ -50,13 +50,7 @@ public class GameLobbyController {
         view.addInventoryButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 view.setVisible(false);
-                GameLobby.Inventory(model); 
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        updateCharacterStatsDisplay();
-                        view.setVisible(true);
-                    }
-                });
+                InventoryGUI inventoryGUI = new InventoryGUI(model);
             }
         });
 
