@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class FastTravelCtrl {
     private FastTravelGUI view;
     private GameLobby model;
+    private Character charac;
 
     /**
      * The {@code FastTravelCtrl} constructor initializes the controller with the provided
@@ -20,9 +21,10 @@ public class FastTravelCtrl {
      * @param model The game lobby model.
      * @param view The fast travel GUI view.
      */
-    public FastTravelCtrl(GameLobby model, FastTravelGUI view){
+    public FastTravelCtrl(GameLobby model, FastTravelGUI view, Character charac){
         this.model = model;
         this.view = view;
+        this.charac = charac;
     
 
     /**

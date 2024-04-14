@@ -214,11 +214,13 @@ public class GameArea {
                     System.out.print("\033\143");
                     System.out.println("\nYou got a battle tile!");
                     Character character = new Character();
+                    System.out.println(character.getCharacterStats());
                     Character.CharacterStats characterStats = character.getCharacterStats();                
                     Spawn[] spawnss = Spawn.initializeSpawn();
                     Spawn chosenSpawn = spawnss[new Random().nextInt(spawns.length)]; // Select a random spawn
                     Battle battle = new Battle(playerCharacter, chosenSpawn); // Assuming 'user' is your Character instance
-                    battle.start(characterStats); // Start the battle
+                    System.out.println(characterStats);
+                    //battle.start(characterStats); // Start the battle
 
                     if (characterStats.getHP() > 0) {
                         System.out.println("Victory! You defeated the spawn.");
